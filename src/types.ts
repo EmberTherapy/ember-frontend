@@ -1,0 +1,1 @@
+export type PanelSource = "editClient" | "newClient" | "clientFlagInfo" | null;
