@@ -16,6 +16,7 @@ export default function App() {
 
   function changeClientDisplay(id: number) {
     setSelectedId(id);
+    closePanel();
   }
 
   function openPanel(source: PanelSource) {
