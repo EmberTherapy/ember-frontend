@@ -26,6 +26,10 @@ export default function App() {
   function closePanel() {
     setPanelSource(null);
   }
+
+  function openRecord(record: any) {
+    console.log("Opening record:", record);
+  }
   
   return (
     <div className="page">
@@ -36,7 +40,7 @@ export default function App() {
 
     <main className="main">
       <div className="main-content">
-        <ClientDisplay id={selectedId} onOpenPanel={openPanel} />
+        <ClientDisplay id={selectedId} onOpenPanel={openPanel} onOpenRecord={openRecord} />
       </div>
 
       {panelSource && (

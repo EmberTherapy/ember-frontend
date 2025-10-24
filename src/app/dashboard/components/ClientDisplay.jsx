@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faFlag } from '@fortawesome/free-solid-svg-icons';
-import { getClientData } from '../../api/fakeApi';
+import { getClientData, getClientRecords } from '../../api/fakeApi';
+import { on } from 'events';
 
-export default function ClientDisplay({ id, onOpenPanel }) {
+export default function ClientDisplay({ id, onOpenPanel, onOpenRecord }) {
     const client = id == 0 ? null : getClientData(id);
+    const records = id == 0 ? [] : getClientRecords(id);
 
     return (
         <div id="client-display">
@@ -30,7 +32,23 @@ export default function ClientDisplay({ id, onOpenPanel }) {
                         ))}
                     </div>
                     <div className="card">
-                        <h3>Recent Activity</h3>
+                        <h3>Client Records</h3>
+                            <table className="records-table">
+                                <tbody>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Content</th>
+                                    </tr>
+                                    {records.map((record, index) => (
+                                        <tr key={index} onClick={() => onOpenRecord(record)}>
+                                            <td>{record.date}</td>
+                                            <td>{record.type == "chat_summary" ? "Chat Summary" : "Session Note"}</td>
+                                            <td>{record.content.length > 100 ? record.content.substring(0, 100) + "..." : record.content}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                     </div>
                 </div>
             ) : (
