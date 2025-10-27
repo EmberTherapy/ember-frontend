@@ -31,7 +31,9 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   font-size: 0.95rem;
+  height: 100vh;
 }
+
 
 .page {
   height: 100vh; 
@@ -89,6 +91,37 @@ body {
   overflow-y: auto;
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0; 
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  backdrop-filter: blur(2px); /*do we like? */
+}
+
+.card {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 1.25rem 1.5rem; 
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.modal {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 75%;
+  height: 70%;
+  overflow: scroll;
+}
+
 .header h1 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -100,7 +133,7 @@ body {
   margin: 0.4rem 0.6rem;
   padding: 0.6rem 1rem;
   border: 1px solid transparent;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   color: var(--color-text);
   font-weight: 600;
   background: transparent;
@@ -134,14 +167,42 @@ body {
 .left-panel-item-active:hover { background-color: #ff6a2a; }
 .left-panel-item:active { transform: scale(0.98); }
 
-.card {
-  width: 100%;
-  box-sizing: border-box;
-  background: #fff;
-  padding: 1.25rem 1.5rem; 
+.add-client {
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;    
+  position: relative;
+  margin: 2rem 0.6rem;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  font-size: 1rem;
   border-radius: 12px;
-  box-shadow: var(--shadow);
-  margin-bottom: 1.5rem;
+  border: 1px solid var(--color-primary-light);
+  background-color: var(--neutral-0);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.add-client:hover {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 3px 6px rgba(242, 88, 27, 0.15);
+  transform: translateY(-1px);
+}
+
+.add-client:active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(0);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 .top-bar {
@@ -232,7 +293,6 @@ body {
   border-color: var(--color-primary);
   box-shadow: 0 0 5px rgba(242, 88, 27, 0.4);
 }
-
 
 .records-table {
   width: 100%;

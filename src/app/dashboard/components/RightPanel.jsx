@@ -4,7 +4,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { getClientData } from '../../api/fakeApi';
     
 export default function RightPanel({ source, onClosePanel, clientId }) {
-    const client = getClientData(clientId);
+    const client = source == "editClient" ? getClientData(clientId) : null;
 
     const editPanel = (
         <div id="right-panel">
@@ -15,15 +15,15 @@ export default function RightPanel({ source, onClosePanel, clientId }) {
             <form>
                 <div className="form-group">
                     <label>Name: </label>
-                    <input type="text" name="name" defaultValue={client.name} />
+                    <input type="text" name="name" defaultValue={client?.name} />
                 </div>
                 <div className="form-group">
                     <label>Problems: </label>
-                    <input type="text" name="problems" defaultValue={client.problems.join(", ")} />
+                    <input type="text" name="problems" defaultValue={client?.problems.join(", ")} />
                 </div>
                 <div className="form-group">
                     <label>Meeting Time: </label>
-                    <input type="text" name="meeting_time" defaultValue={client.meeting_time} />
+                    <input type="text" name="meeting_time" defaultValue={client?.meeting_time} />
                 </div>
                 <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault();}}>Save</button>
             </form>
@@ -46,7 +46,21 @@ export default function RightPanel({ source, onClosePanel, clientId }) {
                 <h1>New Client</h1>
                 <button className="icon-button-default" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
-            <p>Client ID: {clientId}</p>
+            <form>
+                <div className="form-group">
+                    <label>Name: </label>
+                    <input type="text" name="name" defaultValue="" />
+                </div>
+                <div className="form-group">
+                    <label>Problems: </label>
+                    <input type="text" name="problems" defaultValue="" />
+                </div>
+                <div className="form-group">
+                    <label>Meeting Time: </label>
+                    <input type="text" name="meeting_time" defaultValue="" />
+                </div>
+                <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault();}}>Add Client</button>
+            </form>
         </div>
     );
 

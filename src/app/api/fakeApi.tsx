@@ -80,21 +80,22 @@ export function getClientData(id: number) {
 }
 
 export function getClientList() {
-    const sortedClients = [...client_data] 
+  return [...client_data]
     .sort((a, b) => {
-        const lastA = a.name?.trim().split(" ").pop()?.toLowerCase() || "";
-        const lastB = b.name?.trim().split(" ").pop()?.toLowerCase() || "";
-        return lastA.localeCompare(lastB);
+      if (a.flagged && !b.flagged) return -1;
+      if (!a.flagged && b.flagged) return 1;
+
+      const lastA = (a.name ?? "").split(" ").pop()?.toLowerCase() ?? "";
+      const lastB = (b.name ?? "").split(" ").pop()?.toLowerCase() ?? "";
+      return lastA.localeCompare(lastB);
     })
     .map(client => ({
-        id: client.id,
-        name: client.name,
-        flagged: client.flagged
+      id: client.id,
+      name: client.name ?? "",
+      flagged: client.flagged ?? false
     }));
-
-    return sortedClients;
 }
-
+// sort records by date descending
 export function getClientRecords(id: number) {
     const records = client_records.filter(record => record.client_id === id);
     records.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

@@ -3,7 +3,7 @@ import { faGear, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { getClientData, getClientRecords } from '../../api/fakeApi';
 import { on } from 'events';
 
-export default function ClientDisplay({ id, onOpenPanel, onOpenRecord }) {
+export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
     const client = id == 0 ? null : getClientData(id);
     const records = id == 0 ? [] : getClientRecords(id);
 
@@ -19,7 +19,7 @@ export default function ClientDisplay({ id, onOpenPanel, onOpenRecord }) {
                                 <button className="flag-button" onClick={() => onOpenPanel("clientFlagInfo")}>
                                     <FontAwesomeIcon icon={faFlag} />
                                 </button>}
-                                <button className="icon-button-default" onClick={() => onOpenPanel("editClient")}>
+                                <button className="icon-button-default" onClick={() => onOpenModal("editClient")}>
                                     <FontAwesomeIcon icon={faGear} />
                                 </button>
                             </div>
@@ -41,7 +41,7 @@ export default function ClientDisplay({ id, onOpenPanel, onOpenRecord }) {
                                         <th>Content</th>
                                     </tr>
                                     {records.map((record, index) => (
-                                        <tr key={index} onClick={() => onOpenRecord(record)}>
+                                        <tr key={index} onClick={() => onOpenModal("viewRecord")}>
                                             <td>{record.date}</td>
                                             <td>{record.type == "chat_summary" ? "Chat Summary" : "Session Note"}</td>
                                             <td>{record.content.length > 100 ? record.content.substring(0, 100) + "..." : record.content}</td>

@@ -1,6 +1,9 @@
 import { getClientList } from '../../api/fakeApi';
 
-export default function ClientList({ onClick, selected }) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+export default function ClientList({ selected, onChangeDisplay, onOpenModal }) {
   const clients = getClientList();
   
   return (
@@ -9,10 +12,14 @@ export default function ClientList({ onClick, selected }) {
         <div 
           className={`left-panel-item ${selected === client.id ? "left-panel-item-active" : ""} ${client.flagged ? "flagged" : ""} `} 
           key={client.id} 
-          onClick={() => onClick(client.id)}>
+          onClick={() => onChangeDisplay(client.id)}>
             {client.name}
         </div>
       ))}
+      <div className="add-client" onClick={() => onOpenModal("newClient")}>
+        Add Client <FontAwesomeIcon icon={faPlus} />
+      </div>
+
     </div>
   );
 }
