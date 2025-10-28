@@ -2,6 +2,7 @@ const client_data = [
     {
         id: 1, 
         name: "Elie Esses",
+        email: "elie@example.com",
         focus_areas: ["anxiety", "sadness"],
         meeting_time: "3pm Monday",
         ai_instructions: "Please provide extra support around social anxiety and coping mechanisms.",
@@ -10,6 +11,7 @@ const client_data = [
     {
         id: 2,
         name: "Ayelet Cantor",
+        email: "ayelet@example.com",
         focus_areas: ["anger", "depression"],
         meeting_time: "4pm Tuesday",
         ai_instructions: "Please provide extra support around anger management and coping strategies.",
@@ -18,6 +20,7 @@ const client_data = [
     {
         id: 3,
         name: "Elias Sasson",
+        email: "elias@example.com",
         focus_areas: ["stress", "fatigue"],
         meeting_time: "5pm Wednesday",
         ai_instructions: "Please do not focus on stress management techniques.",
@@ -26,6 +29,7 @@ const client_data = [
     {
         id: 4,
         name: "Benjy Diamond",
+        email: "benjy@example.com", 
         focus_areas: ["boredom", "lack of motivation"],
         meeting_time: "2pm Thursday",
         ai_instructions: "Please provide extra support around motivation and engagement strategies.",
@@ -34,6 +38,7 @@ const client_data = [
     {
         id: 5,
         name: "Joshua Fleicher",
+        email: "joshua@example.com",
         focus_areas: ["insomnia", "restlessness"],
         meeting_time: "1pm Friday",
         ai_instructions: "Do not let the client discuss work-related stress.",
@@ -42,6 +47,7 @@ const client_data = [
     {
         id: 6,
         name: "Yehudah Pepper Fox",
+        email: "yehudah@example.com",
         focus_areas: ["anxiety", "stress"],
         meeting_time: "10am Friday",
         ai_instructions: "Client tends to get anxious about social situations. Provide extra support in this area.",
@@ -50,6 +56,7 @@ const client_data = [
     {
         id: 7,
         name: "Yakir Hirsch",
+        email: "yakir@example.com", 
         focus_areas: ["insecurity about his tiny dick", "social anxiety"],
         meeting_time: "11am Monday",
         ai_instructions: "Client has expressed significant insecurity about his body image, particularly regarding his genitalia. Please approach this topic with sensitivity and provide supportive strategies to help improve his self-esteem.",
