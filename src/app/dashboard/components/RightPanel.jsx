@@ -10,7 +10,7 @@ export default function RightPanel({ source, onClosePanel, clientId }) {
         <div id="right-panel">
             <div className="top-bar">
                 <h1>Client Info</h1>
-                <button className="icon-button-default" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="exit-button" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form>
                 <div className="form-group">
@@ -34,7 +34,7 @@ export default function RightPanel({ source, onClosePanel, clientId }) {
         <div id="right-panel">
             <div className="top-bar">
                 <h1>Flag Info</h1>
-                <button className="icon-button-default" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="exit-button" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <p>Client ID: {clientId}</p>
         </div>
@@ -44,7 +44,7 @@ export default function RightPanel({ source, onClosePanel, clientId }) {
         <div id="right-panel">
             <div className="top-bar">
                 <h1>New Client</h1>
-                <button className="icon-button-default" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="exit-button" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form>
                 <div className="form-group">

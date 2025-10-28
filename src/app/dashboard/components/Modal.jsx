@@ -7,10 +7,10 @@ export default function Modal({ source, onCloseModal, clientId }) {
     const client = source == "editClient" ? getClientData(clientId) : null;
 
     const newClient = (
-        <div id="right-panel">
+        <div id="modal-content">
             <div className="top-bar">
                 <h1>New Client</h1>
-                <button className="icon-button-default" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="exit-button" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form>
                 <div className="form-group">
@@ -18,12 +18,16 @@ export default function Modal({ source, onCloseModal, clientId }) {
                     <input type="text" name="name" defaultValue="" />
                 </div>
                 <div className="form-group">
-                    <label>Problems: </label>
-                    <input type="text" name="problems" defaultValue="" />
+                    <label>Focus Areas: </label>
+                    <input type="text" name="focus_areas" defaultValue="" />
                 </div>
                 <div className="form-group">
                     <label>Meeting Time: </label>
                     <input type="text" name="meeting_time" defaultValue="" />
+                </div>
+                    <div className="form-group">
+                    <label>AI Instructions: </label>
+                    <input type="lo" name="ai_instructions" defaultValue="Please enter any instructions, concerns, or notes, for you client's specifically tailored therpist-bot."/>
                 </div>
                 <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault();}}>Add Client</button>
             </form>
@@ -33,8 +37,8 @@ export default function Modal({ source, onCloseModal, clientId }) {
     const editClient = (
         <div id="right-panel">
             <div className="top-bar">
-                <h1>Client Info</h1>
-                <button className="icon-button-default" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                <h1>Client Information</h1>
+                <button className="exit-button" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form>
                 <div className="form-group">
@@ -42,12 +46,16 @@ export default function Modal({ source, onCloseModal, clientId }) {
                     <input type="text" name="name" defaultValue={client?.name} />
                 </div>
                 <div className="form-group">
-                    <label>Problems: </label>
-                    <input type="text" name="problems" defaultValue={client?.problems.join(", ")} />
+                    <label>Focus Areas: </label>
+                    <input type="text" name="focus_areas" defaultValue={client?.focus_areas.join(", ")} />
                 </div>
                 <div className="form-group">
                     <label>Meeting Time: </label>
                     <input type="text" name="meeting_time" defaultValue={client?.meeting_time} />
+                </div>
+                <div className="form-group">
+                    <label>AI Instructions: </label>
+                    <input type="text" name="ai_instructions" defaultValue={client?.ai_instructions} />
                 </div>
                 <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault();}}>Save</button>
             </form>

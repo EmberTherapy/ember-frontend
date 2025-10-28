@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear, faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faFlag, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { getClientData, getClientRecords } from '../../api/fakeApi';
 import { on } from 'events';
 
@@ -20,15 +20,15 @@ export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
                                     <FontAwesomeIcon icon={faFlag} />
                                 </button>}
                                 <button className="icon-button-default" onClick={() => onOpenModal("editClient")}>
-                                    <FontAwesomeIcon icon={faGear} />
+                                    <FontAwesomeIcon icon={faPencil} />
                                 </button>
                             </div>
                         </div>
                         <h3>Meeting Time:</h3>
                          <p>{client.meeting_time}</p>
-                        <h3>Problems:</h3>
-                        {client.problems.map((problem, index) => (
-                            <p key={index}>- {problem}</p>
+                        <h3>Focus Areas:</h3>
+                        {client.focus_areas.map((area, index) => (
+                            <p key={index}>- {area}</p>
                         ))}
                     </div>
                     <div className="card">
@@ -54,7 +54,7 @@ export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
             ) : (
                 <div>
                     <div className="card">
-                            <h2>No Client Selected</h2>
+                            <h2>Welcome back!</h2>
                     </div>
                 </div>
             )}

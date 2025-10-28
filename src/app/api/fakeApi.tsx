@@ -2,44 +2,58 @@ const client_data = [
     {
         id: 1, 
         name: "Elie Esses",
-        problems: ["anxiety", "sadness"],
+        focus_areas: ["anxiety", "sadness"],
         meeting_time: "3pm Monday",
+        ai_instructions: "Please provide extra support around social anxiety and coping mechanisms.",
         flagged: false
     },
     {
         id: 2,
         name: "Ayelet Cantor",
-        problems: ["anger", "depression"],
+        focus_areas: ["anger", "depression"],
         meeting_time: "4pm Tuesday",
+        ai_instructions: "Please provide extra support around anger management and coping strategies.",
         flagged: false
     },
     {
         id: 3,
         name: "Elias Sasson",
-        problems: ["stress", "fatigue"],
+        focus_areas: ["stress", "fatigue"],
         meeting_time: "5pm Wednesday",
+        ai_instructions: "Please do not focus on stress management techniques.",
         flagged: true
     },
     {
         id: 4,
         name: "Benjy Diamond",
-        problems: ["boredom", "lack of motivation"],
+        focus_areas: ["boredom", "lack of motivation"],
         meeting_time: "2pm Thursday",
+        ai_instructions: "Please provide extra support around motivation and engagement strategies.",
         flagged: false
     },
     {
         id: 5,
         name: "Joshua Fleicher",
-        problems: ["insomnia", "restlessness"],
+        focus_areas: ["insomnia", "restlessness"],
         meeting_time: "1pm Friday",
+        ai_instructions: "Do not let the client discuss work-related stress.",
         flagged: true
     },
     {
         id: 6,
         name: "Yehudah Pepper Fox",
-        problems: ["anxiety", "stress"],
+        focus_areas: ["anxiety", "stress"],
         meeting_time: "10am Friday",
+        ai_instructions: "Client tends to get anxious about social situations. Provide extra support in this area.",
         flagged: false
+    },
+    {
+        id: 7,
+        name: "Yakir Hirsch",
+        focus_areas: ["insecurity about his tiny dick", "social anxiety"],
+        meeting_time: "11am Monday",
+        ai_instructions: "Client has expressed significant insecurity about his body image, particularly regarding his genitalia. Please approach this topic with sensitivity and provide supportive strategies to help improve his self-esteem.",
+        flagged: true
     }
 ];
 
