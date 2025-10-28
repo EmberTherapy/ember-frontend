@@ -7,14 +7,14 @@ import ClientDisplay from "./components/ClientDisplay";
 import RightPanel from "./components/RightPanel";
 import Modal from "./components/Modal";
 
-import { PanelSource } from "../../types";
+import { ModalSource, PanelSource } from "../../types";
 
 import "./dashboard.css"; 
 
 export default function App() {
   const [selectedId, setSelectedId] = useState(0);
   const [panelSource, setPanelSource] = useState<PanelSource>(null);
-  const [modalSource, setModalSource] = useState<string | null>(null);
+  const [modalSource, setModalSource] = useState<ModalSource>(null);
 
   function openPanel(source: PanelSource) {
     setPanelSource(source);
@@ -24,8 +24,8 @@ export default function App() {
     setPanelSource(null);
   }
 
-  function openModal(source: string) {
-    setModalSource(source)
+  function openModal(source: ModalSource) {
+    setModalSource(source);
   }
 
   function closeModal() {
@@ -61,7 +61,7 @@ export default function App() {
         </main>
 
         {modalSource && (
-          <Modal source={modalSource} onCloseModal={closeModal} clientId={selectedId}/>
+          <Modal source={modalSource} onCloseModal={closeModal} clientId={selectedId} recordId={null}/>
         )}
     </div>
   );

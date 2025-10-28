@@ -331,7 +331,7 @@ body {
 .modal .form-group {
   display: flex;
   justify-content: space-between;  
-  align-items: center;  
+  align-items: flex-start; 
   margin-bottom: 1.25rem;         
 }
 
@@ -352,13 +352,16 @@ body {
 
 .modal .form-group textarea {
   width: 450px;
-  min-height: 4.5rem; 
+  min-height: 3.5rem; 
+  resize: none;             
+  line-height: 1.5;    
   padding: 10px 12px;
   border: 1px solid #cfd3d8;
   border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
   font-family: inherit;   
+  transition: height 0.15s ease;
 }
 
 .modal .form-group input:focus {

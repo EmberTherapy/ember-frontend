@@ -1,11 +1,13 @@
-const client_data = [
+import { Client, ClientRecord } from "../../types";
+
+const client_data: Client[] = [
     {
         id: 1, 
         name: "Elie Esses",
         email: "elie@example.com",
         focus_areas: ["anxiety", "sadness"],
         meeting_time: "3pm Monday",
-        ai_instructions: "Please provide extra support around social anxiety and coping mechanisms.",
+        ai_instructions: "Please provide extra support around social anxiety and coping mechanisms. Client has a tendency to overthink social situations. Blah blah blah this needs to be longer so the text area looks filled up. Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.",
         flagged: false
     },
     {
@@ -64,7 +66,7 @@ const client_data = [
     }
 ];
 
-const client_records = [
+const client_records: ClientRecord[] = [
     { id: 1, client_id: 1, date: "2024-01-22", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." },
     { id: 2, client_id: 1, date: "2024-01-15", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
     { id: 3, client_id: 1, date: "2024-01-08", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
@@ -122,4 +124,8 @@ export function getClientRecords(id: number) {
     records.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     return records;
+}
+
+export function createNewClient(client: Client) {
+    console.log("Creating new client:", client);
 }

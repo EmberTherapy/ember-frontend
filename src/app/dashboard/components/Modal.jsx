@@ -1,11 +1,34 @@
+import React, { useState } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-import { getClientData } from '../../api/fakeApi';
+import { getClientData, getClientRecords, createNewClient } from '../../api/fakeApi';
 
-export default function Modal({ source, onCloseModal, clientId }) {
+export default function Modal({ source, onCloseModal, clientId, recordId }) {
     const editMode = source == "editClient";
+    const recordMode = source == "viewRecord";
+
     const client = editMode ? getClientData(clientId) : null;
+    const record = recordMode ? getClientRecords(recordId) : null;
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [focusAreas, setFocusAreas] = useState([]);
+    const [meetingTime, setMeetingTime] = useState("");
+    const [aiInstructions, setAIInstructions] = useState("");
+
+    function newClient() {
+        const newUser = {
+            name: name,
+            email: email,
+            focus_areas: focusAreas,
+            meeting_time: meetingTime,
+            ai_instructions: aiInstructions
+        };
+
+        createNewClient(newUser);
+    }
 
     const clientForm = (
         <div id="modal-content">
@@ -16,30 +39,36 @@ export default function Modal({ source, onCloseModal, clientId }) {
             <form>
                 <div className="form-group">
                     <label>Name: </label>
-                    <input type="text" name="name" defaultValue={client?.name || ""} />
+                    <input type="text" name="name" onChange={(e) => setName(e.target.value)} value={name} />
                 </div>
                 <div className="form-group">
                     <label>Email: </label>
-                    <input type="text" name="email" defaultValue={client?.email || ""} />
+                    <input type="text" name="email" onChange={(e) => setEmail(e.target.value)} value={email} />
                 </div>
                 <div className="form-group">
                     <label>Focus Areas: </label>
-                    <input type="text" name="focus_areas" defaultValue={client?.focus_areas.join(", ") || ""} />
+                    <input type="text" name="focus_areas" onChange={(e) => setFocusAreas(e.target.value.split(", "))} value={focusAreas.join(", ")} />
                 </div>
                 <div className="form-group">
                     <label>Meeting Time: </label>
-                    <input type="text" name="meeting_time" defaultValue={client?.meeting_time || ""} />
+                    <input type="text" name="meeting_time" onChange={(e) => setMeetingTime(e.target.value)} value={meetingTime} />
                 </div>
-                    <div className="form-group">
+                <div className="form-group">
                     <label>AI Instructions: </label>
                     <textarea
                         id="ai_instructions"
                         name="ai_instructions"
                         placeholder="Please enter any instructions, concerns, or notes for your client's specifically tailored therapist-bot."
-                        defaultValue={client?.ai_instructions || ""}
+                        onChange={(e) => setAIInstructions(e.target.value)}
+                        value={aiInstructions}
+                        onInput={(e) => {
+                            const el = e.target;
+                            el.style.height = "auto"; // Reset first so shrinking works
+                            el.style.height = `${el.scrollHeight}px`; // Only expand when content exceeds
+                        }}
                     />
                 </div>
-                <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault();}}> {editMode ? "Save Changes" : "Add Client"}</button>
+                <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault(); newClient();}}> {editMode ? "Save Changes" : "Add Client"}</button>
             </form>
         </div>
     );
