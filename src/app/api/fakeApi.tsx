@@ -53,7 +53,7 @@ const client_data = [
         focus_areas: ["insecurity about his tiny dick", "social anxiety"],
         meeting_time: "11am Monday",
         ai_instructions: "Client has expressed significant insecurity about his body image, particularly regarding his genitalia. Please approach this topic with sensitivity and provide supportive strategies to help improve his self-esteem.",
-        flagged: true
+        flagged: false
     }
 ];
 

@@ -101,7 +101,7 @@ body {
   place-items: center;
   background: rgba(0, 0, 0, 0.45);
   z-index: 1000;
-  backdrop-filter: blur(2px); /*do we like? */
+  backdrop-filter: blur(3px); /*do we like? */
 }
 
 .modal {
@@ -109,8 +109,8 @@ body {
   padding: .75rem 1.5rem; 
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  width: 50%;
-  height: 50%;
+  width: 55%;
+  height: auto;
   overflow: scroll;
 }
 
@@ -174,7 +174,7 @@ body {
   justify-content: space-between;  
   align-items: center;    
   position: relative;
-  margin: 2rem 0.6rem;
+  margin: 1.2rem 0.6rem;
   padding: 0.6rem 1rem;
   font-weight: 600;
   background: transparent;
@@ -218,7 +218,7 @@ body {
   gap: 10px;                        
 }
 
-.icon-button-default {
+.edit-button {
   display: flex;
   width: 35px;
   height: 35px;
@@ -233,14 +233,14 @@ body {
   transition: all 0.2s ease;
 }
 
-.icon-button-default:hover {
+.edit-button:hover {
   background-color: var(--color-primary-bg);
   border-color: var(--color-primary-light);
   color: var(--color-primary);
   transform: translateY(-1px);
 }
 
-.icon-button-default:active {
+.edit-button:active {
   background-color: var(--neutral-100);
   border-color: var(--color-primary);
   transform: translateY(0);
@@ -347,9 +347,65 @@ body {
   border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
+  font-family: inherit; 
+}
+
+.modal .form-group textarea {
+  width: 450px;
+  min-height: 4.5rem; 
+  padding: 10px 12px;
+  border: 1px solid #cfd3d8;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit;   
 }
 
 .modal .form-group input:focus {
   border-color: var(--color-primary-light);
   box-shadow: 0 0 4px rgba(242, 88, 27, 0.3);
+}
+
+.modal .form-group textarea:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 4px rgba(242, 88, 27, 0.3);
+}
+
+.modal .submit-button  {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  padding: .8rem 1rem;
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-primary-light);
+  background-color: var(--neutral-0);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.modal .submit-button:hover {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 3px 6px rgba(242, 88, 27, 0.15);
+  transform: translateY(-1px);
+}
+
+.modal .submit-button:active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(0);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
 }

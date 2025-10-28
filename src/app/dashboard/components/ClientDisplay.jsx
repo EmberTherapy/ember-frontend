@@ -19,7 +19,7 @@ export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
                                 <button className="flag-button" onClick={() => onOpenPanel("clientFlagInfo")}>
                                     <FontAwesomeIcon icon={faFlag} />
                                 </button>}
-                                <button className="icon-button-default" onClick={() => onOpenModal("editClient")}>
+                                <button className="edit-button" onClick={() => onOpenModal("editClient")}>
                                     <FontAwesomeIcon icon={faPencil} />
                                 </button>
                             </div>

@@ -27,7 +27,13 @@ export default function Modal({ source, onCloseModal, clientId }) {
                 </div>
                     <div className="form-group">
                     <label>AI Instructions: </label>
-                    <input type="lo" name="ai_instructions" defaultValue="Please enter any instructions, concerns, or notes, for you client's specifically tailored therpist-bot."/>
+                        <textarea
+                            id="ai_instructions"
+                            name="ai_instructions"
+                            placeholder="Please enter any instructions, concerns, or notes for your client's specifically tailored therapist-bot."
+                            defaultValue=""
+                        
+                        />
                 </div>
                 <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault();}}>Add Client</button>
             </form>
@@ -66,7 +72,7 @@ export default function Modal({ source, onCloseModal, clientId }) {
         <div id="right-panel">
             <div className="top-bar">
                 <h1>Record Details</h1>
-                <button className="icon-button-default" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="exit-button" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <div className="form-group">
                 <label>Record details would go here...</label>
