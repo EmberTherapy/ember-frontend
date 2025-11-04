@@ -1,4 +1,5 @@
 html, body {
   height: 100%;
   margin: 0;            /* remove default body margin */
+  overflow: hidden;   /* prevent scrolling */
 }

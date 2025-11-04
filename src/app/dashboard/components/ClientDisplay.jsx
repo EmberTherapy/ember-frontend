@@ -2,10 +2,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faFlag, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { getClientData, getClientRecords } from '../../api/fakeApi';
 import { on } from 'events';
+import { useEffect, useState } from 'react';
 
 export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
-    const client = id == 0 ? null : getClientData(id);
-    const records = id == 0 ? [] : getClientRecords(id);
+    const [client, setClient] = useState(null);
+      useEffect(() => {
+        getClientData(id).then(setClient);
+      } , [id]);
+    
+    const [records, setRecords] = useState([]);
+    useEffect(() => {
+      getClientRecords(id).then(setRecords);
+    }, [id]);
 
     return (
         <div id="client-display">
@@ -40,13 +48,13 @@ export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
                                         <th>Type</th>
                                         <th>Content</th>
                                     </tr>
-                                    {records.map((record, index) => (
+                                    {records.length > 0 ? records.map((record, index) => (
                                         <tr key={index} onClick={() => onOpenModal("viewRecord")}>
                                             <td>{record.date}</td>
                                             <td>{record.type == "chat_summary" ? "Chat Summary" : "Session Note"}</td>
                                             <td>{record.content.length > 100 ? record.content.substring(0, 100) + "..." : record.content}</td>
                                         </tr>
-                                    ))}
+                                    )) : <tr><td colSpan="3">No records available.</td></tr>}
                                 </tbody>
                             </table>
                     </div>

@@ -1,3 +1,5 @@
+import { Toaster } from 'sonner';
+
 export default function DashboardLayout({
   children,
 }: {
@@ -6,6 +8,11 @@ export default function DashboardLayout({
   return (
     <div>
       {children}
+        <Toaster
+          position="bottom-right"
+          richColors
+          // closeButton
+        />
     </div>
   );
 }

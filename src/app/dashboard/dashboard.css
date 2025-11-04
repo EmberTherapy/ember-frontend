@@ -463,7 +463,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 5rem;
   padding: .8rem 1rem;
   font-weight: 600;
   background: transparent;
@@ -498,6 +498,7 @@ body {
 
 .right-panel{
   padding: 2rem;
+  scroll-behavior: smooth;
 }
 
 .right-panel .section {
@@ -526,9 +527,4 @@ body {
 .severity-2 {
   color: var(--color-red);
   background-color: var(--color-light-red);
-}
-
-.section-rowh h4{
-  padding: 0;
-  margin: 0;
 }

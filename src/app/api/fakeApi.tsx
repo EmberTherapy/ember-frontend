@@ -1,14 +1,13 @@
 import { Client, ClientRecord, EmergencyContact, Flag } from "../../types";
 
 const emergency_contacts: EmergencyContact[] = [
-    { id: 1, client_id: 1, name: "Sharon Esses", relationship: "Mother", phone: "555-1234", email: "sarah@example.com" },
-    { id: 2, client_id: 2, name: "Michael Cantor", relationship: "Father", phone: "555-5678", email: "david@example.com" },
-    { id: 3, client_id: 3, name: "Barb Sasson", relationship: "Sister", phone: "555-8765", email: "rachel@example.com" },
-    { id: 4, client_id: 4, name: "David Diamond", relationship: "Father", phone: "555-4321", email: "david@example.com" },
-    { id: 5, client_id: 5, name: "Linda Fleicher", relationship: "Mother", phone: "555-2468", email: "linda@example.com" },
-    { id: 6, client_id: 6, name: "Sarah Fox", relationship: "Sister", phone: "555-1357", email: "sarah@example.com" },
-    { id: 7, client_id: 7, name: "Miriam Hirsch", relationship: "Mother", phone: "555-9753", email: "miriam@example.com" },
-    { id: 8, client_id: 3, name: "Rachel Fleicher", relationship: "Sister", phone: "555-3579", email: "rachel@example.com" }
+    { id: 1, client_id: 1, name: "Sharon Esses", relationship: "Mother", phone: "555-123-0462", email: "sarah@example.com" },
+    { id: 2, client_id: 2, name: "Michael Cantor", relationship: "Father", phone: "555-567-0462", email: "david@example.com" },
+    { id: 3, client_id: 3, name: "Barb Sasson", relationship: "Sister", phone: "555-876-0462", email: "rachel@example.com" },
+    { id: 4, client_id: 4, name: "David Diamond", relationship: "Father", phone: "555-432-0462", email: "david@example.com" },
+    { id: 5, client_id: 5, name: "Linda Fleicher", relationship: "Mother", phone: "555-246-0462", email: "linda@example.com" },
+    { id: 6, client_id: 6, name: "Sarah Fox", relationship: "Sister", phone: "555-135-0462", email: "sarah@example.com" },
+    { id: 7, client_id: 7, name: "Miriam Hirsch", relationship: "Mother", phone: "555-975-0462", email: "miriam@example.com" },
 ];
     
 const flags: Flag[] = [
@@ -138,63 +137,99 @@ const client_records: ClientRecord[] = [
     { id: 16, client_id: 6, date: "2024-01-22", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." }
 ];
 
-export function getClientData(id: number) {
+export async function getClientList() {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    return [...clients]
+        .sort((a, b) => {
+        if (a.flagged && !b.flagged) return -1;
+        if (!a.flagged && b.flagged) return 1;
+
+        if (a.flagged && b.flagged) {
+            if ((a.flag_severity ?? 0) > (b.flag_severity ?? 0)) return -1;
+            if ((a.flag_severity ?? 0) < (b.flag_severity ?? 0)) return 1;
+        }
+
+        const lastA = (a.name ?? "").split(" ").pop()?.toLowerCase() ?? "";
+        const lastB = (b.name ?? "").split(" ").pop()?.toLowerCase() ?? "";
+        return lastA.localeCompare(lastB);
+        })
+        .map(client => ({
+            id: client.id,
+            name: client.name ?? "",
+            flagged: client.flagged ?? false,
+            flag_severity: client.flag_severity ?? null
+        }));
+}
+
+export async function getClientData(client_id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
     for (let client of clients) {
-        if (client.id === id) {
+        if (client.id === client_id) {
             return client;
         }
     }
     return null;
 }
 
-export function getClientList() {
-  return [...clients]
-    .sort((a, b) => {
-      if (a.flagged && !b.flagged) return -1;
-      if (!a.flagged && b.flagged) return 1;
+export async function getClientFormData(client_id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    const client = await getClientData(client_id);
+    const emergency_contact = emergency_contacts.find(ec => ec.client_id === client_id) || null;
 
-      if (a.flagged && b.flagged) {
-        if ((a.flag_severity ?? 0) > (b.flag_severity ?? 0)) return -1;
-        if ((a.flag_severity ?? 0) < (b.flag_severity ?? 0)) return 1;
-      }
-
-      const lastA = (a.name ?? "").split(" ").pop()?.toLowerCase() ?? "";
-      const lastB = (b.name ?? "").split(" ").pop()?.toLowerCase() ?? "";
-      return lastA.localeCompare(lastB);
-    })
-    .map(client => ({
-      id: client.id,
-      name: client.name ?? "",
-      flagged: client.flagged ?? false,
-      flag_severity: client.flag_severity ?? null
-    }));
+    return {
+        client: client,
+        emergency_contact: emergency_contact
+    };
 }
 
-// sort records by date descending
-export function getClientRecords(id: number) {
+export async function getClientRecords(id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
     const records = client_records.filter(record => record.client_id === id);
     records.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     return records;
 }
 
-export function createNewClient(client: Client) {
+export async function createNewClient(client: Client) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
     console.log("Creating new client:", client);
+
+    return true;
 }
 
-export function getClientEmergencyContacts(client_id: number) {
-    const contacts = emergency_contacts.filter(contact => contact.client_id === client_id);
+export async function updateClient(client: Client) {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    console.log("Updating client:", client);
 
-    return contacts;
+    return true;
 }
-export function getFlagsPanelData(client_id: number) {
+
+export async function getFlagsPanelData(client_id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
     const user_flags = flags.filter(flag => flag.client_id === client_id);
-    
+    const contact = emergency_contacts.find(ec => ec.client_id === client_id) || null;
 
     const payload = {
         user_flags: user_flags,
-        emergency_contacts: getClientEmergencyContacts(client_id),
+        emergency_contact: contact
     }
 
     return payload;
+}
+
+export async function isFlagged(client_id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    for (let client of clients) {
+        if (client.id === client_id) {
+            return client.flagged;
+        }
+    }
+    return false;
+}
+
+export async function resolveFlags(client_id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    console.log("Resolving flags for client ID:", client_id);
+
+    return true;
 }

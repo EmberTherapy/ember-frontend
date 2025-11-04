@@ -1,14 +1,30 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'sonner';
+import { useEffect, useState } from 'react';
 
-import { getFlagsPanelData } from '../../api/fakeApi';
+import { getFlagsPanelData, resolveFlags } from '../../api/fakeApi';
     
 export default function RightPanel({ source, onClosePanel, clientId }) {
-    const flags = source == "flag" ? getFlagsPanelData(clientId) : null;
 
-    const emergencyContacts = flags ? flags.emergency_contacts : [];
-    const userFlags = flags ? flags.user_flags : [];
+    const [flagPanelData, setFlagPanelData] = useState(null);
+    
+    useEffect(() => {
+        getFlagsPanelData(clientId).then(setFlagPanelData);
+    }, [clientId]);
 
+    const emergencyContact = flagPanelData?.emergency_contact ?? null;
+    const userFlags = flagPanelData?.user_flags ?? [];
+
+    async function handleResolveFlags() {
+        if (await resolveFlags(clientId)) {
+            onClosePanel();
+            toast.success("Flags resolved successfully!");
+        }
+        else {
+            toast.error("Couldn’t resolve flags. Please try again.");
+        }
+    }
 
     const flagPanel = (
         <div className="right-panel-content">
@@ -31,15 +47,16 @@ export default function RightPanel({ source, onClosePanel, clientId }) {
             </div>
             <div className="section">
                 <h2>Emergency Contact</h2>
-                {emergencyContacts.length > 0 ? emergencyContacts.map((contact) => (
-                    <div key={contact.id} className="contact-item">
-                        <p><strong>Name:</strong> {contact.name}</p>
-                        <p><strong>Relationship:</strong> {contact.relationship}</p>
-                        <p><strong>Phone:</strong> {contact.phone}</p>
-                    </div>
-                )) : <p>No emergency contacts available.</p>}
+                {emergencyContact ? 
+                    (
+                        <div className="contact-item">
+                            <p><strong>{emergencyContact.name}</strong>  - <em>{emergencyContact.relationship}</em></p>
+                            <p>{emergencyContact.phone}</p>
+                        </div>
+                    ) : 
+                    <p>No emergency contacts available.</p>}
             </div>
-            <button className="resolve-button">Resolve</button>
+            <button className="resolve-button" onClick={() => handleResolveFlags()}>Resolve</button>
         </div>
     );
 

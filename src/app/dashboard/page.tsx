@@ -7,6 +7,8 @@ import ClientDisplay from "./components/ClientDisplay";
 import RightPanel from "./components/RightPanel";
 import Modal from "./components/Modal";
 
+import { isFlagged } from "../api/fakeApi";
+
 import { ModalSource, PanelSource } from "../../types";
 
 import "./dashboard.css"; 
@@ -31,9 +33,13 @@ export default function App() {
   function closeModal() {
     setModalSource(null);
   }
-  function changeClientDisplay(id: number) {
+  
+  async function changeClientDisplay(id: number) {
     setSelectedId(id);
-    closePanel();
+    if (!await isFlagged(id)) {
+      setPanelSource(null);
+    }
+    
   }
 
   function openRecord(record: any) {

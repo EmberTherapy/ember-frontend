@@ -1,44 +1,101 @@
-import React, { useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-
-import { getClientData, getClientRecords, createNewClient } from '../../api/fakeApi';
+import { toast } from 'sonner';
+import { getClientRecords, createNewClient, updateClient, getClientFormData } from '../../api/fakeApi';
 
 export default function Modal({ source, onCloseModal, clientId, recordId }) {
     const editMode = source == "editClient";
     const recordMode = source == "viewRecord";
 
-    const client = editMode ? getClientData(clientId) : null;
-    const record = recordMode ? getClientRecords(recordId) : null;
+        const user_template = {
+        name: "",
+        email: "",
+        focus_areas: [],
+        meeting_time: "",
+        ai_instructions: "",
+        emergency_contact: { 
+            name: "", 
+            relationship: "", 
+            email: "", 
+            phone: "" 
+        },
+    };
 
-    const [name, setName] = useState(editMode ? client.name : "");
-    const [email, setEmail] = useState(editMode ? client.email : "");
-    const [focusAreas, setFocusAreas] = useState(editMode ? client.focus_areas : []);
-    const [meetingTime, setMeetingTime] = useState(editMode ? client.meeting_time : "");
-    const [aiInstructions, setAIInstructions] = useState(editMode ? client.ai_instructions : "");
+    const [form, setForm] = useState(user_template);
 
-    const [emergencyContactName, setEmergencyContactName] = useState(editMode && client.emergency_contact ? client.emergency_contact.name : "");
-    const [emergencyContactRelationship, setEmergencyContactRelationship] = useState(editMode && client.emergency_contact ? client.emergency_contact.relationship : "");
-    const [emergencyContactEmail, setEmergencyContactEmail] = useState(editMode && client.emergency_contact ? client.emergency_contact.email : "");
-    const [emergencyContactPhone, setEmergencyContactPhone] = useState(editMode && client.emergency_contact ? client.emergency_contact.phone : "");
+    useEffect(() => {
+        if (!editMode) return;
 
-    function newClient() {
+        (async () => {
+            const form_data = await getClientFormData(clientId);
+
+            setForm({
+                name: form_data.client?.name ?? "",
+                email: form_data.client?.email ?? "",
+                focus_areas: form_data.client?.focus_areas ?? [],
+                meeting_time: form_data.client?.meeting_time ?? "",
+                ai_instructions: form_data.client?.ai_instructions ?? "",
+                emergency_contact: {
+                    name: form_data.emergency_contact?.name ?? "",
+                    relationship: form_data.emergency_contact?.relationship ?? "",
+                    email: form_data.emergency_contact?.email ?? "",
+                    phone: form_data.emergency_contact?.phone ?? "",
+                },
+            });
+        })();
+    }, [editMode, clientId]);
+
+    async function newClient() {
         const newUser = {
-            name: name,
-            email: email,
-            focus_areas: focusAreas,
-            meeting_time: meetingTime,
-            ai_instructions: aiInstructions,
+            name: form.name,
+            email: form.email,
+            focus_areas: form.focus_areas,
+            meeting_time: form.meeting_time,
+            ai_instructions: form.ai_instructions,
             emergency_contact: {
-                name: emergencyContactName,
-                relationship: emergencyContactRelationship,
-                email: emergencyContactEmail,
-                phone: emergencyContactPhone
+                name: form.emergency_contact.name,
+                relationship: form.emergency_contact.relationship,
+                email: form.emergency_contact.email,
+                phone: form.emergency_contact.phone
             }
         };
 
-        createNewClient(newUser);
+        const toastId = toast.loading("Creating client...");
+        if (await createNewClient(newUser)) {
+            toast.dismiss(toastId);
+            onCloseModal();
+            toast.success("Client created successfully!");    
+        }
+        else {
+            toast.error("Couldn’t save. Try again.");
+        }
+    }
+
+    async function handleUpdateClient() {
+        const updatedUser = {
+            name: form.name,
+            email: form.email,
+            focus_areas: form.focus_areas,
+            meeting_time: form.meeting_time,
+            ai_instructions: form.ai_instructions,
+            emergency_contact: {
+                name: form.emergency_contact.name,
+                relationship: form.emergency_contact.relationship,
+                email: form.emergency_contact.email,
+                phone: form.emergency_contact.phone
+            }
+        };
+
+        const toastId = toast.loading("Saving changes...");
+        if (await updateClient(updatedUser)) {
+            toast.dismiss(toastId);
+            onCloseModal();
+            toast.success("Client updated successfully!");
+        }
+        else {
+            toast.error("Couldn’t save changes. Please try again.");
+        }
     }
 
     const clientForm = (
@@ -51,19 +108,19 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
                 <div className = "form-section">    
                     <div className="form-group">
                         <label>Name: </label>
-                        <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+                        <input type="text" name="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
                     </div>
                     <div className="form-group">
                         <label>Email: </label>
-                        <input type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input type="text" name="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
                     </div>
                     <div className="form-group">
                         <label>Focus Areas: </label>
-                        <input type="text" name="focus_areas" value={focusAreas.join(", ")} onChange={(e) => setFocusAreas(e.target.value.split(", "))} />
+                        <input type="text" name="focus_areas" value={form.focus_areas.join(", ")} onChange={(e) => setForm({ ...form, focus_areas: e.target.value.split(", ") })} />
                     </div>
                     <div className="form-group">
                         <label>Meeting Time: </label>
-                        <input type="text" name="meeting_time" value={meetingTime} onChange={(e) => setMeetingTime(e.target.value)} />
+                        <input type="text" name="meeting_time" value={form.meeting_time} onChange={(e) => setForm({ ...form, meeting_time: e.target.value })} />
                     </div>
                     <div className="form-group">
                         <label>AI Instructions: </label>
@@ -71,9 +128,9 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
                             id="ai_instructions"
                             name="ai_instructions"
                             placeholder="Please enter any instructions, concerns, or notes for your client's specifically tailored therapist-bot."
-                            value={aiInstructions}
+                            value={form.ai_instructions}
                             onChange={(e) => {
-                                setAIInstructions(e.target.value);
+                                setForm({ ...form, ai_instructions: e.target.value });
 
                                 const el = e.target;
 
@@ -90,24 +147,24 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
                     <div className="emergency-contact-grid">
                         <div className="form-group">
                             <label>Name: </label>
-                            <input type="text" name="emergency_contact_name" value={emergencyContactName} onChange={(e) => setEmergencyContactName(e.target.value)} />
+                            <input type="text" name="emergency_contact_name" value={form.emergency_contact.name} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, name: e.target.value } })} />
                         </div>
                         <div className="form-group">
                             <label>Relationship: </label>
-                            <input type="text" name="emergency_contact_relationship" value={emergencyContactRelationship} onChange={(e) => setEmergencyContactRelationship(e.target.value)} />
+                            <input type="text" name="emergency_contact_relationship" value={form.emergency_contact.relationship} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, relationship: e.target.value } })} />
                         </div>
                         <div className="form-group">
                             <label>Email: </label>
-                            <input type="text" name="emergency_contact_email" value={emergencyContactEmail} onChange={(e) => setEmergencyContactEmail(e.target.value)} />
+                            <input type="text" name="emergency_contact_email" value={form.emergency_contact.email} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, email: e.target.value } })} />
                         </div>
                         <div className="form-group">
                             <label>Phone Number: </label>
-                            <input type="text" name="emergency_contact_phone" value={emergencyContactPhone} onChange={(e) => setEmergencyContactPhone(e.target.value)} />
+                            <input type="text" name="emergency_contact_phone" value={form.emergency_contact.phone} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, phone: e.target.value } })} />
                         </div>
                     </div>
                 </div>
 
-                <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault(); newClient();}}> {editMode ? "Save Changes" : "Add Client"}</button>
+                <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault(); editMode ? handleUpdateClient() : newClient();}}> {editMode ? "Save Changes" : "Add Client"}</button>
             </form>
         </div>
     );
@@ -124,13 +181,12 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
         </div>
     );
 
-
     return (
         <div className="modal-overlay">
-          <div className="modal">
-            {(source == "newClient" || source == "editClient") && clientForm}
-            {source == "viewRecord" && viewRecord}
-          </div>
+            <div className="modal">
+                {(source == "newClient" || source == "editClient") && clientForm}
+                {source == "viewRecord" && viewRecord}
+            </div>
         </div>
-    )
+    );
 }
