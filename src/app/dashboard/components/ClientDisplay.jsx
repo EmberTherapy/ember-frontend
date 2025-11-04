@@ -16,7 +16,7 @@ export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
                             <h2>{client.name}</h2>
                             <div className="button-group">
                                 {client.flagged && 
-                                <button className="flag-button" onClick={() => onOpenPanel("clientFlagInfo")}>
+                                <button className="flag-button" onClick={() => onOpenPanel("flag")}>
                                     <FontAwesomeIcon icon={faFlag} />
                                 </button>}
                                 <button className="edit-button" onClick={() => onOpenModal("editClient")}>

@@ -10,7 +10,7 @@ export default function ClientList({ selected, onChangeDisplay, onOpenModal }) {
     <div className="left-panel">
       {clients.map((client) => (
         <div 
-          className={`left-panel-item ${selected === client.id ? "left-panel-item-active" : ""} ${client.flagged ? "flagged" : ""} `} 
+          className={`left-panel-item ${selected === client.id ? "left-panel-item-active" : ""} ${client.flag_severity == 2 ? "flagged_high" : ""} ${client.flag_severity == 1 ? "flagged_medium" : ""}`} 
           key={client.id} 
           onClick={() => onChangeDisplay(client.id)}>
             {client.name}

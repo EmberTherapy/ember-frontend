@@ -1,77 +1,50 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-import { getClientData } from '../../api/fakeApi';
+import { getFlagsPanelData } from '../../api/fakeApi';
     
 export default function RightPanel({ source, onClosePanel, clientId }) {
-    const client = source == "editClient" ? getClientData(clientId) : null;
+    const flags = source == "flag" ? getFlagsPanelData(clientId) : null;
 
-    const editPanel = (
-        <div id="right-panel">
-            <div className="top-bar">
-                <h1>Client Info</h1>
-                <button className="exit-button" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
-            </div>
-            <form>
-                <div className="form-group">
-                    <label>Name: </label>
-                    <input type="text" name="name" defaultValue={client?.name} />
-                </div>
-                <div className="form-group">
-                    <label>Problems: </label>
-                    <input type="text" name="problems" defaultValue={client?.problems.join(", ")} />
-                </div>
-                <div className="form-group">
-                    <label>Meeting Time: </label>
-                    <input type="text" name="meeting_time" defaultValue={client?.meeting_time} />
-                </div>
-                <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault();}}>Save</button>
-            </form>
-        </div>
-    );
+    const emergencyContacts = flags ? flags.emergency_contacts : [];
+    const userFlags = flags ? flags.user_flags : [];
+
 
     const flagPanel = (
-        <div id="right-panel">
+        <div className="right-panel-content">
             <div className="top-bar">
-                <h1>Flag Info</h1>
+                <h1>Flag Information</h1>
                 <button className="exit-button" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
-            <p>Client ID: {clientId}</p>
+            <div className="section">
+                <h2>{userFlags.length > 1 ? "Flags" : "Flag"}</h2>
+                {userFlags.map((flag) => (
+                    <div key={flag.id} className="flag-item">
+                        <div className="section-row">
+                            <span className={`severity-label severity-${flag.severity}`}>{flag.severity == 1 ? "Concerning" : "Critical"}</span> 
+                            <p><strong>{flag.date_flagged}</strong></p>
+                        </div>
+                        <p><strong>Type:</strong> {flag.type}</p>
+                        <p><strong>Chat Snippet:</strong> {flag.chat_snippet}</p>
+                    </div>
+                ))}
+            </div>
+            <div className="section">
+                <h2>Emergency Contact</h2>
+                {emergencyContacts.length > 0 ? emergencyContacts.map((contact) => (
+                    <div key={contact.id} className="contact-item">
+                        <p><strong>Name:</strong> {contact.name}</p>
+                        <p><strong>Relationship:</strong> {contact.relationship}</p>
+                        <p><strong>Phone:</strong> {contact.phone}</p>
+                    </div>
+                )) : <p>No emergency contacts available.</p>}
+            </div>
+            <button className="resolve-button">Resolve</button>
         </div>
     );
 
-    const newClient = (
-        <div id="right-panel">
-            <div className="top-bar">
-                <h1>New Client</h1>
-                <button className="exit-button" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
-            </div>
-            <form>
-                <div className="form-group">
-                    <label>Name: </label>
-                    <input type="text" name="name" defaultValue="" />
-                </div>
-                <div className="form-group">
-                    <label>Problems: </label>
-                    <input type="text" name="problems" defaultValue="" />
-                </div>
-                <div className="form-group">
-                    <label>Meeting Time: </label>
-                    <input type="text" name="meeting_time" defaultValue="" />
-                </div>
-                <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault();}}>Add Client</button>
-            </form>
-        </div>
-    );
-
-    if (source === "editClient") {
-        return editPanel;
-    }
-    else if (source === "clientFlagInfo") {
+    if (source === "flag") {
         return flagPanel;
-    }
-    else if (source === "newClient") {
-        return newClient;
     }
     else {
         return null;
