@@ -191,7 +191,7 @@ export async function getClientRecords(id: number) {
 }
 
 export async function createNewClient(client: Client) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     console.log("Creating new client:", client);
 
     return true;
