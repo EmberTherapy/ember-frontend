@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 import { getClientRecords, createNewClient, updateClient, getClientFormData } from '../../api/fakeApi';
 
-export default function Modal({ source, onCloseModal, clientId, recordId }) {
-    const editMode = source == "editClient";
-    const recordMode = source == "viewRecord";
-
-        const user_template = {
+export default function Modal({ mode, onCloseModal, clientId, recordId }) {
+    const user_template = {
         name: "",
         email: "",
         focus_areas: [],
@@ -25,7 +22,7 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
     const [form, setForm] = useState(user_template);
 
     useEffect(() => {
-        if (!editMode) return;
+        if (mode != "editClient") return;
 
         (async () => {
             const form_data = await getClientFormData(clientId);
@@ -44,9 +41,9 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
                 },
             });
         })();
-    }, [editMode, clientId]);
+    }, [mode, clientId]);
 
-    async function newClient() {
+    async function handleCreateNewClient() {
         const newUser = {
             name: form.name,
             email: form.email,
@@ -98,10 +95,32 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
         }
     }
 
+    // auto-resize textarea for AI Instructions
+    const textareaRef = useRef(null);
+    function resizeTextarea() {
+        const el = textareaRef.current;
+        if (!el) return;
+        el.style.height = "auto";                      // allow shrink
+        el.style.height = `${el.scrollHeight}px`;      // fit content
+    }
+
+    useLayoutEffect(() => {
+        resizeTextarea();
+    }, [form.ai_instructions]);
+
+    // close modal on Escape key press
+    useEffect(() => {
+        function handleKeyDown(e) {
+            if (e.key === 'Escape') onCloseModal();
+        }
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [onCloseModal]);
+
     const clientForm = (
         <div id="modal-content">
             <div className="top-bar">
-                <h1>{editMode ? "Edit Client" : "New Client"}</h1>
+                <h1>{mode === "editClient" ? "Edit Client" : mode === "newClient" ? "New Client" : ""}</h1>
                 <button className="exit-button" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form>
@@ -126,18 +145,15 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
                         <label>AI Instructions: </label>
                         <textarea
                             id="ai_instructions"
+                            ref={textareaRef}
                             name="ai_instructions"
                             placeholder="Please enter any instructions, concerns, or notes for your client's specifically tailored therapist-bot."
                             value={form.ai_instructions}
                             onChange={(e) => {
                                 setForm({ ...form, ai_instructions: e.target.value });
-
                                 const el = e.target;
-
-                                if (el.scrollHeight > el.clientHeight) {
-                                    el.style.height = "auto";
-                                    el.style.height = `${el.scrollHeight}px`;
-                                }
+                                el.style.height = "auto";
+                                el.style.height = `${el.scrollHeight}px`;
                             }}
                         />
                     </div>
@@ -163,8 +179,9 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
                         </div>
                     </div>
                 </div>
-
-                <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault(); editMode ? handleUpdateClient() : newClient();}}> {editMode ? "Save Changes" : "Add Client"}</button>
+                <div className="footer">
+                    <button className="submit-button" type="submit" onClick={(e) => { e.preventDefault(); mode === "editClient" ? handleUpdateClient() : handleCreateNewClient(); }}> {mode === "editClient" ? "Save Changes" : "Add Client"}</button>
+                </div>
             </form>
         </div>
     );
@@ -172,6 +189,7 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
     const viewRecord = (
         <div id="right-panel">
             <div className="top-bar">
+                <p>{recordId}</p>
                 <h1>Record Details</h1>
                 <button className="exit-button" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
@@ -182,10 +200,10 @@ export default function Modal({ source, onCloseModal, clientId, recordId }) {
     );
 
     return (
-        <div className="modal-overlay">
-            <div className="modal">
-                {(source == "newClient" || source == "editClient") && clientForm}
-                {source == "viewRecord" && viewRecord}
+        <div className="modal-overlay" onClick={onCloseModal}>
+            <div className="modal" onClick={(e) => e.stopPropagation()}>
+                {(mode == "newClient" || mode == "editClient") && clientForm}
+                {mode == "viewRecord" && viewRecord}
             </div>
         </div>
     );

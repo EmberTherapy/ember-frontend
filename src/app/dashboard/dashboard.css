@@ -116,6 +116,7 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   width: 65%;
   height: auto;
+  max-height: 93%;
   overflow: scroll;
 }
 
@@ -345,6 +346,8 @@ body {
   padding-bottom: 0.75rem;
   margin-bottom: 2rem;
   border-bottom: 1px solid #eee;
+  position: sticky; top: 0;
+  background: white;
 }
 
 .modal .form-group {
@@ -409,13 +412,20 @@ body {
   gap: 0px 24px; 
 }
 
+.modal .footer {
+  position: sticky; bottom: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #eee;
+  background: white;
+}
+
 .modal .submit-button  {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
-  margin-bottom: 1.5rem;
   padding: .8rem 1rem;
   font-weight: 600;
   background: transparent;

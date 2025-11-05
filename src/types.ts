@@ -1,5 +1,5 @@
 export type PanelSource = "flag" | null;
-export type ModalSource = "editClient" | "newClient" | "viewRecord" | null;
+export type ModalMode = "editClient" | "newClient" | "viewRecord" | null;
 
 export interface Client {
   id: number;

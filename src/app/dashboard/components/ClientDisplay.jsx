@@ -4,7 +4,7 @@ import { getClientData, getClientRecords } from '../../api/fakeApi';
 import { on } from 'events';
 import { useEffect, useState } from 'react';
 
-export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
+export default function ClientDisplay({ id, onOpenPanel, onOpenModal, onOpenRecord }) {
     const [client, setClient] = useState(null);
       useEffect(() => {
         getClientData(id).then(setClient);
@@ -49,7 +49,7 @@ export default function ClientDisplay({ id, onOpenPanel, onOpenModal }) {
                                         <th>Content</th>
                                     </tr>
                                     {records.length > 0 ? records.map((record, index) => (
-                                        <tr key={index} onClick={() => onOpenModal("viewRecord")}>
+                                        <tr key={index} onClick={() => { onOpenModal("viewRecord"); onOpenRecord(record.id)}}>
                                             <td>{record.date}</td>
                                             <td>{record.type == "chat_summary" ? "Chat Summary" : "Session Note"}</td>
                                             <td>{record.content.length > 100 ? record.content.substring(0, 100) + "..." : record.content}</td>

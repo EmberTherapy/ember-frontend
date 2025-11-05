@@ -9,14 +9,15 @@ import Modal from "./components/Modal";
 
 import { isFlagged } from "../api/fakeApi";
 
-import { ModalSource, PanelSource } from "../../types";
+import { ModalMode, PanelSource } from "../../types";
 
 import "./dashboard.css"; 
 
 export default function App() {
   const [selectedId, setSelectedId] = useState(0);
+  const [selectedRecordId, setSelectedRecordId] = useState<number | null>(null);
   const [panelSource, setPanelSource] = useState<PanelSource>(null);
-  const [modalSource, setModalSource] = useState<ModalSource>(null);
+  const [modalMode, setmodalMode] = useState<ModalMode>(null);
 
   function openPanel(source: PanelSource) {
     setPanelSource(source);
@@ -26,12 +27,15 @@ export default function App() {
     setPanelSource(null);
   }
 
-  function openModal(source: ModalSource) {
-    setModalSource(source);
+  function openModal(mode: ModalMode) {
+    if (mode == "newClient") {
+      closePanel();
+    }
+    setmodalMode(mode);
   }
 
   function closeModal() {
-    setModalSource(null);
+    setmodalMode(null);
   }
   
   async function changeClientDisplay(id: number) {
@@ -42,8 +46,9 @@ export default function App() {
     
   }
 
-  function openRecord(record: any) {
-    console.log("Opening record:", record);
+  function openRecord(record_id: number) {
+    setSelectedRecordId(record_id);
+    openModal("viewRecord");
   }
   
   return (
@@ -56,7 +61,7 @@ export default function App() {
 
         <main className="main">
           <div className="main-content">
-            <ClientDisplay id={selectedId} onOpenPanel={openPanel} onOpenModal={openModal} />
+            <ClientDisplay id={selectedId} onOpenPanel={openPanel} onOpenModal={openModal} onOpenRecord={openRecord} />
           </div>
 
           {panelSource && (
@@ -66,8 +71,8 @@ export default function App() {
           )}
         </main>
 
-        {modalSource && (
-          <Modal source={modalSource} onCloseModal={closeModal} clientId={selectedId} recordId={null}/>
+        {modalMode && (
+          <Modal mode={modalMode} onCloseModal={closeModal} clientId={selectedId} recordId={selectedRecordId}/>
         )}
     </div>
   );

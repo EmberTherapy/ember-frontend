@@ -233,3 +233,13 @@ export async function resolveFlags(client_id: number) {
 
     return true;
 }
+
+export async function getRecordById(record_id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    for (let record of client_records) {
+        if (record.id === record_id) {
+            return record;
+        }
+    }
+    return null;
+}
