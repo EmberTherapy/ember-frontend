@@ -3,7 +3,10 @@ export type ModalMode = "editClient" | "newClient" | "viewRecord" | null;
 
 export interface Client {
   id: number;
-  name: string;
+  first_name: string;
+  last_name: string;
+  date_of_birth: string;
+  phone: string;
   email: string;
   focus_areas: string[];
   meeting_time: string;

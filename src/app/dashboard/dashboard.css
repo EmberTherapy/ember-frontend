@@ -357,6 +357,17 @@ body {
   margin-bottom: 1.25rem;         
 }
 
+.modal .half-group {
+  display: flex;
+  justify-content: space-between;  
+  align-items: flex-start;    
+}
+
+.modal .half-group label {
+  padding-right: 20px;
+}
+
+
 .modal .form-group label {
   font-weight: 600;
   font-size: 0.95rem;
@@ -372,6 +383,10 @@ body {
   font-family: inherit; 
 }
 
+.modal .half-group {
+  display: inline-block;
+  width: 48%;
+}
 .modal .form-group textarea {
   width: 65%;
   min-height: 3.5rem; 

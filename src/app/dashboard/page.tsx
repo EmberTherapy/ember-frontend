@@ -1,20 +1,17 @@
 "use client"
 
 import { useState } from "react";
-
+import "./dashboard.css"; 
+import { ModalMode, PanelSource } from "../../types";
 import ClientList from "./components/ClientList";
 import ClientDisplay from "./components/ClientDisplay";
 import RightPanel from "./components/RightPanel";
 import Modal from "./components/Modal";
+import { isFlagged } from "@/app/api/fakeApi";
 
-import { isFlagged } from "../api/fakeApi";
-
-import { ModalMode, PanelSource } from "../../types";
-
-import "./dashboard.css"; 
 
 export default function App() {
-  const [selectedId, setSelectedId] = useState(0);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedRecordId, setSelectedRecordId] = useState<number | null>(null);
   const [panelSource, setPanelSource] = useState<PanelSource>(null);
   const [modalMode, setmodalMode] = useState<ModalMode>(null);
@@ -40,10 +37,10 @@ export default function App() {
   
   async function changeClientDisplay(id: number) {
     setSelectedId(id);
+
     if (!await isFlagged(id)) {
       setPanelSource(null);
     }
-    
   }
 
   function openRecord(record_id: number) {
@@ -61,7 +58,7 @@ export default function App() {
 
         <main className="main">
           <div className="main-content">
-            <ClientDisplay id={selectedId} onOpenPanel={openPanel} onOpenModal={openModal} onOpenRecord={openRecord} />
+            <ClientDisplay selected_id={selectedId} onOpenPanel={openPanel} onOpenModal={openModal} onOpenRecord={openRecord} />
           </div>
 
           {panelSource && (

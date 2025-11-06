@@ -4,11 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 
-import { createNewClient, updateClient, getClientFormData } from '../../api/fakeApi';
+import { createNewClient, updateClient, getClientFormData } from '@/app/api/fakeApi';
 
 export default function ClientFormModal({ mode, clientId, onCloseModal }) {
     const user_template = {
-        name: "",
+        first_name: "",
+        last_name: "",
+        date_of_birth: "",
+        phone: "",
         email: "",
         focus_areas: [],
         meeting_time: "",
@@ -30,8 +33,11 @@ export default function ClientFormModal({ mode, clientId, onCloseModal }) {
             const form_data = await getClientFormData(clientId);
 
             setForm({
-                name: form_data.client?.name ?? "",
+                first_name: form_data.client?.first_name ?? "",
+                last_name: form_data.client?.last_name ?? "",
                 email: form_data.client?.email ?? "",
+                date_of_birth: form_data.client?.date_of_birth ?? "",
+                phone: form_data.client?.phone ?? "",
                 focus_areas: form_data.client?.focus_areas ?? [],
                 meeting_time: form_data.client?.meeting_time ?? "",
                 ai_instructions: form_data.client?.ai_instructions ?? "",
@@ -47,8 +53,11 @@ export default function ClientFormModal({ mode, clientId, onCloseModal }) {
 
     async function handleCreateNewClient() {
         const newUser = {
-            name: form.name,
+            first_name: form.first_name,
+            last_name: form.last_name,
             email: form.email,
+            date_of_birth: form.date_of_birth,
+            phone: form.phone,
             focus_areas: form.focus_areas,
             meeting_time: form.meeting_time,
             ai_instructions: form.ai_instructions,
@@ -73,7 +82,10 @@ export default function ClientFormModal({ mode, clientId, onCloseModal }) {
 
     async function handleUpdateClient() {
         const updatedUser = {
-            name: form.name,
+            first_name: form.first_name,
+            last_name: form.last_name,
+            date_of_birth: form.date_of_birth,
+            phone: form.phone,
             email: form.email,
             focus_areas: form.focus_areas,
             meeting_time: form.meeting_time,
@@ -117,10 +129,28 @@ export default function ClientFormModal({ mode, clientId, onCloseModal }) {
                 <button className="exit-button" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form>
-                <div className = "form-section">    
+                <div className = "form-section">   
+                    <div className = "emergency-contact-grid">
+                        <div className="form-group">
+                            <label>First Name: </label>
+                            <input type="text" name="first_name" value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} />
+                        </div>
+                        <div className="form-group">
+                            <label>Last Name: </label>
+                            <input type="text" name="last_name" value={form.last_name} onChange={(e) => setForm({ ...form, last_name: e.target.value })} />
+                        </div>
+                        <div className="form-group">
+                            <label>Email: </label>
+                            <input type="text" name="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                        </div>
+                        <div className="form-group">
+                                <label>Phone: </label>
+                                <input type="text" name="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                        </div>
+                    </div>
                     <div className="form-group">
-                        <label>Name: </label>
-                        <input type="text" name="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                        <label>Date of Birth: </label>
+                        <input type="text" name="date_of_birth" value={form.date_of_birth} onChange={(e) => setForm({ ...form, date_of_birth: e.target.value })} />
                     </div>
                     <div className="form-group">
                         <label>Email: </label>
