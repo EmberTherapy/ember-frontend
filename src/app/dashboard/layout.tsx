@@ -11,7 +11,7 @@ export default function DashboardLayout({
         <Toaster
           position="bottom-right"
           richColors
-          // closeButton
+          visibleToasts={1}
         />
     </div>
   );
