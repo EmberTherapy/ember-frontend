@@ -107,34 +107,44 @@ const clients: Client[] = [
         ai_instructions: "Client has expressed significant insecurity about his body image, particularly regarding his genitalia. Please approach this topic with sensitivity and provide supportive strategies to help improve his self-esteem.",
         flagged: false,
         flag_severity: null
+    },
+    {
+        id: 8,
+        name: "Big Mike",
+        email: "DADDY@example.com",
+        focus_areas: ["relationship issues", "elias needs some love"],
+        meeting_time: "3pm Tuesday",
+        ai_instructions: "Client is navigating complex relationship dynamics. Provide support around communication strategies.",
+        flagged: false,
+        flag_severity: null
     }
 ];
 
 const client_records: ClientRecord[] = [
-    { id: 1, client_id: 1, date: "2024-01-22", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." },
-    { id: 2, client_id: 1, date: "2024-01-15", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
-    { id: 3, client_id: 1, date: "2024-01-08", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
-    { id: 4, client_id: 1, date: "2023-12-30", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
-    { id: 5, client_id: 1, date: "2023-12-20", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
-    { id: 6, client_id: 2, date: "2023-12-10", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
-    { id: 7, client_id: 2, date: "2023-12-01", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
-    { id: 8, client_id: 2, date: "2023-11-22", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
-    { id: 1, client_id: 2, date: "2024-01-22", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." },
-    { id: 2, client_id: 2, date: "2024-01-15", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
-    { id: 3, client_id: 2, date: "2024-01-08", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
-    { id: 4, client_id: 3, date: "2023-12-30", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
-    { id: 5, client_id: 3, date: "2023-12-20", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
-    { id: 6, client_id: 4, date: "2023-12-10", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
-    { id: 7, client_id: 4, date: "2023-12-01", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
-    { id: 8, client_id: 4, date: "2023-11-22", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
-    { id: 9, client_id: 5, date: "2024-01-15", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
-    { id: 10, client_id: 5, date: "2024-01-08", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
-    { id: 11, client_id: 6, date: "2023-12-30", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
-    { id: 12, client_id: 6, date: "2023-12-20", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
-    { id: 13, client_id: 6, date: "2023-12-10", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
-    { id: 14, client_id: 6, date: "2023-12-01", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
-    { id: 15, client_id: 6, date: "2023-11-22", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
-    { id: 16, client_id: 6, date: "2024-01-22", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." }
+    { id: 1, client_id: 1, date: "1/22/2024, 10:00 AM", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." },
+    { id: 2, client_id: 1, date: "1/15/2024, 10:00 AM", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
+    { id: 3, client_id: 1, date: "1/8/2024, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
+    { id: 4, client_id: 1, date: "12/30/2023, 10:00 AM", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
+    { id: 5, client_id: 1, date: "12/20/2023, 10:00 AM", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
+    { id: 6, client_id: 2, date: "12/10/2023, 10:00 AM", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
+    { id: 7, client_id: 2, date: "12/1/2023, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
+    { id: 8, client_id: 2, date: "11/22/2023, 10:00 AM", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
+    { id: 1, client_id: 2, date: "1/22/2024, 10:00 AM", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." },
+    { id: 2, client_id: 2, date: "1/15/2024, 10:00 AM", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
+    { id: 3, client_id: 2, date: "1/8/2024, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
+    { id: 4, client_id: 3, date: "12/30/2023, 10:00 AM", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
+    { id: 5, client_id: 3, date: "12/20/2023, 10:00 AM", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
+    { id: 6, client_id: 4, date: "12/10/2023, 10:00 AM", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
+    { id: 7, client_id: 4, date: "12/1/2023, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
+    { id: 8, client_id: 4, date: "11/22/2023, 10:00 AM", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
+    { id: 9, client_id: 5, date: "1/15/2024, 10:00 AM", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
+    { id: 10, client_id: 5, date: "1/8/2024, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
+    { id: 11, client_id: 6, date: "12/30/2023, 10:00 AM", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
+    { id: 12, client_id: 6, date: "12/20/2023, 10:00 AM", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
+    { id: 13, client_id: 6, date: "12/10/2023, 10:00 AM", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
+    { id: 14, client_id: 6, date: "12/1/2023, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
+    { id: 15, client_id: 6, date: "11/22/2023, 10:00 AM", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
+    { id: 16, client_id: 6, date: "1/22/2024, 10:00 AM", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." }
 ];
 
 export async function getClientList() {
