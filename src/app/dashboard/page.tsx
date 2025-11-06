@@ -3,10 +3,10 @@
 import { useState } from "react";
 import "./dashboard.css"; 
 import { ModalMode, PanelSource } from "../../types";
-import ClientList from "./components/ClientList";
-import ClientDisplay from "./components/ClientDisplay";
-import RightPanel from "./components/RightPanel";
-import Modal from "./components/Modal";
+import ClientList from "./Components/ClientList";
+import ClientDisplay from "./Components/ClientDisplay";
+import RightPanel from "./Components/RightPanel";
+import Modal from "./Components/Modal";
 import { isFlagged } from "@/app/api/fakeApi";
 
 
