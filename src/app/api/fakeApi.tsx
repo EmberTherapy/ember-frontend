@@ -1,6 +1,10 @@
 import { Client, EmergencyContact, ClientRecord, Flag } from "@/types";
 import { emergency_contacts, flags, clients, client_records } from "./data";
 
+export async function authenticateUser(email: string, password: string) {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return { status: true, token: "fake-jwt-token" };
+}
 
 export async function getClientList() {
     await new Promise((resolve) => setTimeout(resolve, 50));

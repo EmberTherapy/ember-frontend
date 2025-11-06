@@ -1,0 +1,157 @@
+html, body { height: 100%; margin: 0; }
+:root {
+  --color-primary: #F2581B;        /* Orange accent */
+  --color-primary-light: #FF6A2A;
+  --color-primary-bg: #FFF4E6;     
+  --color-primary-fade: #fffaf3;  
+  --color-red: #E63946;         /* for alarming actions like flag */
+  --color-light-red: #fdeaea;
+  --color-red-shadow: #E6394699;
+  --color-orange: #FB8500;       /* vivid orange for strong alert */
+  --color-light-orange: #FFF3E0; /* gentle, warm complement */
+  --color-yellow: #FFB703; 
+  --color-yellow-shadow: #FFB70399; 
+
+  --color-success-green: #3CB878;
+  --color-failure-red: #E63946;
+
+  --neutral-0:   #FFFFFF;
+  --neutral-50:  #FFFBF7;   /* warm paper */
+  --neutral-100: #F5F6F7;   /* slightly cooler to avoid beige cast */
+  --neutral-200: #E7EAEE;
+  --neutral-300: #D6DAE0;
+  --neutral-400: #B8BEC7;
+  --neutral-500: #8D96A2;
+  --neutral-600: #5A6472;
+  --neutral-800: #1F242C;
+
+  --color-text: #3e3e3e;
+
+  --border: var(--neutral-200);
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+  --header-h: 64px;
+  --sidebar-w: 240px;
+  --rightpanel-w: 320px;
+}
+
+/* auth.css */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--neutral-50);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main {
+    text-align: center;
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+a {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+h1 {
+  font-size: 3.0rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+
+.card {
+  background: var(--neutral-0);
+  padding: 2.5rem 2.75rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  text-align: left;
+  width: auto;
+}
+
+/* Form Layout */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Label + Input */
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--neutral-600);
+}
+
+input {
+  margin-top: 0.4rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1.5px solid var(--neutral-200);
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  background-color: var(--neutral-0);
+}
+
+input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-primary-bg);
+}
+
+/* Button */
+button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+button:hover {
+  background-color: var(--color-primary-light);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.success {
+    color: var(--color-success-green);
+    font-weight: bold;
+}
+
+.fail {
+    color: var(--color-failure-red);
+}
+
+.name-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}

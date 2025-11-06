@@ -10,7 +10,7 @@ import Modal from "./Components/Modal";
 import { isFlagged } from "@/app/api/fakeApi";
 
 
-export default function App() {
+export default function DashboardPage() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedRecordId, setSelectedRecordId] = useState<number | null>(null);
   const [panelSource, setPanelSource] = useState<PanelSource>(null);
