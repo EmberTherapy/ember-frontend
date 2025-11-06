@@ -4,7 +4,7 @@ import RecordsCard from './DisplayCards/RecordsCard';
 import ClientCard from './DisplayCards/ClientCard';
 import { getClientData, getClientRecords } from '../../api/fakeApi';
 
-export default function ClientDisplay({ selected_id, onOpenPanel, onOpenModal, onOpenRecord }) {
+export default function ClientDisplay({ selected_id, onOpenPanel, onOpenModal }) {
     if (!selected_id) {
         return (
             <div id="client-display">
@@ -21,7 +21,7 @@ export default function ClientDisplay({ selected_id, onOpenPanel, onOpenModal, o
         <div id="client-display">
             <div>
                 <ClientCard client_id={selected_id} onOpenPanel={onOpenPanel} onOpenModal={onOpenModal} />
-                <RecordsCard client_id={selected_id} onOpenModal={onOpenModal} onOpenRecord={onOpenRecord} />
+                <RecordsCard client_id={selected_id} onOpenModal={onOpenModal} />
             </div>
         </div>
     );

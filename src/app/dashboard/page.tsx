@@ -24,7 +24,10 @@ export default function App() {
     setPanelSource(null);
   }
 
-  function openModal(mode: ModalMode) {
+  function openModal(mode: ModalMode, record_id: number | null = null) {
+    if (mode == "viewRecord") {
+      setSelectedRecordId(record_id);
+    }
     if (mode == "newClient") {
       closePanel();
     }
@@ -42,11 +45,6 @@ export default function App() {
       setPanelSource(null);
     }
   }
-
-  function openRecord(record_id: number) {
-    setSelectedRecordId(record_id);
-    openModal("viewRecord");
-  }
   
   return (
     <div className="page">
@@ -58,7 +56,7 @@ export default function App() {
 
         <main className="main">
           <div className="main-content">
-            <ClientDisplay selected_id={selectedId} onOpenPanel={openPanel} onOpenModal={openModal} onOpenRecord={openRecord} />
+            <ClientDisplay selected_id={selectedId} onOpenPanel={openPanel} onOpenModal={openModal}/>
           </div>
 
           {panelSource && (

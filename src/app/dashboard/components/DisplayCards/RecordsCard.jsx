@@ -19,7 +19,7 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
                         <th>Content</th>
                     </tr>
                     {records.length > 0 ? records.map((record, index) => (
-                        <tr key={index} onClick={() => { onOpenModal("viewRecord"); onOpenRecord(record.id)}}>
+                        <tr key={index} onClick={() => { onOpenModal("viewRecord", record.id); }}>
                             <td>{record.date}</td>
                             <td>{record.type == "chat_summary" ? "Chat Summary" : "Session Note"}</td>
                             <td>{record.content.length > 100 ? record.content.substring(0, 100) + "..." : record.content}</td>
