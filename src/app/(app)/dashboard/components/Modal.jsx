@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import ClientFormModal from './Modals/ClientFormModal';
-import RecordModal from './Modals/RecordModal';
+import ClientFormModal from './modals/ClientFormModal';
+import RecordModal from './modals/RecordModal';
 
 export default function Modal({ mode, onCloseModal, clientId, recordId }) {
 
