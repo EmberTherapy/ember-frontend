@@ -55,7 +55,7 @@ export default function SignupPage() {
     
             if (apiStatus) {
                 console.log("Signup successful");
-                window.location.href = "/auth/verify";
+                window.location.href = "/verify";
             }
         }
     }
@@ -95,7 +95,7 @@ export default function SignupPage() {
                 </form>
 
                 <p className="footer">
-                Already have an account? <a href="../auth/login">Log in</a>
+                Already have an account? <a href="/login">Log in</a>
                 </p>
                 {failMessage}
                 {apiStatus === true ? successMessage : apiStatus === false ? failMessage : null}

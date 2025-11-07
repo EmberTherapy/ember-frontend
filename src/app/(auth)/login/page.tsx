@@ -21,7 +21,7 @@ export default function LoginPage() {
 
         if (auth_res.status) {
             console.log("Login successful, token:", auth_res.token);
-            window.location.href = "/app/dashboard";
+            window.location.href = "/dashboard";
         }
 
         return;
@@ -46,7 +46,7 @@ export default function LoginPage() {
             </form>
 
             <p className="footer">
-            Don’t have an account? <a href="../auth/signup">Sign up</a>
+            Don’t have an account? <a href="/signup">Sign up</a>
             </p>
 
             {loginStatus === true ? successMessage : loginStatus === false ? failMessage : null}
