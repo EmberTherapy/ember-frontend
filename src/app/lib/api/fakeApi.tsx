@@ -1,4 +1,4 @@
-import { Client, EmergencyContact, ClientRecord, Flag } from "@/types";
+import { Client, EmergencyContact, ClientRecord, Flag } from "@/app/lib/types";
 import { emergency_contacts, flags, clients, client_records } from "./data";
 
 export async function authenticateUser(email: string, password: string) {

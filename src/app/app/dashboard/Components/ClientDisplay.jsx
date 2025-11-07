@@ -2,7 +2,7 @@ import { on } from 'events';
 import { useEffect, useState } from 'react';
 import RecordsCard from './DisplayCards/RecordsCard';
 import ClientCard from './DisplayCards/ClientCard';
-import { getClientData, getClientRecords } from '../../api/fakeApi';
+import { getClientData, getClientRecords } from '@/app/lib/api/fakeApi';
 
 export default function ClientDisplay({ selected_id, onOpenPanel, onOpenModal }) {
     if (!selected_id) {

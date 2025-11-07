@@ -1,18 +1,13 @@
-import { Toaster } from 'sonner';
+import React from "react";
+import './auth.css';
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      {children}
-        <Toaster
-          position="bottom-right"
-          richColors
-          visibleToasts={1}
-        />
+    <div className="auth-root">
+        <h1 className="brand">Ember</h1>
+        <div className="card">
+            {children}
+        </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import {useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-import { getRecordById } from '@/app/api/fakeApi';
+import { getRecordById } from '@/app/lib/api/fakeApi';
 
 export default function RecordModal({ mode, closeModal, recordId }) {
     const [record, setRecord] = useState(null);

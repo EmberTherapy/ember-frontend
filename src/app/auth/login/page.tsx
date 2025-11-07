@@ -3,7 +3,7 @@
 import { redirect } from "next/dist/server/api-utils";
 import "../auth.css";
 import {useState} from 'react';
-import { authenticateUser } from "@/app/api/fakeApi";
+import { authenticateUser } from "@/app/lib/api/fakeApi";
 import { log } from "console";
 
 export default function LoginPage() {
@@ -21,39 +21,35 @@ export default function LoginPage() {
 
         if (auth_res.status) {
             console.log("Login successful, token:", auth_res.token);
-            window.location.href = "/dashboard";
+            window.location.href = "/app/dashboard";
         }
 
         return;
     }
 
     return (
-        <div className="main">
-            <h1 className="brand">Ember</h1>
-            
-            <div className="card">
-                <p className="subtitle">Welcome back — sign in to continue!</p>
+        <div className="card-content">
+            <p className="subtitle">Welcome back — sign in to continue!</p>
 
-                <form onSubmit={e => {e.preventDefault(); handleLogin();}}>
-                <label>
-                    Email
-                    <input type="email" name="email" placeholder="you@example.com" onChange={e => setEmail(e.target.value)}/>
-                </label>
+            <form onSubmit={e => {e.preventDefault(); handleLogin();}}>
+            <label>
+                Email
+                <input type="email" name="email" placeholder="you@example.com" onChange={e => setEmail(e.target.value)}/>
+            </label>
 
-                <label>
-                    Password
-                    <input type="password" name="password" placeholder="••••••••" onChange={e => setPassword(e.target.value)}/>
-                </label>
+            <label>
+                Password
+                <input type="password" name="password" placeholder="••••••••" onChange={e => setPassword(e.target.value)}/>
+            </label>
 
-                <button type="submit">Log In</button>
-                </form>
+            <button type="submit">Log In</button>
+            </form>
 
-                <p className="footer">
-                Don’t have an account? <a href="../auth/signup">Sign up</a>
-                </p>
+            <p className="footer">
+            Don’t have an account? <a href="../auth/signup">Sign up</a>
+            </p>
 
-                {loginStatus === true ? successMessage : loginStatus === false ? failMessage : null}
-            </div>
+            {loginStatus === true ? successMessage : loginStatus === false ? failMessage : null}
         </div>
     );
 }

@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import "./dashboard.css"; 
-import { ModalMode, PanelSource } from "../../types";
+import { ModalMode, PanelSource } from "@/app/lib/types";
 import ClientList from "./Components/ClientList";
 import ClientDisplay from "./Components/ClientDisplay";
 import RightPanel from "./Components/RightPanel";
 import Modal from "./Components/Modal";
-import { isFlagged } from "@/app/api/fakeApi";
+import { isFlagged } from "@/app/lib/api/fakeApi";
 
 
 export default function DashboardPage() {
@@ -48,10 +48,6 @@ export default function DashboardPage() {
   
   return (
     <div className="page">
-        <header className="header">
-          <h1>Ember</h1>
-        </header>
-
         <ClientList onChangeDisplay={changeClientDisplay} selected={selectedId} onOpenModal={openModal} />
 
         <main className="main">

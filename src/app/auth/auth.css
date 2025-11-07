@@ -35,39 +35,23 @@ html, body { height: 100%; margin: 0; }
   --rightpanel-w: 320px;
 }
 
-/* auth.css */
 
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    font-family: 'DM Sans', sans-serif;
-    background-color: var(--neutral-50);
-    color: var(--color-text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.auth-root {
+  height: 100vh; /* use vh so it fills full screen */
+  width: 100%;
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--neutral-50);
+  color: var(--color-text);
+
+  display: flex;
+  flex-direction: column;     /* stack vertically */
+  align-items: center;        /* center horizontally */
+  justify-content: center;    /* center vertically */
+  text-align: center;         /* makes brand text look balanced */
 }
 
-.main {
-    text-align: center;
-    width: 100%;
-    padding: 1.5rem;
-}
-
-.subtitle {
-    font-size: 1.1rem;
-    color: var(--color-text);
-    margin-bottom: 2rem;
-    font-weight: 500;
-}
-
-a {
-    color: var(--color-primary);
-    font-weight: 500;
-}
-
-h1 {
+.brand {
   font-size: 3.0rem;
   font-weight: 700;
   margin-bottom: 2rem;
@@ -83,6 +67,18 @@ h1 {
   border: 1px solid var(--border);
   text-align: left;
   width: auto;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+a {
+    color: var(--color-primary);
+    font-weight: 500;
 }
 
 /* Form Layout */

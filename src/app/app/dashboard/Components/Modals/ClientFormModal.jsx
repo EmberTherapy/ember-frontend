@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 
-import { createNewClient, updateClient, getClientFormData } from '@/app/api/fakeApi';
+import { createNewClient, updateClient, getClientFormData } from '@/app/lib/api/fakeApi';
 
 export default function ClientFormModal({ mode, clientId, onCloseModal }) {
     const user_template = {

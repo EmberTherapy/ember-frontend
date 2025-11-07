@@ -3,7 +3,7 @@
 import { redirect } from "next/dist/server/api-utils";
 import "../auth.css";
 import {useState} from 'react';
-import { createUser } from "@/app/api/fakeApi";
+import { createUser } from "@/app/lib/api/fakeApi";
 import { fail } from "assert";
 
 export default function SignupPage() {
@@ -55,18 +55,14 @@ export default function SignupPage() {
     
             if (apiStatus) {
                 console.log("Signup successful");
-                window.location.href = "/auth/login";
+                window.location.href = "/auth/verify";
             }
         }
     }
 
     return (
-        <div className="main">
-            <h1 className="brand">Ember</h1>
-            
-            <div className="card">
+        <div className="card-content">
                 <p className="subtitle">Welcome to Ember!</p>
-
                 <form onSubmit={e => {e.preventDefault(); handleSignup();}}>
                     <div className="name-row">
                         <label>
@@ -103,7 +99,6 @@ export default function SignupPage() {
                 </p>
                 {failMessage}
                 {apiStatus === true ? successMessage : apiStatus === false ? failMessage : null}
-            </div>
         </div>
     );
 }

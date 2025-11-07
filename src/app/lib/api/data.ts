@@ -1,4 +1,4 @@
-import { Client, ClientRecord, EmergencyContact, Flag } from "../../types";
+import { Client, ClientRecord, EmergencyContact, Flag } from "../types";
 
 export const emergency_contacts: EmergencyContact[] = [
     { id: 1, client_id: 1, name: "Sharon Esses", relationship: "Mother", phone: "555-123-0462", email: "sarah@example.com" },

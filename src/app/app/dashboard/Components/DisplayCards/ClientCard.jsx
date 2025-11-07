@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faFlag, faPencil } from '@fortawesome/free-solid-svg-icons';
-import { getClientData } from "@/app/api/fakeApi";
+import { getClientData } from "@/app/lib/api/fakeApi";
 
 export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
     const [client, setClient] = useState(null);

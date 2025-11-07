@@ -6,17 +6,13 @@ import {useState} from 'react';
 export default function VerifyPage() {
 
     return (
-        <div className="main">
-            <h1 className="brand">Ember</h1>
-            
-            <div className="card">
-                <p className="subtitle">Welcome to Ember!</p>
+        <div className="card-content">
+            <p className="subtitle">Welcome to Ember!</p>
 
-                <p className="info">A verification link has been sent to your email address. Please check your inbox and click on the link to verify your account.</p>
-                <p className="footer">
-                    Already have an account? <a href="../auth/login">Log in</a>
-                </p>
-            </div>
+            <p className="info">A verification link has been sent to your email address. Please check your inbox and click on the link to verify your account.</p>
+            <p className="footer">
+                Already have an account? <a href="../auth/login">Log in</a>
+            </p>
         </div>
     );
 }

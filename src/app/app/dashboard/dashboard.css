@@ -46,25 +46,9 @@ body {
 .page {
   height: 100vh; 
   display: grid;
-  grid-template-rows: var(--header-h) 1fr;
   grid-template-columns: var(--sidebar-w) 1fr;
   grid-template-areas:
-    "header header"
     "sidebar main";
-}
-
-.header {
-  grid-area: header;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  border-bottom: 1px solid var(--border);
-  height: var(--header-h);
-  position: sticky;
-  top: 0;          
-  z-index: 2;        
-  background: var(--neutral-0);
 }
 
 .left-panel {

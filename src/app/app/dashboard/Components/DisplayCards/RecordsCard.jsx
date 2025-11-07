@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getClientRecords } from "@/app/api/fakeApi";
+import { getClientRecords } from "@/app/lib/api/fakeApi";
 
 export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
     const [records, setRecords] = useState([]);

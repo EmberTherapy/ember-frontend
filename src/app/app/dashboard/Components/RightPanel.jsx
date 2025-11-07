@@ -3,7 +3,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 
-import { getFlagsPanelData, resolveFlags } from '../../api/fakeApi';
+import { getFlagsPanelData, resolveFlags } from '@/app/lib/api/fakeApi';
     
 export default function RightPanel({ source, onClosePanel, clientId }) {
 

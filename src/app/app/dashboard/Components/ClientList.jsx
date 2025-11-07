@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
-import { getClientList } from '@/app/api/fakeApi';
+import { getClientList } from '@/app/lib/api/fakeApi';
 
 export default function ClientList({ selected, onChangeDisplay, onOpenModal }) {
   const [clients, setClients] = useState([]);
