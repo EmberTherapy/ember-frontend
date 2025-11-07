@@ -1,3 +1,45 @@
+:root {
+  --color-primary: #F2581B;        /* Orange accent */
+  --color-primary-light: #FF6A2A;
+  --color-primary-bg: #FFF4E6;     
+  --color-primary-fade: #fffaf3;  
+  --color-red: #E63946;         /* for alarming actions like flag */
+  --color-light-red: #fdeaea;
+  --color-red-shadow: #E6394699;
+  --color-orange: #FB8500;       /* vivid orange for strong alert */
+  --color-light-orange: #FFF3E0; /* gentle, warm complement */
+  --color-yellow: #FFB703; 
+  --color-yellow-shadow: #FFB70399; 
+
+  --neutral-0:   #FFFFFF;
+  --neutral-50:  #FFFBF7;   /* warm paper */
+  --neutral-100: #F5F6F7;   /* slightly cooler to avoid beige cast */
+  --neutral-200: #E7EAEE;
+  --neutral-300: #D6DAE0;
+  --neutral-400: #B8BEC7;
+  --neutral-500: #8D96A2;
+  --neutral-600: #5A6472;
+  --neutral-800: #1F242C;
+
+  --color-text: #3e3e3e;
+
+  --border: var(--neutral-200);
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+  --header-h: 64px;
+  --sidebar-w: 240px;
+  --rightpanel-w: 320px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--neutral-0);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  height: 100vh;
+}
+
 .header {
   grid-area: header;
   display: flex;
@@ -10,4 +52,10 @@
   top: 0;          
   z-index: 2;        
   background: var(--neutral-0);
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
 }
