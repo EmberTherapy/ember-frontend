@@ -1,7 +1,7 @@
 import { Toaster } from 'sonner';
 import './app.css';
 
-export default function DashboardLayout({
+export default function AppLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ export default function DashboardLayout({
       <header className="header">
         <h1>Ember</h1>
       </header>
-        {children}
+      {children}
       <Toaster
         position="bottom-right"
         richColors

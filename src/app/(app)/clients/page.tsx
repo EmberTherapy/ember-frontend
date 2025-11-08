@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import "./dashboard.css"; 
+import "./clients.css"; 
 import { ModalMode, PanelSource } from "@/app/lib/types";
 import ClientList from "./components/ClientList";
 import ClientDisplay from "./components/ClientDisplay";

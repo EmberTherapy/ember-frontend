@@ -21,7 +21,7 @@ export default function LoginPage() {
 
         if (auth_res.status) {
             console.log("Login successful, token:", auth_res.token);
-            window.location.href = "/dashboard";
+            window.location.href = "/clients";
         }
 
         return;
