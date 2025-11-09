@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 
 import { createNewClient, updateClient, getClientFormData } from '@/app/lib/api/fakeApi';
 
-export default function ClientFormModal({ mode, clientId, onCloseModal }) {
+export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyClose }) {
     const user_template = {
         first_name: "",
         last_name: "",
@@ -126,7 +126,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal }) {
         <div id="modal-content">
             <div className="top-bar">
                 <h1>{mode === "editClient" ? "Edit Client" : mode === "newClient" ? "New Client" : ""}</h1>
-                <button className="exit-button" onClick={onCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form>
                 <div className = "form-section">   

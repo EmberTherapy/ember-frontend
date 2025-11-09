@@ -7,19 +7,37 @@ import { getRecordById } from '@/app/lib/api/fakeApi';
 export default function RecordModal({ mode, closeModal, recordId }) {
     const [record, setRecord] = useState(null);
 
+    function formatType(type) {
+        return type
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+
+    function formatDateForRecord(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+        });
+    }
+
     useEffect(() => {
         getRecordById(recordId).then(setRecord);
     }, [recordId]);
 
     return (
-        <div id="modal-content">
+        <div className="modal-content">
             <div className="top-bar">
-                <h1>View Record</h1>
+                <h2>{record ? <span className="type">{formatType(record.type)}</span> : "View Record"}</h2>
                 <button className="exit-button" onClick={closeModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             {record ? (
                 <div className="record-details">
-                    <p>{record.date}</p>
+                    <p><strong>{formatDateForRecord(record.date)}</strong></p>
                     <p>{record.content}</p>
                 </div>
             ) 

@@ -22,6 +22,7 @@ export interface ClientRecord {
   date: string;
   type: "chat_summary" | "session_note";
   content: string;
+  flag: boolean;
 }
 
 export interface EmergencyContact {
@@ -35,6 +36,7 @@ export interface EmergencyContact {
 
 export interface Flag {
   id: number;
+  record_id: number;
   client_id: number;
   severity: 1 | 2 | null;
   type: "Self-Harm" | "Substance Abuse" | "Mental Health Crisis";

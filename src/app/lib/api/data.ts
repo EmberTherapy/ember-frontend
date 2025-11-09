@@ -11,149 +11,170 @@ export const emergency_contacts: EmergencyContact[] = [
 ];
     
 export const flags: Flag[] = [
-    {
-        id: 1,
-        client_id: 3,
-        type: "Self-Harm",
-        severity: 2,
-        chat_snippet: "Client mentioned feeling hopeless and having thoughts of self-harm during in chat.",
-        date_flagged: "1/10/2025, 1:23 PM"
-    },
-    {
-        id: 2,
-        client_id: 5,
-        type: "Substance Abuse",
-        severity: 1,
-        chat_snippet: "Client disclosed using alcohol more frequently to cope with stress.",
-        date_flagged: "1/12/2024, 2:45 PM"
-    },
-    {
-        id: 3,
-        client_id: 3,
-        type: "Mental Health Crisis",
-        severity: 1,
-        chat_snippet: "Client described panic attacks and avoidance behaviors impacting daily life.",
-        date_flagged: "1/15/2024, 3:30 PM"
-    }
+  {
+    id: 1,
+    record_id: 3,
+    client_id: 1,
+    severity: 1,
+    type: "Mental Health Crisis",
+    chat_snippet: "Client expressed that 'things feel pointless lately' but denied plan or intent. Recommended clinician check-in and scheduled follow-up.",
+    date_flagged: "2024-01-08T10:15:00Z"
+  },
+  {
+    id: 2,
+    record_id: 15,
+    client_id: 4,
+    severity: 2,
+    type: "Mental Health Crisis",
+    chat_snippet: "Client stated 'I can’t do this anymore' during group conflict discussion. Immediate de-escalation initiated and safety contact advised.",
+    date_flagged: "2023-12-01T10:30:00Z"
+  },
+  {
+    id: 3,
+    record_id: 18,
+    client_id: 5,
+    severity: 2,
+    type: "Self-Harm",
+    chat_snippet: "Client used explicit self-harm language following interpersonal conflict. Crisis protocol activated; clinician notified for same-day outreach.",
+    date_flagged: "2024-01-08T10:45:00Z"
+  }
 ];
 
 export const clients: Client[] = [
-    {
-        id: 1, 
-        first_name: "Elie",
-        last_name: "Esses",
-        date_of_birth: "01/01/1990",
-        phone: "555-123-4567",
-        email: "elie@example.com",
-        focus_areas: ["anxiety", "sadness"],
-        meeting_time: "3pm Monday",
-        ai_instructions: "Please provide extra support around social anxiety and coping mechanisms. Client has a tendency to overthink social situations. Blah blah blah this needs to be longer so the text area looks filled up. Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.",
-        flagged: false,
-        flag_severity: null
-    },
-    {
-        id: 2,
-        first_name: "Ayelet",
-        last_name: "Cantor",
-        email: "ayelet@example.com",
-        date_of_birth: "02/02/1992",
-        phone: "555-234-5678",
-        focus_areas: ["anger", "depression"],
-        meeting_time: "4pm Tuesday",
-        ai_instructions: "Please provide extra support around anger management and coping strategies.",
-        flagged: false,
-        flag_severity: null
-    },
-    {
-        id: 3,
-        first_name: "Elias",
-        last_name: "Sasson",
-        email: "elias@example.com",
-        date_of_birth: "03/03/1993",
-        phone: "555-345-6789",
-        focus_areas: ["stress", "fatigue"],
-        meeting_time: "5pm Wednesday",
-        ai_instructions: "Please do not focus on stress management techniques.",
-        flagged: true,
-        flag_severity: 2
-    },
-    {
-        id: 4,
-        first_name: "Benjy",
-        last_name: "Diamond",
-        email: "benjy@example.com",
-        date_of_birth: "04/04/1994",
-        phone: "555-456-7890",
-        focus_areas: ["boredom", "lack of motivation"],
-        meeting_time: "2pm Thursday",
-        ai_instructions: "Please provide extra support around motivation and engagement strategies.",
-        flagged: false,
-        flag_severity: null
-    },
-    {
-        id: 5,
-        first_name: "Joshua",
-        last_name: "Fleicher",
-        email: "joshua@example.com",
-        date_of_birth: "05/05/1995",
-        phone: "555-567-8901",
-        focus_areas: ["insomnia", "restlessness"],
-        meeting_time: "1pm Friday",
-        ai_instructions: "Do not let the client discuss work-related stress.",
-        flagged: true,
-        flag_severity: 1
-    },
-    {
-        id: 6,
-        first_name: "Yehudah",
-        last_name: "Pepper Fox",
-        email: "yehudah@example.com",
-        date_of_birth: "06/06/1996",
-        phone: "555-678-9012",
-        focus_areas: ["anxiety", "stress"],
-        meeting_time: "10am Friday",
-        ai_instructions: "Client tends to get anxious about social situations. Provide extra support in this area.",
-        flagged: false,
-        flag_severity: null
-    },
-    {
-        id: 7,
-        first_name: "Yakir",
-        last_name: "Hirsch",
-        email: "yakir@example.com",
-        date_of_birth: "07/07/1997",
-        phone: "555-789-0123",
-        focus_areas: ["insecurity about his tiny dick", "social anxiety"],
-        meeting_time: "11am Monday",
-        ai_instructions: "Client has expressed significant insecurity about his body image, particularly regarding his genitalia. Please approach this topic with sensitivity and provide supportive strategies to help improve his self-esteem.",
-        flagged: false,
-        flag_severity: null
-    }
+  {
+    id: 1,
+    first_name: "Elie",
+    last_name: "Esses",
+    date_of_birth: "1990-01-01",
+    phone: "555-123-4567",
+    email: "elie@example.com",
+    focus_areas: ["anxiety", "sadness"],
+    meeting_time: "3pm Monday",
+    ai_instructions:
+      "Provide extra support around social anxiety and coping mechanisms. Client tends to overthink social interactions and benefits from gentle reframing exercises. Encourage mindfulness practices and structured journaling to increase awareness of triggers.",
+    flagged: true,
+    flag_severity: 1
+  },
+  {
+    id: 2,
+    first_name: "Ayelet",
+    last_name: "Cantor",
+    email: "ayelet@example.com",
+    date_of_birth: "1992-02-02",
+    phone: "555-234-5678",
+    focus_areas: ["anger", "depression"],
+    meeting_time: "4pm Tuesday",
+    ai_instructions:
+      "Support anger regulation and emotion labeling. Focus on mindfulness-based approaches and short grounding exercises when irritability increases.",
+    flagged: false,
+    flag_severity: null
+  },
+  {
+    id: 3,
+    first_name: "Elias",
+    last_name: "Sasson",
+    email: "elias@example.com",
+    date_of_birth: "1993-03-03",
+    phone: "555-345-6789",
+    focus_areas: ["stress", "fatigue"],
+    meeting_time: "5pm Wednesday",
+    ai_instructions:
+      "Avoid repetitive stress-management techniques; client prefers reflective or meaning-based dialogue. Encourage consistent sleep and daily structure.",
+    flagged: false,
+    flag_severity: null
+  },
+  {
+    id: 4,
+    first_name: "Benjy",
+    last_name: "Diamond",
+    email: "benjy@example.com",
+    date_of_birth: "1994-04-04",
+    phone: "555-456-7890",
+    focus_areas: ["boredom", "lack of motivation"],
+    meeting_time: "2pm Thursday",
+    ai_instructions:
+      "Provide motivational enhancement strategies and goal-setting exercises to boost engagement with daily tasks.",
+    flagged: true,
+    flag_severity: 2
+  },
+  {
+    id: 5,
+    first_name: "Joshua",
+    last_name: "Fleicher",
+    email: "joshua@example.com",
+    date_of_birth: "1995-05-05",
+    phone: "555-567-8901",
+    focus_areas: ["insomnia", "restlessness"],
+    meeting_time: "1pm Friday",
+    ai_instructions:
+      "Avoid discussions around occupational stress. Encourage good sleep hygiene, relaxation techniques, and body-scan meditation.",
+    flagged: true,
+    flag_severity: 2
+  },
+  {
+    id: 6,
+    first_name: "Yehudah",
+    last_name: "Pepper Fox",
+    email: "yehudah@example.com",
+    date_of_birth: "1996-06-06",
+    phone: "555-678-9012",
+    focus_areas: ["anxiety", "stress"],
+    meeting_time: "10am Friday",
+    ai_instructions:
+      "Experiences social anxiety; use a supportive tone and reassurance. Reinforce grounding techniques before and after stressful interactions.",
+    flagged: false,
+    flag_severity: null
+  },
+  {
+    id: 7,
+    first_name: "Yakir",
+    last_name: "Hirsch",
+    email: "yakir@example.com",
+    date_of_birth: "1997-07-07",
+    phone: "555-789-0123",
+    focus_areas: ["body image", "social anxiety"],
+    meeting_time: "11am Monday",
+    ai_instructions:
+      "Struggles with body-image-related self-esteem concerns. Approach with empathy and focus on cognitive reframing and self-acceptance exercises.",
+    flagged: false,
+    flag_severity: null
+  }
 ];
 
 export const client_records: ClientRecord[] = [
-    { id: 1, client_id: 1, date: "1/22/2024, 10:00 AM", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." },
-    { id: 2, client_id: 1, date: "1/15/2024, 10:00 AM", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
-    { id: 3, client_id: 1, date: "1/8/2024, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
-    { id: 4, client_id: 1, date: "12/30/2023, 10:00 AM", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
-    { id: 5, client_id: 1, date: "12/20/2023, 10:00 AM", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
-    { id: 6, client_id: 2, date: "12/10/2023, 10:00 AM", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
-    { id: 7, client_id: 2, date: "12/1/2023, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
-    { id: 8, client_id: 2, date: "11/22/2023, 10:00 AM", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
-    { id: 1, client_id: 2, date: "1/22/2024, 10:00 AM", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." },
-    { id: 2, client_id: 2, date: "1/15/2024, 10:00 AM", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
-    { id: 3, client_id: 2, date: "1/8/2024, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
-    { id: 4, client_id: 3, date: "12/30/2023, 10:00 AM", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
-    { id: 5, client_id: 3, date: "12/20/2023, 10:00 AM", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
-    { id: 6, client_id: 4, date: "12/10/2023, 10:00 AM", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
-    { id: 7, client_id: 4, date: "12/1/2023, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
-    { id: 8, client_id: 4, date: "11/22/2023, 10:00 AM", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
-    { id: 9, client_id: 5, date: "1/15/2024, 10:00 AM", type: "session_note", content: "Client reported feeling anxious. Discussed potential triggers." },
-    { id: 10, client_id: 5, date: "1/8/2024, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of sadness. Explored recent events." },
-    { id: 11, client_id: 6, date: "12/30/2023, 10:00 AM", type: "session_note", content: "Client reported stress related to work. Discussed time management techniques." },
-    { id: 12, client_id: 6, date: "12/20/2023, 10:00 AM", type: "chat_summary", content: "Client discussed feelings of loneliness. Explored social connection strategies." },
-    { id: 13, client_id: 6, date: "12/10/2023, 10:00 AM", type: "session_note", content: "Client reported difficulty sleeping. Discussed sleep hygiene practices." },
-    { id: 14, client_id: 6, date: "12/1/2023, 10:00 AM", type: "chat_summary", content: "Client expressed feelings of anger. Explored anger management techniques." },
-    { id: 15, client_id: 6, date: "11/22/2023, 10:00 AM", type: "session_note", content: "Client reported feeling overwhelmed. Discussed relaxation techniques." },
-    { id: 16, client_id: 6, date: "1/22/2024, 10:00 AM", type: "chat_summary", content: "Client reported feeling more positive. Discussed coping strategies." }
+  // Client 1
+  { id: 1, client_id: 1, date: "2024-01-22T10:00:00Z", type: "chat_summary", flag: false, content: "Client reported improved mood after using a gratitude prompt and a 10-minute task start timer. Suggested a ‘two good things’ evening reflection and a short breathing script when rumination spiked. No risk language detected; user declined escalation. Adherence: 4/7 gratitude entries; plan to continue." },
+  { id: 2, client_id: 1, date: "2024-01-15T10:00:00Z", type: "session_note", flag: false, content: "Focused on anticipatory anxiety before work. Completed CBT thought record identifying catastrophizing around Monday deadlines. Practiced 4-7-8 breathing and created a Sunday planning ritual. Homework: 2 thought records, graded exposure to unanswered emails. MSE: cooperative, anxious affect congruent, no SI/HI, judgment intact." },
+  { id: 3, client_id: 1, date: "2024-01-08T10:00:00Z", type: "chat_summary", flag: true, content: "[Concerning] Client described post-holiday sadness and low energy. Behavioral activation recommended: one mastery task (laundry) and one pleasure task (call a friend). Client noted +2 mood lift afterward. Passive hopelessness language noted (“feels pointless lately”) without plan/intent; advised check-in with clinician and scheduled near-term follow-up." },
+  { id: 4, client_id: 1, date: "2023-12-30T10:00:00Z", type: "session_note", flag: false, content: "Work stress from unclear priorities. Implemented Eisenhower matrix; defined ‘definition of done’ for key tasks. Introduced 45-minute focus blocks and 5-minute shutdown ritual. Plan to review stress metrics next session. Risk: none acute; protective factors stable." },
+  { id: 5, client_id: 1, date: "2023-12-20T10:00:00Z", type: "chat_summary", flag: false, content: "Client expressed evening loneliness. Suggested values-based micro-connections: two outreach texts and one structured activity. Provided conversation openers. Client accepted reminders; average connection quality 6/10." },
+
+  // Client 2
+  { id: 6, client_id: 2, date: "2023-12-10T10:00:00Z", type: "session_note", flag: false, content: "Sleep-onset insomnia. Reviewed stimulus control, fixed wake time, and cognitive shuffle technique. Homework: log sleep efficiency; reduce caffeine after noon. MSE: mood ‘tired,’ affect restricted, no SI/HI." },
+  { id: 7, client_id: 2, date: "2023-12-01T10:00:00Z", type: "chat_summary", flag: false, content: "Anger after feeling dismissed at work. STOP skill and 90-second pause routine practiced. Drafted assertive ‘I’ statement; client reported improved control next morning. No escalation needed." },
+  { id: 8, client_id: 2, date: "2023-11-22T10:00:00Z", type: "session_note", flag: false, content: "Overwhelm from multiple deadlines. Introduced 10-minute activation rule and self-compassion practice. Homework: task triage twice weekly; rate perceived control pre/post. No safety concerns." },
+  { id: 9, client_id: 2, date: "2024-01-22T10:00:00Z", type: "chat_summary", flag: false, content: "Follow-up on sleep routine and task batching. Client reported reduced evening rumination and improved sleep onset. Reinforced consistency and added morning reflection prompt." },
+  { id: 10, client_id: 2, date: "2024-01-15T10:00:00Z", type: "session_note", flag: false, content: "Performance anxiety before presentations. Identified safety behaviors (over-rehearsal, avoiding eye contact). Designed graded exposure and diaphragmatic breathing plan. Homework: track SUDs before/after. No acute risk." },
+  { id: 11, client_id: 2, date: "2024-01-08T10:00:00Z", type: "chat_summary", flag: false, content: "Sadness related to family distance. Suggested two small outreach actions (send photo, short call). Reinforced boundary-setting script. Client noted mild mood improvement." },
+
+  // Client 3
+  { id: 12, client_id: 3, date: "2023-12-30T10:00:00Z", type: "session_note", flag: false, content: "Perfectionism causing delay and fatigue. Challenged all-or-nothing beliefs and built ‘good-enough’ rubric for deliverables. Plan to test rubric and review outcomes. MSE: organized, no risk." },
+  { id: 13, client_id: 3, date: "2023-12-20T10:00:00Z", type: "chat_summary", flag: false, content: "Winter isolation. Proposed Sunday open-mic and midweek coworking. Client accepted calendar reminders and reported higher energy." },
+
+  // Client 4
+  { id: 14, client_id: 4, date: "2023-12-10T10:00:00Z", type: "session_note", flag: false, content: "Nighttime phone use delaying sleep. Implemented 60-minute tech curfew and journaling routine. Encouraged consistent wake times. Risk: low, no SI/HI." },
+  { id: 15, client_id: 4, date: "2023-12-01T10:00:00Z", type: "chat_summary", flag: true, content: "[URGENT] Conflict in group project led to intense distress and statements suggesting inability to cope (“can’t do this anymore”). De-escalation steps provided (grounding, breathing, safe-contact outreach). Recommended immediate clinician contact and crisis resources; emergency contacts and safety plan reviewed. Follow-up flagged for same-day check-in." },
+  { id: 16, client_id: 4, date: "2023-11-22T10:00:00Z", type: "session_note", flag: false, content: "Overload from academic and family pressure. Used spheres-of-control mapping to separate controllables vs. accepts. Introduced micro-breaks. Risk screen clear." },
+
+  // Client 5
+  { id: 17, client_id: 5, date: "2024-01-15T10:00:00Z", type: "session_note", flag: false, content: "Anxiety with somatic tension. Practiced box breathing and progressive muscle relaxation. Began values clarification to separate urgency from importance. Homework: PMR 3x/week, tension ratings. No risk." },
+  { id: 18, client_id: 5, date: "2024-01-08T10:00:00Z", type: "chat_summary", flag: true, content: "[URGENT] Post-argument distress with explicit self-harm language. Immediate safety protocol initiated: removed means, identified supportive contact, and agreed to same-day clinical outreach. Crisis lines and emergency steps provided. System set to prompt rapid follow-up and alert clinician." },
+
+  // Client 6
+  { id: 19, client_id: 6, date: "2023-12-30T10:00:00Z", type: "session_note", flag: false, content: "Job stress from unclear roles. Drafted clarifying email and weekly meeting agenda. Introduced personal Kanban to track WIP. Plan to monitor throughput and stress levels. MSE stable." },
+  { id: 20, client_id: 6, date: "2023-12-20T10:00:00Z", type: "chat_summary", flag: false, content: "Weekend loneliness. Suggested two anchors (Saturday gym, Sunday coffee) and activation rule for avoidance. Client implemented both; reported improved weekend mood." },
+  { id: 21, client_id: 6, date: "2023-12-10T10:00:00Z", type: "session_note", flag: false, content: "Early-morning awakenings. Out-of-bed protocol, quiet activity, return when sleepy. Reduced alcohol intake to aid REM. Risk negative." },
+  { id: 22, client_id: 6, date: "2023-12-01T10:00:00Z", type: "chat_summary", flag: false, content: "Reported anger during commute. Cue-routine replacement suggested: switch to podcast + breathing at stops. Client noted intensity drop from 3→1. No risk indicators." },
+  { id: 23, client_id: 6, date: "2023-11-22T10:00:00Z", type: "session_note", flag: false, content: "Pre-finals overwhelm. Created 7-day plan with spaced repetition, added mindful walk breaks. Homework: review mid-week load. No SI/HI; affect stable." },
+  { id: 24, client_id: 6, date: "2024-01-22T10:00:00Z", type: "chat_summary", flag: false, content: "Positive update—client maintained study plan and commute routine. Offered monthly reflection template. No flagged language detected; client reported greater control and improved sleep continuity." }
 ];

@@ -25,15 +25,17 @@ export async function getClientList() {
         }
         const lastA = a.last_name.toLowerCase();
         const lastB = b.last_name.toLowerCase();
+        console.log("Client list fetched:", lastA, lastB);
         return lastA.localeCompare(lastB);
-        })
-        .map(client => ({
-            id: client.id,
-            first_name: client.first_name ?? "",
-            last_name: client.last_name ?? "",
+    })
+    .map(client => ({
+        id: client.id,
+        first_name: client.first_name ?? "",
+        last_name: client.last_name ?? "",
             flagged: client.flagged ?? false,
             flag_severity: client.flag_severity ?? null
         }));
+
 }
 
 export async function getClientData(client_id: number) {

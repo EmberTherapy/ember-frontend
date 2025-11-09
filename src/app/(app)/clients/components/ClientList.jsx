@@ -7,8 +7,11 @@ export default function ClientList({ selected, onChangeDisplay, onOpenModal }) {
   const [clients, setClients] = useState([]);
   
   useEffect(() => {
-    getClientList().then(setClients);
-  });
+    getClientList().then(clients => {
+      console.log("Fetched clients:", clients);
+      setClients(clients);
+    }).catch(console.error);
+  }, []);
   
   return (
     <div className="left-panel">

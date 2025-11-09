@@ -7,6 +7,7 @@ import ClientList from "./components/ClientList";
 import ClientDisplay from "./components/ClientDisplay";
 import RightPanel from "./components/RightPanel";
 import Modal from "./components/Modal";
+import ExitPrompt from "./components/ExitPrompt";
 import { isFlagged } from "@/app/lib/api/fakeApi";
 
 
@@ -15,6 +16,18 @@ export default function DashboardPage() {
   const [selectedRecordId, setSelectedRecordId] = useState<number | null>(null);
   const [panelSource, setPanelSource] = useState<PanelSource>(null);
   const [modalMode, setmodalMode] = useState<ModalMode>(null);
+  const [exitPrompt, setExitPrompt] = useState<boolean>(false);
+
+  function setExitPromptState(state: boolean, source: PanelSource = null) {
+    setExitPrompt(state);
+  }
+
+  function handleExitPromptQuit() {
+    if (modalMode === "newClient" || modalMode === "editClient") {
+      closeModal();
+      setExitPrompt(false);
+    }
+  }
 
   function openPanel(source: PanelSource) {
     setPanelSource(source);
@@ -63,8 +76,9 @@ export default function DashboardPage() {
         </main>
 
         {modalMode && (
-          <Modal mode={modalMode} onCloseModal={closeModal} clientId={selectedId} recordId={selectedRecordId}/>
+          <Modal mode={modalMode} onCloseModal={closeModal} onEarlyClose={() => setExitPrompt(true)} clientId={selectedId} recordId={selectedRecordId}/>
         )}
+        {exitPrompt && <ExitPrompt onExit={handleExitPromptQuit} onContinueEditing={() => setExitPrompt(false)} />}
     </div>
   );
 }
