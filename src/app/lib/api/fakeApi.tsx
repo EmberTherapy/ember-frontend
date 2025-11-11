@@ -104,7 +104,6 @@ export async function isFlagged(client_id: number) {
 
 export async function resolveFlags(client_id: number) {
     await new Promise((resolve) => setTimeout(resolve, 50));
-    console.log("Resolving flags for client ID:", client_id);
 
     return true;
 }
