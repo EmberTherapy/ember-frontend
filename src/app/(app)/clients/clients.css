@@ -261,6 +261,8 @@
   width: 100%;
   padding: 0;
   margin: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .records-table th, .records-table td {
@@ -271,13 +273,13 @@
 
 .modal form {
   padding: 0 1rem;
+  margin-top: 2rem;
 }
 .modal .top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 0.75rem;
-  margin-bottom: 2rem;
   border-bottom: 1px solid #eee;
   position: sticky; top: 0;
   background: white;
@@ -575,6 +577,10 @@
   padding-bottom: 2rem;
 }
 
+.modal-content .top-bar {
+  margin-top: 10px;
+}
+
 .record-row {
   position: relative;
   cursor: pointer;
@@ -608,9 +614,14 @@
 .record-header {
   display: flex;
   align-items: center;
-  gap: 1rem; /* space between date and badge */
-  margin-bottom: 0.25rem;
+  gap: 1rem;
+  margin-top: 1rem;
 }
+
+.record-details p {
+  margin: 0.75rem 0;
+}
+
 
 .read-more-flag {
   text-decoration: underline;
@@ -621,4 +632,40 @@
 .read-more-flag:hover {
   cursor: pointer;
   color: var(--color-primary);
+}
+
+.client-card-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.client-card-label {
+  font-weight: 600;
+  width: 140px;
+  margin: 0;
+}
+
+.client-card-content {
+  margin-left: 8px;
+}
+
+.focus-area {
+  background-color: var(--color-primary-bg);
+  color: var(--color-primary);
+  padding: 3px 9px;
+  border: 1px solid var(--color-primary);
+  border-radius: 15px;
+  margin-right: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.card h2 {
+  margin-bottom: 12px;
+}
+
+.client-card-bottom-row {
+  margin-bottom: 18px;
 }

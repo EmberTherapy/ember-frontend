@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { getClientRecords } from "@/app/lib/api/fakeApi";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
     const [records, setRecords] = useState([]);
@@ -18,7 +20,14 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
     }
     return (
         <div className="card">
-            <h3>Client Records</h3>
+            <div className="top-bar">
+                <h2>Client Records</h2>
+                <div className="button-group">
+                    <button className="edit-button">
+                        <FontAwesomeIcon icon={faPlus} />
+                    </button>
+                </div>
+            </div>
             <table className="records-table">
                 <tbody>
                     <tr>

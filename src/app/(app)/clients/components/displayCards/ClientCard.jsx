@@ -10,6 +10,14 @@ export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
       getClientData(client_id).then(setClient);
     }, [client_id]);
 
+    function formatFocusArea(area) {
+        //capitalize first letter of each word in a focus area
+        return area
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+        
+    }
     if (!client) {
         return <div className="card">Loading client data...</div>;
     }
@@ -28,12 +36,18 @@ export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
                     </button>
                 </div>
             </div>
-            <h3>Meeting Time:</h3>
-            <p>{client.meeting_time}</p>
-            <h3>Focus Areas:</h3>
-            {client.focus_areas.map((area, index) => (
-                <p key={index}>- {area}</p>
-            ))}
+            <div className="client-card-row">
+                <h3 className="client-card-label">Next Meeting:</h3>
+                <p className="client-card-content">{client.meeting_time}</p>
+            </div>
+            <div className="client-card-row client-card-bottom-row">
+                <h3 className="client-card-label">Focus Areas:</h3>
+                <div className="client-card-content focus-areas">
+                    {client.focus_areas.map((area, index) => (
+                        <span className="focus-area" key={index}>{formatFocusArea(area)}</span>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }

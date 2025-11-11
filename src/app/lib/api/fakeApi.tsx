@@ -58,9 +58,17 @@ export async function getClientFormData(client_id: number) {
 }
 
 export async function getClientRecords(id: number) {
+    // sort by flag_severity descending, then date descending
     await new Promise((resolve) => setTimeout(resolve, 50));
+
     const records = client_records.filter(record => record.client_id === id);
-    records.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    records.sort((a, b) => {
+        if (b.flag_severity !== a.flag_severity) {
+            return (b.flag_severity ?? 0) - (a.flag_severity ?? 0);
+        }
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 
     return records;
 }
