@@ -37,7 +37,10 @@ export default function RecordModal({ mode, closeModal, recordId }) {
             </div>
             {record ? (
                 <div className="record-details">
-                    <p><strong>{formatDateForRecord(record.date)}</strong></p>
+                    <div className="record-header">
+                        <p><strong>{formatDateForRecord(record.date)}</strong></p>
+                        <span className={`severity-label severity-${record.flag_severity}`}>{record.flag_severity == 1 ? "Concerning" : record.flag_severity == 2 ? "Critical" : ""}</span>
+                    </div>
                     <p>{record.content}</p>
                 </div>
             ) 

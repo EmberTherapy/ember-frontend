@@ -17,7 +17,12 @@ export default function Modal({ mode, onCloseModal, onEarlyClose, clientId, reco
 
     useEffect(() => {
         function handleKeyDown(e) {
-            if (e.key === 'Escape') onEarlyClose();
+            if (e.key === 'Escape' && isWriteMode) {
+                onEarlyClose();
+            }
+            else if (e.key === 'Escape') {
+                onCloseModal();
+            }
         }
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);

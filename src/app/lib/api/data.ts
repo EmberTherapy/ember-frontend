@@ -190,7 +190,7 @@ export const client_records: ClientRecord[] = [
     client_id: 1, 
     date: "2024-01-22T10:00:00Z", 
     type: "chat_summary", 
-    flag: false, 
+    flag_severity: null,
     content: "Client reported improved mood after using a gratitude prompt and a 10-minute task start timer. Suggested a ‘two good things’ evening reflection and a short breathing script when rumination spiked. No risk language detected; user declined escalation. Adherence: 4/7 gratitude entries; plan to continue." 
   },
   { 
@@ -198,7 +198,7 @@ export const client_records: ClientRecord[] = [
     client_id: 1, 
     date: "2024-01-15T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null,
     content: "Focused on anticipatory anxiety before work. Completed CBT thought record identifying catastrophizing around Monday deadlines. Practiced 4-7-8 breathing and created a Sunday planning ritual. Homework: 2 thought records, graded exposure to unanswered emails. MSE: cooperative, anxious affect congruent, no SI/HI, judgment intact."
   },
   { 
@@ -206,7 +206,7 @@ export const client_records: ClientRecord[] = [
     client_id: 1, 
     date: "2024-01-08T10:00:00Z", 
     type: "chat_summary", 
-    flag: true, 
+    flag_severity: 1,
     content: "Client described post-holiday sadness and low energy. Behavioral activation recommended: one mastery task (laundry) and one pleasure task (call a friend). Client noted +2 mood lift afterward. Passive hopelessness language noted (“feels pointless lately”) without plan/intent; advised check-in with clinician and scheduled near-term follow-up." 
   },
   { 
@@ -214,9 +214,9 @@ export const client_records: ClientRecord[] = [
     client_id: 1, 
     date: "2023-12-30T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Work stress from unclear priorities. Implemented Eisenhower matrix; defined ‘definition of done’ for key tasks. Introduced 45-minute focus blocks and 5-minute shutdown ritual. Plan to review stress metrics next session. Risk: none acute; protective factors stable." },
-  { id: 5, client_id: 1, date: "2023-12-20T10:00:00Z", type: "chat_summary", flag: false, content: "Client expressed evening loneliness. Suggested values-based micro-connections: two outreach texts and one structured activity. Provided conversation openers. Client accepted reminders; average connection quality 6/10."
+  { id: 5, client_id: 1, date: "2023-12-20T10:00:00Z", type: "chat_summary", flag_severity: null, content: "Client expressed evening loneliness. Suggested values-based micro-connections: two outreach texts and one structured activity. Provided conversation openers. Client accepted reminders; average connection quality 6/10."
   },
 
   // Client 2
@@ -225,25 +225,25 @@ export const client_records: ClientRecord[] = [
     client_id: 2, 
     date: "2023-12-10T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Sleep-onset insomnia. Reviewed stimulus control, fixed wake time, and cognitive shuffle technique. Homework: log sleep efficiency; reduce caffeine after noon. MSE: mood ‘tired,’ affect restricted, no SI/HI." },
-  { id: 7, client_id: 2, date: "2023-12-01T10:00:00Z", type: "chat_summary", flag: false, content: "Anger after feeling dismissed at work. STOP skill and 90-second pause routine practiced. Drafted assertive ‘I’ statement; client reported improved control next morning. No escalation needed."
+  { id: 7, client_id: 2, date: "2023-12-01T10:00:00Z", type: "chat_summary", flag_severity: null, content: "Anger after feeling dismissed at work. STOP skill and 90-second pause routine practiced. Drafted assertive ‘I’ statement; client reported improved control next morning. No escalation needed."
   },
   { 
     id: 8, 
     client_id: 2, 
     date: "2023-11-22T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Overwhelm from multiple deadlines. Introduced 10-minute activation rule and self-compassion practice. Homework: task triage twice weekly; rate perceived control pre/post. No safety concerns." },
-  { id: 9, client_id: 2, date: "2024-01-22T10:00:00Z", type: "chat_summary", flag: false, content: "Follow-up on sleep routine and task batching. Client reported reduced evening rumination and improved sleep onset. Reinforced consistency and added morning reflection prompt."
+  { id: 9, client_id: 2, date: "2024-01-22T10:00:00Z", type: "chat_summary", flag_severity: null, content: "Follow-up on sleep routine and task batching. Client reported reduced evening rumination and improved sleep onset. Reinforced consistency and added morning reflection prompt."
   },
   { 
     id: 10, 
     client_id: 2, 
     date: "2024-01-15T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Performance anxiety before presentations. Identified safety behaviors (over-rehearsal, avoiding eye contact). Designed graded exposure and diaphragmatic breathing plan. Homework: track SUDs before/after. No acute risk."
   },
   {
@@ -251,7 +251,7 @@ export const client_records: ClientRecord[] = [
     client_id: 2, 
     date: "2024-01-08T10:00:00Z", 
     type: "chat_summary", 
-    flag: false, 
+    flag_severity: null, 
     content: "Sadness related to family distance. Suggested two small outreach actions (send photo, short call). Reinforced boundary-setting script. Client noted mild mood improvement."
   },
 
@@ -261,7 +261,7 @@ export const client_records: ClientRecord[] = [
     client_id: 3, 
     date: "2023-12-30T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Perfectionism causing delay and fatigue. Challenged all-or-nothing beliefs and built ‘good-enough’ rubric for deliverables. Plan to test rubric and review outcomes. MSE: organized, no risk."
   },
   { 
@@ -269,7 +269,7 @@ export const client_records: ClientRecord[] = [
     client_id: 3, 
     date: "2023-12-20T10:00:00Z", 
     type: "chat_summary", 
-    flag: false, 
+    flag_severity: null, 
     content: "Winter isolation. Proposed Sunday open-mic and midweek coworking. Client accepted calendar reminders and reported higher energy."
   },
 
@@ -279,7 +279,7 @@ export const client_records: ClientRecord[] = [
     client_id: 4, 
     date: "2023-12-10T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Nighttime phone use delaying sleep. Implemented 60-minute tech curfew and journaling routine. Encouraged consistent wake times. Risk: low, no SI/HI." 
   },
   { 
@@ -287,7 +287,7 @@ export const client_records: ClientRecord[] = [
     client_id: 4, 
     date: "2023-12-01T10:00:00Z", 
     type: "chat_summary", 
-    flag: true, 
+    flag_severity: 2, 
     content: "Conflict in group project led to intense distress and statements suggesting inability to cope (“can’t do this anymore”). De-escalation steps provided (grounding, breathing, safe-contact outreach). Recommended immediate clinician contact and crisis resources; emergency contacts and safety plan reviewed. Follow-up flagged for same-day check-in."
   },
   { 
@@ -295,7 +295,7 @@ export const client_records: ClientRecord[] = [
     client_id: 4, 
     date: "2023-11-22T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Overload from academic and family pressure. Used spheres-of-control mapping to separate controllables vs. accepts. Introduced micro-breaks. Risk screen clear."
   },
 
@@ -305,7 +305,7 @@ export const client_records: ClientRecord[] = [
     client_id: 5, 
     date: "2024-01-15T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Anxiety with somatic tension. Practiced box breathing and progressive muscle relaxation. Began values clarification to separate urgency from importance. Homework: PMR 3x/week, tension ratings. No risk."
   },
   { 
@@ -313,7 +313,7 @@ export const client_records: ClientRecord[] = [
     client_id: 5, 
     date: "2024-01-08T10:00:00Z", 
     type: "chat_summary", 
-    flag: true, 
+    flag_severity: 2, 
     content: "Post-argument distress with explicit self-harm language. Immediate safety protocol initiated: removed means, identified supportive contact, and agreed to same-day clinical outreach. Crisis lines and emergency steps provided. System set to prompt rapid follow-up and alert clinician."
   },
 
@@ -323,7 +323,7 @@ export const client_records: ClientRecord[] = [
     client_id: 6, 
     date: "2023-12-30T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Job stress from unclear roles. Drafted clarifying email and weekly meeting agenda. Introduced personal Kanban to track WIP. Plan to monitor throughput and stress levels. MSE stable."
   },
   { 
@@ -331,7 +331,7 @@ export const client_records: ClientRecord[] = [
     client_id: 6, 
     date: "2023-12-20T10:00:00Z", 
     type: "chat_summary", 
-    flag: false, 
+    flag_severity: null, 
     content: "Weekend loneliness. Suggested two anchors (Saturday gym, Sunday coffee) and activation rule for avoidance. Client implemented both; reported improved weekend mood."
   },
   { 
@@ -339,7 +339,7 @@ export const client_records: ClientRecord[] = [
     client_id: 6, 
     date: "2023-12-10T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Early-morning awakenings. Out-of-bed protocol, quiet activity, return when sleepy. Reduced alcohol intake to aid REM. Risk negative."
   },
   { 
@@ -347,7 +347,7 @@ export const client_records: ClientRecord[] = [
     client_id: 6, 
     date: "2023-12-01T10:00:00Z", 
     type: "chat_summary", 
-    flag: false, 
+    flag_severity: null, 
     content: "Reported anger during commute. Cue-routine replacement suggested: switch to podcast + breathing at stops. Client noted intensity drop from 3→1. No risk indicators."
   },
   { 
@@ -355,7 +355,7 @@ export const client_records: ClientRecord[] = [
     client_id: 6, 
     date: "2023-11-22T10:00:00Z", 
     type: "session_note", 
-    flag: false, 
+    flag_severity: null, 
     content: "Pre-finals overwhelm. Created 7-day plan with spaced repetition, added mindful walk breaks. Homework: review mid-week load. No SI/HI; affect stable." 
   },
   { 
@@ -363,7 +363,7 @@ export const client_records: ClientRecord[] = [
     client_id: 6, 
     date: "2024-01-22T10:00:00Z", 
     type: "chat_summary", 
-    flag: false, 
+    flag_severity: null, 
     content: "Positive update—client maintained study plan and commute routine. Offered monthly reflection template. No flagged language detected; client reported greater control and improved sleep continuity."
   }
 ];

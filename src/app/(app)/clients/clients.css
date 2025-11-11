@@ -68,12 +68,6 @@
   box-shadow: var(--shadow);
   margin-bottom: 1.5rem;
 }
-/* 
-.header h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-primary);
-} */
 
 .left-panel-item {
   position: relative;
@@ -477,7 +471,7 @@
   align-items: center;    
 }
 
-.right-panel .severity-label {
+.severity-label {
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 6px;
@@ -579,4 +573,52 @@
 
 .modal-content {
   padding-bottom: 2rem;
+}
+
+.record-row {
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.record-row.flagged_high::after,
+.record-row.flagged_medium::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  right: 15px;      
+  width: 8px;
+  height: 8px;
+}
+.record-row.flagged_high::after {
+  background-color: var(--color-red);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8), 0 0 8px var(--color-red-shadow);
+}
+.record-row.flagged_medium::after {
+  background-color: var(--color-yellow);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8), 0 0 8px var(--color-yellow-shadow);
+}
+
+.placeholder {
+  width: 20px; /* Adjust size as needed */
+}
+
+.record-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space between date and badge */
+  margin-bottom: 0.25rem;
+}
+
+.read-more-flag {
+  text-decoration: underline;
+  color: var(--color-primary-light);
+  font-weight: 1000;
+}
+
+.read-more-flag:hover {
+  cursor: pointer;
+  color: var(--color-primary);
 }

@@ -8,7 +8,6 @@ export default function ClientList({ selected, onChangeDisplay, onOpenModal }) {
   
   useEffect(() => {
     getClientList().then(clients => {
-      console.log("Fetched clients:", clients);
       setClients(clients);
     }).catch(console.error);
   }, []);

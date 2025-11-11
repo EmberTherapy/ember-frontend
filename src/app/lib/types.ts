@@ -22,7 +22,7 @@ export interface ClientRecord {
   date: string;
   type: "chat_summary" | "session_note";
   content: string;
-  flag: boolean;
+  flag_severity: 1 | 2 | null;
 }
 
 export interface EmergencyContact {

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { getFlagsPanelData, resolveFlags } from '@/app/lib/api/fakeApi';
     
-export default function RightPanel({ source, onClosePanel, clientId }) {
+export default function RightPanel({ source, onClosePanel, clientId, openModal}) {
 
     const [flagPanelData, setFlagPanelData] = useState(null);
     
@@ -43,7 +43,7 @@ export default function RightPanel({ source, onClosePanel, clientId }) {
                                     <p><strong>{flag.date_flagged}</strong></p>
                                 </div>
                                 <p><strong>Type:</strong> {flag.type}</p>
-                                <p><strong>Chat Snippet:</strong> {flag.chat_snippet}</p>
+                                <p><strong>Chat Snippet:</strong> {flag.chat_snippet} &nbsp;&nbsp;<span className='read-more-flag' onClick={() => openModal("viewRecord", flag.record_id)}>read more</span></p>
                             </div>
                         ))}
                     </div>

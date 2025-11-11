@@ -70,7 +70,7 @@ export default function DashboardPage() {
 
           {panelSource && (
             <aside className="right-panel">
-              <RightPanel source={panelSource} onClosePanel={closePanel} clientId={selectedId}/>
+              <RightPanel source={panelSource} onClosePanel={closePanel} clientId={selectedId} openModal={openModal}/>
             </aside>
           )}
         </main>
