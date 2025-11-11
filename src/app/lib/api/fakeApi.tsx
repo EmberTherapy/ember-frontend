@@ -125,3 +125,17 @@ export async function getRecordById(record_id: number) {
     }
     return null;
 }
+
+export async function createClientRecord(text: string, client_id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    console.log("Creating new client record:", text, client_id);
+    
+    return true;
+}
+
+export async function updateClientRecord(record: ClientRecord) {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    console.log("Updating client record:", record);
+
+    return true;
+}

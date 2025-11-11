@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import ClientFormModal from './modals/ClientFormModal';
-import RecordModal from './modals/RecordModal';
+import RecordModal from './modals/ViewRecordModal';
 import { on } from 'events';
 
 export default function ExitPrompt( {onExit, onContinueEditing} ) {

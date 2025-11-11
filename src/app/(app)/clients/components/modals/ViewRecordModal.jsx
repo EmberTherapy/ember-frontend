@@ -4,7 +4,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { getRecordById } from '@/app/lib/api/fakeApi';
 
-export default function RecordModal({ mode, closeModal, recordId }) {
+export default function ViewRecordModal({ mode, closeModal, recordId }) {
     const [record, setRecord] = useState(null);
 
     function formatType(type) {

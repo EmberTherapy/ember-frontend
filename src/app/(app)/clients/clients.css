@@ -669,3 +669,44 @@
 .client-card-bottom-row {
   margin-bottom: 18px;
 }
+
+.record_textarea {
+  width: 100%;
+  min-height: 20rem; 
+  resize: none;             
+  line-height: 1.5;    
+  padding: 10px 12px;
+  border: 1px solid #cfd3d8;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit;   
+  transition: height 0.15s ease;
+  margin-bottom: 10px;
+}
+
+.record_textarea:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 4px rgba(242, 88, 27, 0.3);
+}
+
+.record_textaread:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 4px rgba(242, 88, 27, 0.3);
+}
+
+.record-form .submit-button {
+  margin: 0;
+}
+
+.record-form form{
+  margin-top: 0;
+}
+
+.record-form .footer {
+  border: none;
+}
+
+#modal-content, #modal-content * {
+  box-sizing: border-box;
+}

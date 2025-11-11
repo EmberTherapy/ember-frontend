@@ -54,7 +54,6 @@ export default function SignupPage() {
             const apiStatus = await createUser(email, password, firstName, lastName);
     
             if (apiStatus) {
-                console.log("Signup successful");
                 window.location.href = "/verify";
             }
         }

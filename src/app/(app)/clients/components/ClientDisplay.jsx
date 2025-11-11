@@ -21,7 +21,7 @@ export default function ClientDisplay({ selected_id, onOpenPanel, onOpenModal })
         <div id="client-display">
             <div>
                 <ClientCard client_id={selected_id} onOpenPanel={onOpenPanel} onOpenModal={onOpenModal} />
-                <RecordsCard client_id={selected_id} onOpenModal={onOpenModal} />
+                <RecordsCard client_id={selected_id} onOpenModal={onOpenModal}/>
             </div>
         </div>
     );

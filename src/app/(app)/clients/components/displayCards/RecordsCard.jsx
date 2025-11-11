@@ -18,13 +18,18 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
             day: 'numeric',
         });
     }
+
+    function handleAddRecord() {
+        onOpenModal("newRecord");
+    }
+
     return (
         <div className="card">
             <div className="top-bar">
                 <h2>Client Records</h2>
                 <div className="button-group">
                     <button className="edit-button">
-                        <FontAwesomeIcon icon={faPlus} />
+                        <FontAwesomeIcon icon={faPlus} onClick={handleAddRecord}/>
                     </button>
                 </div>
             </div>

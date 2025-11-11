@@ -23,10 +23,8 @@ export default function DashboardPage() {
   }
 
   function handleExitPromptQuit() {
-    if (modalMode === "newClient" || modalMode === "editClient") {
-      closeModal();
-      setExitPrompt(false);
-    }
+    closeModal();
+    setExitPrompt(false);
   }
 
   function openPanel(source: PanelSource) {
@@ -38,7 +36,7 @@ export default function DashboardPage() {
   }
 
   function openModal(mode: ModalMode, record_id: number | null = null) {
-    if (mode == "viewRecord") {
+    if (mode == "viewRecord" || mode == "editRecord" || mode == "newRecord") {
       setSelectedRecordId(record_id);
     }
     if (mode == "newClient") {
