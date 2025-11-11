@@ -19,7 +19,8 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
         });
     }
 
-    function handleAddRecord() {
+    function handleCreateRecord() {
+        console.log("Creating new record for client:", client_id);
         onOpenModal("newRecord");
     }
 
@@ -28,8 +29,8 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
             <div className="top-bar">
                 <h2>Client Records</h2>
                 <div className="button-group">
-                    <button className="edit-button">
-                        <FontAwesomeIcon icon={faPlus} onClick={handleAddRecord}/>
+                    <button className="edit-button" onClick={handleCreateRecord}>
+                        <FontAwesomeIcon icon={faPlus}/>
                     </button>
                 </div>
             </div>

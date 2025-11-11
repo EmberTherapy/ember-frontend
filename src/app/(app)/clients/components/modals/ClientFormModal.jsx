@@ -128,7 +128,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                 <h1>{mode === "editClient" ? "Edit Client" : mode === "newClient" ? "New Client" : ""}</h1>
                 <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
-            <form>
+            <form className="client-form">
                 <div className = "form-section">   
                     <div className = "emergency-contact-grid">
                         <div className="form-group">

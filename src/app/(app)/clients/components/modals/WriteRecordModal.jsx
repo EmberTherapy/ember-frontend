@@ -9,6 +9,8 @@ import { createClientRecord, updateClientRecord } from "@/app/lib/api/fakeApi";
 export default function WriteRecordModal({ mode, clientId, recordId, onCloseModal, onEarlyClose }) {
     const [note, setNote] = useState("");
 
+
+    const custom_date_obj = <h1>Edit Record [MM/DD/YYYY]</h1>; // Placeholder for edited record date
     function getCurrentDate() {
         const date = new Date();
         const year = date.getFullYear();
@@ -48,21 +50,21 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
         // }
         // onCloseModal();
     }
+
     return (
         <div id="modal-content">
             <div className="top-bar">
-                <h1>New Record [{getCurrentDate()}]</h1>
+                {mode == "newRecord" ? <h1>New Record [{getCurrentDate()}]</h1> : mode == "editRecord" && <h1>Edit Record [{custom_date_obj}]</h1>}
                 <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form className="record-form">
-        
-                <textarea
-
-                    className="record_textarea"
-                    name="note"
-                    onChange={(e) => setNote(e.target.value)}
-                    // value={}
-                />
+                <div
+                className="record_textarea"
+                contentEditable
+                suppressContentEditableWarning
+                onInput={(e) => setNote(e.currentTarget.textContent)}
+                >
+                </div>
                 <div className="footer">
                     <button className="submit-button" type="submit" onClick={mode === "newRecord" ? handleNewSave : handleEditSave}>Save</button>
                 </div>

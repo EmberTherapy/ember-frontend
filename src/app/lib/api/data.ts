@@ -180,6 +180,19 @@ export const clients: Client[] = [
     ai_instructions: "Struggles with body-image-related self-esteem concerns. Approach with empathy and focus on cognitive reframing and self-acceptance exercises.",
     flagged: false,
     flag_severity: null
+  },
+  {
+    id: 8,
+    first_name: "Leeanne",
+    last_name: "Mann",
+    email: "leeanne@example.com",
+    date_of_birth: "2005-09-26",
+    phone: "555-890-1234",
+    focus_areas: ["academic stress", "procrastination"],
+    meeting_time: "3pm Wednesday",
+    ai_instructions: "Help client develop time-management skills and reduce procrastination through structured planning and positive reinforcement.",
+    flagged: false,
+    flag_severity: null
   }
 ];
 

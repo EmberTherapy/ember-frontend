@@ -271,7 +271,7 @@
   border-bottom: 1px solid var(--border);
 }
 
-.modal form {
+.modal .client-form {
   padding: 0 1rem;
   margin-top: 2rem;
 }
@@ -682,7 +682,6 @@
   outline: none;
   font-family: inherit;   
   transition: height 0.15s ease;
-  margin-bottom: 10px;
 }
 
 .record_textarea:focus {
@@ -696,15 +695,17 @@
 }
 
 .record-form .submit-button {
-  margin: 0;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
 }
 
-.record-form form{
-  margin-top: 0;
+.record-form {
+  margin-top: 1.5rem;
 }
 
 .record-form .footer {
   border: none;
+  padding-top: 0;
 }
 
 #modal-content, #modal-content * {
