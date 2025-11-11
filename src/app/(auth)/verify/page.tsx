@@ -15,7 +15,7 @@ export default function VerifyPage() {
 
             <p className="info">A verification link has been sent to your email address. Please check your inbox and click on the link to verify your account.</p>
             <p className="footer">
-                Already have an account? <a onClick={handleRedirect}>Log in</a>
+                Already have an account? <a href="/login">Log in</a>
             </p>
         </div>
     );
