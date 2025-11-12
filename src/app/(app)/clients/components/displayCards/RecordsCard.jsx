@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { getClientRecords } from "@/app/lib/api/fakeApi";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPencil } from '@fortawesome/free-solid-svg-icons';
+
+import { formatDate } from "@/app/lib/dataUtils";
+import { format } from "path";
 
 export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
     const [records, setRecords] = useState([]);
@@ -9,18 +12,7 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
       getClientRecords(client_id).then(setRecords);
     }, [client_id]);
 
-    function formatDateForRecordCard(dateString) {
-        // Format date as MM/DD/YYYY
-        const date = new Date(dateString);
-        return date.toLocaleDateString(undefined, {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-        });
-    }
-
     function handleCreateRecord() {
-        console.log("Creating new record for client:", client_id);
         onOpenModal("newRecord");
     }
 
@@ -44,10 +36,14 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord}) {
                     </tr>
                     {records.length > 0 ? records.map((record, index) => (
                         <tr className={`record-row ${record.flag_severity == 2 ? "flagged_high" : (record.flag_severity == 1 ? "flagged_medium" : "")}`} key={index} onClick={() => { onOpenModal("viewRecord", record.id); }}>
-                            <td>{formatDateForRecordCard(record.date)}</td>
+                            <td>{formatDate(record.date)}</td>
                             <td>{record.type == "chat_summary" ? "Chat Summary" : "Session Note"}</td>
                             <td>{record.content.length > 100 ? record.content.substring(0, 100) + "..." : record.content}</td>
-                            <td className="placeholder"></td>
+                            {record.type != "session_note" ? (
+                                <td className="placeholder"></td>
+                            ) : (
+                                <td className="placeholder edit" onClick={(e) => { e.stopPropagation(); onOpenModal("editRecord", record.id); }}><FontAwesomeIcon icon={faPencil} /></td>
+                            )}
                         </tr>
                     )) : <tr><td colSpan="3">No records available.</td></tr>}
                 </tbody>

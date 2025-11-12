@@ -1,10 +1,10 @@
 import {useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faPencil } from '@fortawesome/free-solid-svg-icons';
 
 import { getRecordById } from '@/app/lib/api/fakeApi';
 
-export default function ViewRecordModal({ mode, closeModal, recordId }) {
+export default function ViewRecordModal({ mode, closeModal, onOpenModal, recordId }) {
     const [record, setRecord] = useState(null);
 
     function formatType(type) {
@@ -33,7 +33,15 @@ export default function ViewRecordModal({ mode, closeModal, recordId }) {
         <div className="modal-content">
             <div className="top-bar">
                 <h2>{record ? <span className="type">{formatType(record.type)}</span> : "View Record"}</h2>
-                <button className="exit-button" onClick={closeModal}><FontAwesomeIcon icon={faXmark} /></button>
+                <div className='button-group'>
+                    {record ?
+                        record.type == "session_note" ? (
+                            <button className="edit-button" onClick={() => onOpenModal("editRecord", record.id)}><FontAwesomeIcon icon={faPencil} /></button>
+                        ) : null
+                     : null
+                    }
+                    <button className="exit-button" onClick={closeModal}><FontAwesomeIcon icon={faXmark} /></button>
+                </div>
             </div>
             {record ? (
                 <div className="record-details">
@@ -41,7 +49,7 @@ export default function ViewRecordModal({ mode, closeModal, recordId }) {
                         <p><strong>{formatDateForRecord(record.date)}</strong></p>
                         <span className={`severity-label severity-${record.flag_severity}`}>{record.flag_severity == 1 ? "Concerning" : record.flag_severity == 2 ? "Critical" : ""}</span>
                     </div>
-                    <p>{record.content}</p>
+                    <p>{record ? record.content : null}</p>
                 </div>
             ) 
             : (

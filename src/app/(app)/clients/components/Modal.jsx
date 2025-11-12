@@ -6,7 +6,7 @@ import ViewRecordModal from './modals/ViewRecordModal';
 import WriteRecordModal from './modals/WriteRecordModal';
 import { on } from 'events';
 
-export default function Modal({ mode, onCloseModal, onEarlyClose, clientId, recordId }) {
+export default function Modal({ mode, onCloseModal, onOpenModal, onEarlyClose, clientId, recordId }) {
 
     const recordWriteModes = ["newRecord", "editRecord"];
     const isRecordWriteMode = recordWriteModes.includes(mode);
@@ -17,6 +17,10 @@ export default function Modal({ mode, onCloseModal, onEarlyClose, clientId, reco
     const writeModes = ["newClient", "editClient", "newRecord", "editRecord"];
     const isWriteMode = writeModes.includes(mode);
 
+    function openEditFromView(mode, recordId=null) {
+        onCloseModal();
+        onOpenModal(mode, recordId);
+    }
     useEffect(() => {
         function handleKeyDown(e) {
             if (e.key === 'Escape' && isWriteMode) {
@@ -34,7 +38,7 @@ export default function Modal({ mode, onCloseModal, onEarlyClose, clientId, reco
         <div className="modal-overlay" onClick={isWriteMode ? onEarlyClose : onCloseModal}>
             <div className="modal" onClick={(e) => e.stopPropagation()}> 
                 {isClientMode && <ClientFormModal mode={mode} clientId={clientId} onCloseModal={onCloseModal} onEarlyClose={onEarlyClose} />}
-                {mode == "viewRecord" && <ViewRecordModal mode={mode} recordId={recordId} closeModal={onCloseModal} />}
+                {mode == "viewRecord" && <ViewRecordModal mode={mode} recordId={recordId} closeModal={onCloseModal} onOpenModal={openEditFromView} />}
                 {isRecordWriteMode && <WriteRecordModal mode={mode} clientId={clientId} recordId={recordId} onCloseModal={onCloseModal} onEarlyClose={onEarlyClose} />}
             </div>
         </div>

@@ -74,7 +74,7 @@ export default function DashboardPage() {
         </main>
 
         {modalMode && (
-          <Modal mode={modalMode} onCloseModal={closeModal} onEarlyClose={() => setExitPrompt(true)} clientId={selectedId} recordId={selectedRecordId}/>
+          <Modal mode={modalMode} onCloseModal={closeModal} onEarlyClose={() => setExitPrompt(true)} onOpenModal={openModal} clientId={selectedId} recordId={selectedRecordId}/>
         )}
         {exitPrompt && <ExitPrompt onExit={handleExitPromptQuit} onContinueEditing={() => setExitPrompt(false)} />}
     </div>

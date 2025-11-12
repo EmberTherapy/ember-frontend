@@ -594,7 +594,7 @@
   top: 50%;
   transform: translateY(-50%);
   border-radius: 50%;
-  right: 15px;      
+  right: 50px;      
   width: 8px;
   height: 8px;
 }
@@ -608,7 +608,25 @@
 }
 
 .placeholder {
-  width: 20px; /* Adjust size as needed */
+  width: 50px; /* Adjust size as needed */
+}
+
+.placeholder.edit {
+  color: var(--color-text);
+}
+
+.placeholder.edit:hover {
+  color: var(--color-primary);
+}
+
+.placeholder.edit:active {
+  color: var(--color-primary-light);
+}
+
+.record-row:hover {
+  background-color: var(--color-primary-fade);
+  background-color: var(--color-primary-fade);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .record-header {
