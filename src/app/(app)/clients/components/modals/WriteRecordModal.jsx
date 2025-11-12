@@ -5,8 +5,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 import { createClientRecord, updateClientRecord, getRecordById } from "@/app/lib/api/fakeApi";
 import { formatDate, getCurrentDate } from "@/app/lib/dataUtils";
-import { get } from "http";
-
 
 export default function WriteRecordModal({ mode, clientId, recordId, onCloseModal, onEarlyClose }) {
     const [record, setRecord] = useState(null);
