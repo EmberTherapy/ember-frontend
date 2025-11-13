@@ -9,6 +9,7 @@ export interface Client {
   phone: string;
   email: string;
   focus_areas: string[];
+  meeting_day: string;
   meeting_time: string;
   ai_instructions: string;
   flagged: boolean;
@@ -50,3 +51,15 @@ export interface FlagsPanelData {
   user_flags: Flag[];
   emergency_contacts: EmergencyContact[];
 }
+
+export interface UserFormData {
+        first_name: string;
+        last_name: string;
+        date_of_birth: string;
+        phone: string;
+        email: string;
+        focus_areas: string[];
+        meeting_time: string;
+        ai_instructions: string;
+        emergency_contact: EmergencyContact;
+    }

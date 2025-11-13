@@ -292,6 +292,48 @@
   margin-bottom: 1.25rem;         
 }
 
+.meeting-time-inputs {
+  display: flex;
+  gap: 10px;
+  width: 65%;
+}
+
+.meeting-day-wrapper {
+  position: relative;
+  width: 65%; /* or 100% and let the parent control width */
+}
+
+.meeting-day-select {
+  width: 100%;
+  padding: 10px 40px 10px 12px;  /* extra right padding for the icon */
+  border: 1px solid #cfd3d8;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit;
+  background-color: #fff;
+
+  /* hide native arrow */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.meeting-day-select:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 4px rgba(242, 88, 27, 0.3);
+}
+
+.meeting-day-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;   /* clicks still hit the select */
+  font-size: 0.8rem;
+  color: #9ca3af;         /* tweak if you want it darker/lighter */
+}
+
 .modal .half-group {
   display: flex;
   justify-content: space-between;  
@@ -334,6 +376,11 @@
   outline: none;
   font-family: inherit;   
   transition: height 0.15s ease;
+
+}
+
+::-webkit-input-placeholder {
+  color: #6B7280;
 }
 
 .modal .form-group input:focus {
@@ -770,4 +817,9 @@
   border-color: var(--color-primary-light);
   box-shadow: 0 2px 4px rgba(242, 88, 27, 0.2);
   outline: none;
+}
+
+.mandatory-field {
+  border: 1px solid var(--color-red) !important;
+  background-color: var(--color-light-red);
 }

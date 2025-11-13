@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 
 import { createNewClient, updateClient, getClientFormData } from '@/app/lib/api/fakeApi';
+import { checkFormValidity } from '@/app/lib/dataUtils';
 
 export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyClose }) {
     const user_template = {
@@ -14,6 +15,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
         phone: "",
         email: "",
         focus_areas: [],
+        meeting_day: "",
         meeting_time: "",
         ai_instructions: "",
         emergency_contact: { 
@@ -25,6 +27,16 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
     };
 
     const [form, setForm] = useState(user_template);
+
+    const daysOfWeek = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+    ];
 
     useEffect(() => {
         if (mode != "editClient") return;
@@ -39,6 +51,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                 date_of_birth: form_data.client?.date_of_birth ?? "",
                 phone: form_data.client?.phone ?? "",
                 focus_areas: form_data.client?.focus_areas ?? [],
+                meeting_day: form_data.client?.meeting_day ?? "",
                 meeting_time: form_data.client?.meeting_time ?? "",
                 ai_instructions: form_data.client?.ai_instructions ?? "",
                 emergency_contact: {
@@ -51,6 +64,23 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
         })();
     }, [mode, clientId]);
 
+    function validateForm(form) {
+        const validationResult = checkFormValidity(form);
+        if (validationResult !== true) {
+            for (const field of validationResult) {
+                const el = document.getElementById(field);
+                console.log(el);
+                if (el) {
+                    el.classList.add("mandatory-field");
+                }
+            }
+        }
+
+        else {
+            return true;
+        }
+    }
+
     async function handleCreateNewClient() {
         const newUser = {
             first_name: form.first_name,
@@ -59,6 +89,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
             date_of_birth: form.date_of_birth,
             phone: form.phone,
             focus_areas: form.focus_areas,
+            meeting_day: form.meeting_day,
             meeting_time: form.meeting_time,
             ai_instructions: form.ai_instructions,
             emergency_contact: {
@@ -68,7 +99,11 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                 phone: form.emergency_contact.phone
             }
         };
-
+        console.log(newUser);
+        if (!validateForm(newUser)) {
+            toast.error("Please fill in all required fields correctly.");
+            return;
+        }
         const toastId = toast.loading("Creating client...");
         if (await createNewClient(newUser)) {
             toast.dismiss(toastId);
@@ -88,6 +123,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
             phone: form.phone,
             email: form.email,
             focus_areas: form.focus_areas,
+            meeting_day: form.meeting_day,
             meeting_time: form.meeting_time,
             ai_instructions: form.ai_instructions,
             emergency_contact: {
@@ -97,7 +133,10 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                 phone: form.emergency_contact.phone
             }
         };
-
+        if (!validateForm(updatedUser)) {
+            toast.error("Please fill in all required fields correctly.");
+            return;
+        }
         const toastId = toast.loading("Saving changes...");
         if (await updateClient(updatedUser)) {
             toast.dismiss(toastId);
@@ -133,32 +172,54 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                     <div className = "emergency-contact-grid">
                         <div className="form-group">
                             <label>First Name: </label>
-                            <input type="text" name="first_name" value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} />
+                            <input id="first_name" type="text" name="first_name" value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} />
                         </div>
                         <div className="form-group">
                             <label>Last Name: </label>
-                            <input type="text" name="last_name" value={form.last_name} onChange={(e) => setForm({ ...form, last_name: e.target.value })} />
+                            <input id="last_name" type="text" name="last_name" value={form.last_name} onChange={(e) => setForm({ ...form, last_name: e.target.value })} />
                         </div>
                         <div className="form-group">
                             <label>Email: </label>
-                            <input type="text" name="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                            <input id="email" type="text" name="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
                         </div>
                         <div className="form-group">
-                                <label>Phone: </label>
-                                <input type="text" name="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                            <label>Phone: </label>
+                            <input id="phone" type="text" name="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label>Date of Birth: </label>
-                        <input type="text" name="date_of_birth" value={form.date_of_birth} onChange={(e) => setForm({ ...form, date_of_birth: e.target.value })} />
+                        <input id="date_of_birth" type="date" name="date_of_birth" value={form.date_of_birth} onChange={(e) => setForm({ ...form, date_of_birth: e.target.value })} />
                     </div>
                     <div className="form-group">
                         <label>Focus Areas: </label>
                         <input type="text" name="focus_areas" value={form.focus_areas.join(", ")} onChange={(e) => setForm({ ...form, focus_areas: e.target.value.split(", ") })} />
                     </div>
                     <div className="form-group">
-                        <label>Meeting Time: </label>
-                        <input type="text" name="meeting_time" value={form.meeting_time} onChange={(e) => setForm({ ...form, meeting_time: e.target.value })} />
+                        <label> Regular Meeting Time: </label>
+                        <div className="meeting-time-inputs">
+                            <div className="meeting-day-wrapper">
+                                <select
+                                id="meeting_day"
+                                className="meeting-day-select"
+                                name="meeting_day"
+                                value={form.meeting_day}
+                                onChange={(e) => setForm({ ...form, meeting_day: e.target.value })}
+                                >
+                                <option value="">Select a day</option>
+                                {daysOfWeek.map((day) => (
+                                    <option key={day} value={day}>
+                                    {day}
+                                    </option>
+                                ))}
+                                </select>
+                                <FontAwesomeIcon
+                                    icon={faChevronDown}
+                                    className="meeting-day-icon"
+                                />
+                            </div>
+                            <input type="time" name="meeting_time" value={form.meeting_time} onChange={(e) => setForm({ ...form, meeting_time: e.target.value })} />
+                        </div>
                     </div>
                     <div className="form-group">
                         <label>AI Instructions: </label>
@@ -182,7 +243,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                     <div className="emergency-contact-grid">
                         <div className="form-group">
                             <label>Name: </label>
-                            <input type="text" name="emergency_contact_name" value={form.emergency_contact.name} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, name: e.target.value } })} />
+                            <input id = "ec_name" type="text" name="emergency_contact_name" value={form.emergency_contact.name} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, name: e.target.value } })} />
                         </div>
                         <div className="form-group">
                             <label>Relationship: </label>
@@ -194,7 +255,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                         </div>
                         <div className="form-group">
                             <label>Phone Number: </label>
-                            <input type="text" name="emergency_contact_phone" value={form.emergency_contact.phone} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, phone: e.target.value } })} />
+                            <input id = "ec_phone" type="text" name="emergency_contact_phone" value={form.emergency_contact.phone} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, phone: e.target.value } })} />
                         </div>
                     </div>
                 </div>
