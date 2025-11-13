@@ -12,6 +12,8 @@ export interface Client {
   meeting_time: string;
   ai_instructions: string;
   flagged: boolean;
+  invite_status: "invited" | "pending" | "accepted" | "none";
+  accepted_date: string | null;
   flag_severity: 1 | 2 | null;
   emergency_contact?: EmergencyContact;
 }

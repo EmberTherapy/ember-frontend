@@ -5,13 +5,36 @@ import { getClientData } from "@/app/lib/api/fakeApi";
 
 export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
     const [client, setClient] = useState(null);
+    const [inviteStatus, setInviteStatus] = useState(null);
 
     useEffect(() => {
-      getClientData(client_id).then(setClient);
+    getClientData(client_id).then(setClient);
     }, [client_id]);
 
+    useEffect(() => {
+        if (!client) return;
+
+        if (client.invite_status === "pending") {
+            setInviteStatus("pending");
+            return;
+        }
+
+        if (client.invite_status === "accepted") {
+            const accepted = new Date(client.accepted_date);
+            const now = new Date();
+
+            const diffInMs = now - accepted;
+            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+            if (diffInDays <= 14) {
+                setInviteStatus("accepted");
+            } else {
+                setInviteStatus(null);
+            }
+        }
+    }, [client]);
+
     function formatFocusArea(area) {
-        //capitalize first letter of each word in a focus area
         return area
             .split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -25,7 +48,11 @@ export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
     return (
         <div className="card">
             <div className="top-bar">
-                <h2>{client.first_name} {client.last_name}</h2>
+                <div className = "left-group">
+                    <h2>{client.first_name} {client.last_name}</h2>
+                    {inviteStatus == "pending" && <span className="invite-status pending">Pending Invitation</span>}
+                    {inviteStatus == "accepted" && <span className="invite-status accepted">Accepted Invitation</span>}
+                </div>
                 <div className="button-group">
                     {client.flagged && 
                     <button className="flag-button" onClick={() => onOpenPanel("flag")}>

@@ -1,15 +1,16 @@
 import { use, useEffect, useState } from "react";
 import { getClientRecords } from "@/app/lib/api/fakeApi";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 import { createClientRecord, updateClientRecord, getRecordById } from "@/app/lib/api/fakeApi";
 import { formatDate, getCurrentDate } from "@/app/lib/dataUtils";
 
 export default function WriteRecordModal({ mode, clientId, recordId, onCloseModal, onEarlyClose }) {
     const [record, setRecord] = useState(null);
-    const [content, setContent] = useState(getCurrentDate());
-    const [date, setDate] = useState("");
+    const [content, setContent] = useState();
+    const [date, setDate] = useState(getCurrentDate());
+
 
     useEffect(() => {
         if (mode != "editRecord") return;
@@ -17,11 +18,9 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
             console.log(record_data);
             setRecord(record_data);
             setContent(record_data.content);
-            setDate(record_data.date);
+            setDate(record_data.date.slice(0, 10));
         }).catch(console.error);
       }, [recordId]);
-
-    const custom_date_obj = <h1>Edit Record [MM/DD/YYYY]</h1>;
 
     async function handleNewSave(e) {
         e.preventDefault();
@@ -58,8 +57,18 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
     return (
         <div id="modal-content">
             <div className="top-bar">
-                {mode == "newRecord" && <h1>New Record [{getCurrentDate()}]</h1>}
-                {mode == "editRecord" && <h1>Edit Record [{record ? formatDate(record.date) : ""}]</h1>}
+                {(mode === "newRecord" || mode === "editRecord") && (
+                    <h1>
+                        {mode === "newRecord" ? "New Record" : "Edit Record"} [
+                        <input
+                        className="date-inline-input"
+                        type="date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        />
+                        ]
+                    </h1>
+                )}
                 <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form className="record-form">

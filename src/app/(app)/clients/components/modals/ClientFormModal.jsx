@@ -153,10 +153,6 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                         <input type="text" name="date_of_birth" value={form.date_of_birth} onChange={(e) => setForm({ ...form, date_of_birth: e.target.value })} />
                     </div>
                     <div className="form-group">
-                        <label>Email: </label>
-                        <input type="text" name="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                    </div>
-                    <div className="form-group">
                         <label>Focus Areas: </label>
                         <input type="text" name="focus_areas" value={form.focus_areas.join(", ")} onChange={(e) => setForm({ ...form, focus_areas: e.target.value.split(", ") })} />
                     </div>
@@ -203,7 +199,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                     </div>
                 </div>
                 <div className="footer">
-                    <button className="submit-button" type="submit" onClick={(e) => { e.preventDefault(); mode === "editClient" ? handleUpdateClient() : handleCreateNewClient(); }}> {mode === "editClient" ? "Save Changes" : "Add Client"}</button>
+                    <button className="submit-button" type="submit" onClick={(e) => { e.preventDefault(); mode === "editClient" ? handleUpdateClient() : handleCreateNewClient(); }}> {mode === "editClient" ? "Save Changes" : "Add & Invite Client"}</button>
                 </div>
             </form>
         </div>

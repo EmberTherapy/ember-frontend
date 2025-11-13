@@ -101,7 +101,9 @@ export const clients: Client[] = [
     meeting_time: "3pm Monday",
     ai_instructions: "Provide extra support around social anxiety and coping mechanisms. Client tends to overthink social interactions and benefits from gentle reframing exercises. Encourage mindfulness practices and structured journaling to increase awareness of triggers.",
     flagged: true,
-    flag_severity: 1
+    flag_severity: 1,
+    invite_status: "accepted",
+    accepted_date: "2024-01-10"
   },
   {
     id: 2,
@@ -114,7 +116,9 @@ export const clients: Client[] = [
     meeting_time: "4pm Tuesday",
     ai_instructions: "Support anger regulation and emotion labeling. Focus on mindfulness-based approaches and short grounding exercises when irritability increases.",
     flagged: false,
-    flag_severity: null
+    flag_severity: null,
+    invite_status: "pending",
+    accepted_date: null
   },
   {
     id: 3,
@@ -127,7 +131,9 @@ export const clients: Client[] = [
     meeting_time: "5pm Wednesday",
     ai_instructions: "Avoid repetitive stress-management techniques; client prefers reflective or meaning-based dialogue. Encourage consistent sleep and daily structure.",
     flagged: false,
-    flag_severity: null
+    flag_severity: null,
+    invite_status: "accepted",
+    accepted_date: "2024-01-10"
   },
   {
     id: 4,
@@ -140,7 +146,9 @@ export const clients: Client[] = [
     meeting_time: "2pm Thursday",
     ai_instructions: "Provide motivational enhancement strategies and goal-setting exercises to boost engagement with daily tasks.",
     flagged: true,
-    flag_severity: 2
+    flag_severity: 2,
+    invite_status: "accepted",
+    accepted_date: "2024-01-10"
   },
   {
     id: 5,
@@ -153,7 +161,9 @@ export const clients: Client[] = [
     meeting_time: "1pm Friday",
     ai_instructions: "Avoid discussions around occupational stress. Encourage good sleep hygiene, relaxation techniques, and body-scan meditation.",
     flagged: true,
-    flag_severity: 2
+    flag_severity: 2,
+    invite_status: "accepted",
+    accepted_date: "2024-01-10"
   },
   {
     id: 6,
@@ -166,7 +176,10 @@ export const clients: Client[] = [
     meeting_time: "10am Friday",
     ai_instructions: "Experiences social anxiety; use a supportive tone and reassurance. Reinforce grounding techniques before and after stressful interactions.",
     flagged: false,
-    flag_severity: null
+    flag_severity: null,
+    invite_status: "accepted",
+    accepted_date: "2025-11-10"
+    
   },
   {
     id: 7,
@@ -179,7 +192,9 @@ export const clients: Client[] = [
     meeting_time: "11am Monday",
     ai_instructions: "Struggles with body-image-related self-esteem concerns. Approach with empathy and focus on cognitive reframing and self-acceptance exercises.",
     flagged: false,
-    flag_severity: null
+    flag_severity: null,
+    invite_status: "accepted",
+    accepted_date: "2025-11-10"
   },
   {
     id: 8,
@@ -192,7 +207,9 @@ export const clients: Client[] = [
     meeting_time: "3pm Wednesday",
     ai_instructions: "Help client develop time-management skills and reduce procrastination through structured planning and positive reinforcement.",
     flagged: false,
-    flag_severity: null
+    flag_severity: null,
+    invite_status: "accepted",
+    accepted_date: "2024-01-10"
   }
 ];
 
@@ -232,28 +249,28 @@ export const client_records: ClientRecord[] = [
   { id: 5, client_id: 1, date: "2023-12-20T10:00:00Z", type: "chat_summary", flag_severity: null, content: "Client expressed evening loneliness. Suggested values-based micro-connections: two outreach texts and one structured activity. Provided conversation openers. Client accepted reminders; average connection quality 6/10."
   },
 
-  // Client 2
+  // Client 7
   { 
     id: 6, 
-    client_id: 2, 
+    client_id: 7, 
     date: "2023-12-10T10:00:00Z", 
     type: "session_note", 
     flag_severity: null, 
     content: "Sleep-onset insomnia. Reviewed stimulus control, fixed wake time, and cognitive shuffle technique. Homework: log sleep efficiency; reduce caffeine after noon. MSE: mood ‘tired,’ affect restricted, no SI/HI." },
-  { id: 7, client_id: 2, date: "2023-12-01T10:00:00Z", type: "chat_summary", flag_severity: null, content: "Anger after feeling dismissed at work. STOP skill and 90-second pause routine practiced. Drafted assertive ‘I’ statement; client reported improved control next morning. No escalation needed."
+  { id: 7, client_id: 7, date: "2023-12-01T10:00:00Z", type: "chat_summary", flag_severity: null, content: "Anger after feeling dismissed at work. STOP skill and 90-second pause routine practiced. Drafted assertive ‘I’ statement; client reported improved control next morning. No escalation needed."
   },
   { 
     id: 8, 
-    client_id: 2, 
+    client_id: 7, 
     date: "2023-11-22T10:00:00Z", 
     type: "session_note", 
     flag_severity: null, 
     content: "Overwhelm from multiple deadlines. Introduced 10-minute activation rule and self-compassion practice. Homework: task triage twice weekly; rate perceived control pre/post. No safety concerns." },
-  { id: 9, client_id: 2, date: "2024-01-22T10:00:00Z", type: "chat_summary", flag_severity: null, content: "Follow-up on sleep routine and task batching. Client reported reduced evening rumination and improved sleep onset. Reinforced consistency and added morning reflection prompt."
+  { id: 9, client_id: 7, date: "2024-01-22T10:00:00Z", type: "chat_summary", flag_severity: null, content: "Follow-up on sleep routine and task batching. Client reported reduced evening rumination and improved sleep onset. Reinforced consistency and added morning reflection prompt."
   },
   { 
     id: 10, 
-    client_id: 2, 
+    client_id: 7, 
     date: "2024-01-15T10:00:00Z", 
     type: "session_note", 
     flag_severity: null, 
@@ -261,7 +278,7 @@ export const client_records: ClientRecord[] = [
   },
   {
     id: 11, 
-    client_id: 2, 
+    client_id: 7, 
     date: "2024-01-08T10:00:00Z", 
     type: "chat_summary", 
     flag_severity: null, 
