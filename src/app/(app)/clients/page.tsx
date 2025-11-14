@@ -8,6 +8,7 @@ import ClientDisplay from "./components/ClientDisplay";
 import RightPanel from "./components/RightPanel";
 import Modal from "./components/Modal";
 import ExitPrompt from "./components/ExitPrompt";
+import DeletePrompt from "./components/DeletePrompt";
 import { isFlagged } from "@/app/lib/api/fakeApi";
 
 
@@ -17,6 +18,16 @@ export default function DashboardPage() {
   const [panelSource, setPanelSource] = useState<PanelSource>(null);
   const [modalMode, setmodalMode] = useState<ModalMode>(null);
   const [exitPrompt, setExitPrompt] = useState<boolean>(false);
+  const [deletePrompt, setDeletePrompt] = useState<boolean>(false);
+
+  function toggleDeletePrompt() {
+    setDeletePrompt(true)
+  }
+  function handleDeleteRecordConfirm(record_id: number) {
+    console.log("Record deleted:", record_id);
+    setDeletePrompt(false);
+    closeModal();
+  }
 
   function setExitPromptState(state: boolean, source: PanelSource = null) {
     setExitPrompt(state);
@@ -63,7 +74,7 @@ export default function DashboardPage() {
 
         <main className="main">
           <div className="main-content">
-            <ClientDisplay selected_id={selectedId} onOpenPanel={openPanel} onOpenModal={openModal}/>
+            <ClientDisplay selected_id={selectedId} onOpenPanel={openPanel} onOpenModal={openModal} onDeleteRecord={toggleDeletePrompt}/>
           </div>
 
           {panelSource && (
@@ -74,9 +85,10 @@ export default function DashboardPage() {
         </main>
 
         {modalMode && (
-          <Modal mode={modalMode} onCloseModal={closeModal} onEarlyClose={() => setExitPrompt(true)} onOpenModal={openModal} clientId={selectedId} recordId={selectedRecordId}/>
+          <Modal mode={modalMode} onCloseModal={closeModal} onEarlyClose={() => setExitPrompt(true)} onOpenModal={openModal} clientId={selectedId} recordId={selectedRecordId} onDelete = {toggleDeletePrompt}/>
         )}
         {exitPrompt && <ExitPrompt onExit={handleExitPromptQuit} onContinueEditing={() => setExitPrompt(false)} />}
+        {deletePrompt && <DeletePrompt onDelete={handleDeleteRecordConfirm} onCancel={() => setDeletePrompt(false)} />}
     </div>
   );
 }

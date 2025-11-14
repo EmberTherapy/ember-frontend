@@ -6,7 +6,7 @@ import ViewRecordModal from './modals/ViewRecordModal';
 import WriteRecordModal from './modals/WriteRecordModal';
 import { on } from 'events';
 
-export default function Modal({ mode, onCloseModal, onOpenModal, onEarlyClose, clientId, recordId }) {
+export default function Modal({ mode, onCloseModal, onOpenModal, onEarlyClose, clientId, recordId, onDelete}) {
 
     const recordWriteModes = ["newRecord", "editRecord"];
     const isRecordWriteMode = recordWriteModes.includes(mode);
@@ -39,7 +39,7 @@ export default function Modal({ mode, onCloseModal, onOpenModal, onEarlyClose, c
             <div className="modal" onClick={(e) => e.stopPropagation()}> 
                 {isClientMode && <ClientFormModal mode={mode} clientId={clientId} onCloseModal={onCloseModal} onEarlyClose={onEarlyClose} />}
                 {mode == "viewRecord" && <ViewRecordModal mode={mode} recordId={recordId} closeModal={onCloseModal} onOpenModal={openEditFromView} />}
-                {isRecordWriteMode && <WriteRecordModal mode={mode} clientId={clientId} recordId={recordId} onCloseModal={onCloseModal} onEarlyClose={onEarlyClose} />}
+                {isRecordWriteMode && <WriteRecordModal mode={mode} clientId={clientId} recordId={recordId} onCloseModal={onCloseModal} onEarlyClose={onEarlyClose} onDelete={onDelete} />}
             </div>
         </div>
     );

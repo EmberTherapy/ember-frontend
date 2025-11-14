@@ -28,6 +28,17 @@ export function checkPhoneNumberValidity(phoneNumber: string): boolean {
     return phoneRegex.test(phoneNumber);
 }
 
+export function checkFocusAreasValidity(input: string): boolean {
+  if (!input || input.trim() === "") return true; // null/empty is allowed
+
+  const list = input
+    .split(",")
+    .map(v => v.trim())
+    .filter(v => v.length > 0);
+    
+  return list.length > 0;
+}
+
 export function checkRequiredFields(form: UserFormData): true | string[] {
     const missingFields: string[] = [];
 

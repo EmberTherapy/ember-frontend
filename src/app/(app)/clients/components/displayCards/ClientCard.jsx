@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faPencil  } from '@fortawesome/free-solid-svg-icons';
 import { getClientData } from "@/app/lib/api/fakeApi";
 import { formatTime } from "@/app/lib/dataUtils";
 
@@ -56,7 +56,7 @@ export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
                 </div>
                 <div className="button-group">
                     {client.flagged && 
-                    <button className="flag-button" onClick={() => onOpenPanel("flag")}>
+                    <button className="red-button" onClick={() => onOpenPanel("flag")}>
                         <FontAwesomeIcon icon={faFlag} />
                     </button>}
                     <button className="edit-button" onClick={() => onOpenModal("editClient")}>

@@ -1,12 +1,12 @@
 import { use, useEffect, useState } from "react";
 import { getClientRecords } from "@/app/lib/api/fakeApi";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faCalendar, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 import { createClientRecord, updateClientRecord, getRecordById } from "@/app/lib/api/fakeApi";
 import { formatDate, getCurrentDate } from "@/app/lib/dataUtils";
 
-export default function WriteRecordModal({ mode, clientId, recordId, onCloseModal, onEarlyClose }) {
+export default function WriteRecordModal({ mode, clientId, recordId, onCloseModal, onEarlyClose, onDelete }) {
     const [record, setRecord] = useState(null);
     const [content, setContent] = useState();
     const [date, setDate] = useState(getCurrentDate());
@@ -69,7 +69,10 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
                         ]
                     </h1>
                 )}
-                <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
+                <div className="button-group">
+                    <button className="red-button" onClick={onDelete}><FontAwesomeIcon icon={faTrashCan} /></button>
+                    <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
+                </div>
             </div>
             <form className="record-form">
                 <div

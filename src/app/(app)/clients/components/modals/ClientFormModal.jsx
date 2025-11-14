@@ -193,7 +193,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                     </div>
                     <div className="form-group">
                         <label>Focus Areas: </label>
-                        <input type="text" name="focus_areas" value={form.focus_areas.join(", ")} onChange={(e) => setForm({ ...form, focus_areas: e.target.value.split(", ") })} />
+                        <input type="text" name="focus_areas" placeholder="e.g. anxiety, relationships, trauma" value={form.focus_areas.join(", ")} onChange={(e) => setForm({ ...form, focus_areas: e.target.value.split(", ") })} />
                     </div>
                     <div className="form-group">
                         <label> Regular Meeting Time: </label>
