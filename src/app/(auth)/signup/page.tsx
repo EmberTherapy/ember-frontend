@@ -35,7 +35,6 @@ export default function SignupPage() {
             return false;
         }
         if (firstName.trim() === "" || lastName.trim() === "" || email.trim() === "" || password.trim() === "") {
-            console.log(email);
 
             setErrorMessage("All fields are required.");
             return false;

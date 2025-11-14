@@ -5,8 +5,9 @@ import { faPlus, faPencil, faEllipsis, faTrashCan } from '@fortawesome/free-soli
 
 import EllipsesActions from "../EllipsesActions";
 import { formatDate } from "@/app/lib/dataUtils";
+import { on } from "events";
 
-export default function RecordsCard({ client_id, onOpenModal, onOpenRecord, onDeleteRecord }) {
+export default function RecordsCard({ client_id, onOpenModal, onOpenRecord, onDeleteRecord}) {
     const [records, setRecords] = useState([]);
     useEffect(() => {
       getClientRecords(client_id).then(setRecords);
@@ -14,11 +15,6 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord, onDe
 
     function handleCreateRecord() {
         onOpenModal("newRecord");
-    }
-
-    function handleDeleteRecord(recordId) {
-        console.log("Delete record with ID:", recordId);
-        onDeleteRecord(recordId);
     }
 
     return (
@@ -48,7 +44,8 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord, onDe
                             <td onClick={(e) => e.stopPropagation()}>
                                 <EllipsesActions
                                     onEdit={() => onOpenModal("editRecord", record.id)}
-                                    onDelete={() => handleDeleteRecord(record.id)}
+                                    onDeleteRecord={onDeleteRecord}
+                                    recordId={record.id}
                                 />
                             </td>
                             <td className="placeholder"></td>

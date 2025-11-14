@@ -4,7 +4,7 @@ import RecordsCard from './displayCards/RecordsCard';
 import ClientCard from './displayCards/ClientCard';
 import { getClientData, getClientRecords } from '@/app/lib/api/fakeApi';
 
-export default function ClientDisplay({ selected_id, onOpenPanel, onOpenModal, onDeleteRecord }) {
+export default function ClientDisplay({ selected_id, onOpenPanel, onOpenModal, onDeleteRecord}) {
     if (!selected_id) {
         return (
             <div id="client-display">

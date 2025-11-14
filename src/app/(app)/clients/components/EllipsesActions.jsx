@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import DeletePrompt from './DeletePrompt';
+import { on } from 'events';
 
-export default function EllipsesActions({ onEdit, onDelete, recordId }) {
+export default function EllipsesActions({ onEdit, recordId, onDeleteRecord }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -25,10 +26,7 @@ export default function EllipsesActions({ onEdit, onDelete, recordId }) {
     setIsOpen(false);
   }
 
-  function handleDelete() {
-    <DeletePrompt onDelete={onDelete} onContinue={() => {}} />;
-    setIsOpen(false);
-  }
+
   return (
     <div className="actions-menu" ref={menuRef}>
       <button
@@ -42,7 +40,7 @@ export default function EllipsesActions({ onEdit, onDelete, recordId }) {
       {isOpen && (
         <div className="actions-menu-dropdown">
           <div className='actions-menu-item' onClick={handleEdit}>Edit</div>
-          <div className='actions-menu-item delete' onClick={handleDelete}>Delete</div>
+          <div className='actions-menu-item delete' onClick={() => { onDeleteRecord(recordId); setIsOpen(false); }}>Delete</div>
         </div>
       )}
     </div>

@@ -2,10 +2,22 @@ import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { on } from 'events';
+import { toast } from 'sonner';
+import { deleteClientRecord } from '@/app/lib/api/fakeApi';
 
-export default function DeletePrompt( {onDelete, onCancel} ) {
+export default function DeletePrompt( {recordId, onCancel} ) {
     const ignoreFirstEscapeUp = useRef(true); 
-    
+
+    async function deleteRecord(recordId) {
+        const toastId = toast.loading("Deleting client record...");
+        const delete_status = await deleteClientRecord(recordId);
+
+        if (delete_status) {
+            toast.dismiss(toastId);
+            toast.success("Client record deleted successfully.");
+            onCancel?.();
+        }
+    }
     useEffect(() => {
         function handleKeyUp(e) {
         if (e.key === 'Escape') {
@@ -15,13 +27,13 @@ export default function DeletePrompt( {onDelete, onCancel} ) {
             ignoreFirstEscapeUp.current = false;
             return;
             }
-            onContinueEditing?.(); // now respond to *new* Escapes
+            onCancel?.(); // now respond to *new* Escapes
         }
         }
 
         window.addEventListener('keyup', handleKeyUp);
         return () => window.removeEventListener('keyup', handleKeyUp);
-    }, [onDelete, onCancel]);
+    }, [onCancel]);
 
     return (
         <div className="exit-prompt-overlay" onClick={onCancel}>
@@ -29,7 +41,7 @@ export default function DeletePrompt( {onDelete, onCancel} ) {
                  <h3>Delete?</h3>
                  <div className = "button-group">
                      <button className="prompt-btn edit" onClick={onCancel}>Cancel</button>
-                     <button className="prompt-btn exit" onClick={onDelete}>Delete</button>
+                     <button className="prompt-btn exit" onClick={() => deleteRecord(recordId)}>Delete</button>
                  </div>
             </div>
         </div>

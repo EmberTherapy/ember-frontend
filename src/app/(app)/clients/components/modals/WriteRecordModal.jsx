@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { createClientRecord, updateClientRecord, getRecordById } from "@/app/lib/api/fakeApi";
 import { formatDate, getCurrentDate } from "@/app/lib/dataUtils";
 
-export default function WriteRecordModal({ mode, clientId, recordId, onCloseModal, onEarlyClose, onDelete }) {
+export default function WriteRecordModal({ mode, clientId, recordId, onCloseModal, onEarlyClose, onDeleteRecord }) {
     const [record, setRecord] = useState(null);
     const [content, setContent] = useState();
     const [date, setDate] = useState(getCurrentDate());
@@ -15,7 +15,6 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
     useEffect(() => {
         if (mode != "editRecord") return;
         getRecordById(recordId).then(record_data => {
-            console.log(record_data);
             setRecord(record_data);
             setContent(record_data.content);
             setDate(record_data.date.slice(0, 10));
@@ -70,7 +69,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
                     </h1>
                 )}
                 <div className="button-group">
-                    <button className="red-button" onClick={onDelete}><FontAwesomeIcon icon={faTrashCan} /></button>
+                    <button className="red-button" onClick={() => onDeleteRecord(recordId)}><FontAwesomeIcon icon={faTrashCan} /></button>
                     <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
             </div>

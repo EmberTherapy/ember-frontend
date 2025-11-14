@@ -139,3 +139,10 @@ export async function updateClientRecord(record: ClientRecord) {
 
     return true;
 }
+
+export async function deleteClientRecord(record_id: number) {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    console.log("Deleting client record:", record_id);
+
+    return true;
+}

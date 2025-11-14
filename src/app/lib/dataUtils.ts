@@ -89,7 +89,6 @@ export function checkRequiredFields(form: UserFormData): true | string[] {
 
 export function checkFormValidity(form: UserFormData): boolean | string[] {
     if (checkRequiredFields(form) != true || !checkEmailValidity(form.email) || !checkPhoneNumberValidity(form.phone)) {
-        console.log(checkRequiredFields(form));
         return checkRequiredFields(form);
     }
     else {

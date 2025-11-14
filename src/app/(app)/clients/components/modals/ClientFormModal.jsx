@@ -69,7 +69,6 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
         if (validationResult !== true) {
             for (const field of validationResult) {
                 const el = document.getElementById(field);
-                console.log(el);
                 if (el) {
                     el.classList.add("mandatory-field");
                 }
@@ -99,7 +98,6 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                 phone: form.emergency_contact.phone
             }
         };
-        console.log(newUser);
         if (!validateForm(newUser)) {
             toast.error("Please fill in all required fields correctly.");
             return;
