@@ -5,11 +5,12 @@ import { on } from 'events';
 import { toast } from 'sonner';
 import { deleteClientRecord } from '@/app/lib/api/fakeApi';
 
-export default function DeletePrompt( {recordId, onCancel} ) {
+export default function DeletePrompt( {recordId, onCancel, closeModal } ) {
     const ignoreFirstEscapeUp = useRef(true); 
 
     async function deleteRecord(recordId) {
         const toastId = toast.loading("Deleting client record...");
+        closeModal();
         const delete_status = await deleteClientRecord(recordId);
 
         if (delete_status) {

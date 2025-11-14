@@ -66,7 +66,7 @@ export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
             </div>
             <div className="client-card-row">
                 <h3 className="client-card-label">Next Meeting:</h3>
-                <p className="client-card-content">{formatTime(client.meeting_time)}</p>
+                <p className="client-card-content">{client.meeting_day} {formatTime(client.meeting_time)}</p>
             </div>
             <div className="client-card-row client-card-bottom-row">
                 <h3 className="client-card-label">Focus Areas:</h3>

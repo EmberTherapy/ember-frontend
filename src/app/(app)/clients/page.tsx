@@ -81,7 +81,7 @@ export default function DashboardPage() {
           <Modal mode={modalMode} onCloseModal={closeModal} onEarlyClose={() => setExitPrompt(true)} onOpenModal={openModal} clientId={selectedId} recordId={selectedRecordId} onDeleteRecord={handleDeleteRecord}/>
         )}
         {exitPrompt && <ExitPrompt onExit={handleExitPromptQuit} onContinueEditing={() => setExitPrompt(false)} />}
-        {deletePrompt && <DeletePrompt recordId={recordToDelete} onCancel={() => setDeletePrompt(false)} />}
+        {deletePrompt && <DeletePrompt closeModal={closeModal} recordId={recordToDelete} onCancel={() => { setDeletePrompt(false); setRecordToDelete(null); }} />}
     </div>
   );
 }
