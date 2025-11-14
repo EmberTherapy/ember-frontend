@@ -51,8 +51,8 @@ export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
             <div className="top-bar">
                 <div className = "left-group">
                     <h2>{client.first_name} {client.last_name}</h2>
-                    {inviteStatus == "pending" && <span className="invite-status pending">Pending Invitation</span>}
-                    {inviteStatus == "accepted" && <span className="invite-status accepted">Accepted Invitation</span>}
+                    {inviteStatus == "pending" && <span className="invite-status pending">Invitation Pending</span>}
+                    {inviteStatus == "accepted" && <span className="invite-status accepted">Invitation Accepted</span>}
                 </div>
                 <div className="button-group">
                     {client.flagged && 
