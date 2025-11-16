@@ -91,5 +91,60 @@ body {
   color: white;
   padding: 10px 10px;
   font-weight: 500;
+  cursor: pointer;
 } 
 
+.user-menu-dropdown {
+  position: absolute;
+  right: 10px;
+  margin-top: 15px;
+
+  min-width: 140px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+
+  padding: 0;               
+  overflow: hidden;         
+  z-index: 20;
+  font-family: inherit;
+}
+
+.user-menu-item {
+  width: 100%;
+  padding: 0.45rem 1rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.user-menu-item:hover {
+  background-color: #f3f4f6;
+}
+
+.user-menu-item + .user-menu-item {
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Delete styling */
+.user-menu-item.logout {
+  color: var(--color-red);
+}
+
+.user-menu-item.logout:hover {
+  background-color: var(--color-light-red);
+}
+
+.user-menu-name {
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+
+}

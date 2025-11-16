@@ -147,10 +147,10 @@ export async function deleteClientRecord(record_id: number) {
     return true;
 }
 
-export function getUserInfo() {
-
+export async function getUserInfo() {
+    await new Promise((resolve) => setTimeout(resolve, 50));
     return {
-        first_name: "John",
-        last_name: "Doe"
+        first_name: "Elie",
+        last_name: "Esses"
     }
 }

@@ -8,7 +8,6 @@ export default function EllipsesActions({ onEdit, recordId, onDeleteRecord }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Close on outside click
   useEffect(() => {
     function handleClickOutside(e) {
       if (!menuRef.current) return;
