@@ -5,7 +5,7 @@ import './calendar.css';
 
 export default function CalendarPage() {
     return (
-        <div>
+        <div className="calendar-wrapper">
             <TherapistCal />
         </div>
     );

@@ -1,24 +1,40 @@
-'user client';
+'use client';
 
-import { useState, useEffect } from 'react';
-import { getUserInfo } from '@/app/lib/api/fakeApi';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import UserIcon from './UserIcon';
 
 export default function Header() {
+  const pathname = usePathname();
 
+  const isActive = (path) => pathname.startsWith(path);
 
-
-    return (
-        <header className="header">
-            <div className="left">
-            <h1>Ember</h1>
-            <div className='nav'>
-                <a href="/clients">Clients</a>
-                <a href="/calendar">Calendar</a>
-                <a href="/billing">Billing</a>
-            </div>
-            </div>
-            <UserIcon />
-        </header>
-    )
+  return (
+    <header className="header">
+      <div className="left">
+        <h1>Ember</h1>
+        <nav className="nav">
+          <Link
+            href="/clients"
+            className={isActive('/clients') ? 'nav-item active' : 'nav-item'}
+          >
+            Clients
+          </Link>
+          <Link
+            href="/calendar"
+            className={isActive('/calendar') ? 'nav-item active' : 'nav-item'}
+          >
+            Calendar
+          </Link>
+          <Link
+            href="/billing"
+            className={isActive('/billing') ? 'nav-item active' : 'nav-item'}
+          >
+            Billing
+          </Link>
+        </nav>
+      </div>
+      <UserIcon />
+    </header>
+  );
 }

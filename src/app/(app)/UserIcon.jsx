@@ -47,8 +47,8 @@ export default function UserIcon() {
       {isOpen && (
         <div className="user-menu-dropdown">
           <div className='user-menu-name'>{userName}</div>
-          <div className='user-menu-item'>User Settings</div>
-          <div className='user-menu-item logout'>Log Out</div>
+          <a className='user-menu-item' href="/settings">User Settings</a>
+          <a className='user-menu-item logout'>Log Out</a>
         </div>
       )}
     </div>

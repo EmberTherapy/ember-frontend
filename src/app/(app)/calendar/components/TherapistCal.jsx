@@ -39,8 +39,6 @@ export default function TherapistCalendar() {
         defaultView={Views.WEEK}
         step={30}
         timeslots={2}
-        style={{ height: "90vh", background: "white", borderRadius: "12px" }}
-        resizable
         onEventDrop={handleEventDrop}
         onEventResize={handleEventResize}
         draggableAccessor={() => true}

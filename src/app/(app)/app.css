@@ -73,15 +73,20 @@ body {
   gap: 24px;
 }
 
-.nav a {
+.nav-item {
   text-decoration: none;
   color: var(--neutral-600);
   font-weight: 500;
   transition: color 0.2s;
 }
 
-.nav a:hover {
+.nav-item:hover {
   color: var(--color-primary);
+}
+
+.nav-item.active {
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .user {
@@ -112,15 +117,14 @@ body {
 }
 
 .user-menu-item {
+  all: unset; /* wipes out default link styling */
+  display: block; /* makes the whole row clickable */
   width: 100%;
   padding: 0.45rem 1rem;
-  border: none;
-  background: transparent;
-  text-align: left;
+  cursor: pointer;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--color-text);
-  cursor: pointer;
   transition: background 0.15s ease;
 }
 
