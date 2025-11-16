@@ -59,3 +59,37 @@ body {
   font-weight: 700;
   color: var(--color-primary);
 }
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--neutral-600);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: var(--color-primary);
+}
+
+.user {
+  margin-right: 10px;
+  border-radius: 100%;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 10px 10px;
+  font-weight: 500;
+} 
+
