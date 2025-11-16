@@ -147,6 +147,10 @@ export async function deleteClientRecord(record_id: number) {
     return true;
 }
 
-export function getUserInitials() {
-    return "EE";
+export function getUserInfo() {
+
+    return {
+        first_name: "John",
+        last_name: "Doe"
+    }
 }

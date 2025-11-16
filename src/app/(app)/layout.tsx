@@ -1,10 +1,12 @@
 'use client';
 
 import { Toaster } from 'sonner';
-import { getUserInitials } from '@/app/lib/api/fakeApi';
+import { getUserInfo } from '@/app/lib/api/fakeApi';
 import { useState, useEffect } from 'react';
 
 import './app.css';
+import { userInfo } from 'os';
+import { get } from 'http';
 
 export default function AppLayout({
   children,
@@ -13,10 +15,16 @@ export default function AppLayout({
 }) {
 
   const [userInitials, setUserInitials] = useState("");
+  const [userName, setUserName] = useState("");
 
+
+  function getUserInitials(firstName: string, lastName: string) {
+    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  }
   useEffect(() => {
-    const initials = getUserInitials();
-    setUserInitials(initials);
+    const userInfo = getUserInfo();
+    setUserInitials(getUserInitials(userInfo.first_name, userInfo.last_name));
+    setUserName(`${userInfo.first_name} ${userInfo.last_name}`);
   }, []);
 
 
