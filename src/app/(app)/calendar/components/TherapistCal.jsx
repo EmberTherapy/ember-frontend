@@ -10,19 +10,19 @@ export default function TherapistCalendar() {
   const [events, setEvents] = useState([
     {
       id: 1,
-      title: "Session with Benjy",
+      title: "Benjy Diamond",
       start: new Date(2025, 10, 17, 10, 0),
       end: new Date(2025, 10, 17, 11, 0),
     },
     {
       id: 2,
-      title: "Session with Elias",
+      title: "Elias Sasson",
       start: new Date(2025, 10, 18, 14, 0),
       end: new Date(2025, 10, 18, 15, 0),
     },
     {
       id: 3,
-      title: "Session with Cantor",
+      title: "Ayelet Cantor",
       start: new Date(2025, 10, 19, 9, 30),
       end: new Date(2025, 10, 19, 10, 30),
     },
@@ -38,6 +38,7 @@ export default function TherapistCalendar() {
     <Calendar
       className="calendar"
       localizer={localizer}
+      toolbar={false}
       events={events}
       date={date}
       view={view}

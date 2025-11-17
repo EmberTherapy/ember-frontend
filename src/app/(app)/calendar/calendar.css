@@ -13,113 +13,140 @@
   font-family: inherit;
   color: var(--color-text);
 }
+/* STRIP MOST OF RBC'S DEFAULT BORDERS */
+.calendar .rbc-time-view,
+.calendar .rbc-time-header,
+.calendar .rbc-time-content,
+.calendar .rbc-time-gutter,
+.calendar .rbc-time-header-content,
+.calendar .rbc-day-slot {
+  border: none;
+}
+
+/* REMOVE ALL-DAY ROW COMPLETELY */
+.calendar .rbc-allday-cell,
+.calendar .rbc-allday-events,
+.calendar .rbc-row.rbc-allday-cell,
+.calendar .rbc-allday-cell + .rbc-timeslot-group {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+
+/* REMOVE THE GAP LEFT BEHIND BY THE ALL-DAY ROW */
+.calendar .rbc-time-header {
+  border-bottom: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.calendar .rbc-time-header-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* MAKE HEADER + GRID VERTICAL LINES LINE UP PERFECTLY */
+.calendar .rbc-time-header-content > .rbc-row > .rbc-header + .rbc-header,
+.calendar .rbc-time-content > * + * {
+  border-left: none;
+}
+
+/* REMOVE RBC’S EXTRA BORDER ON THE HEADER ROW */
+.calendar .rbc-header {
+  border: none !important;
+  padding-top: 5px;
+}
+
+
+.calendar .rbc-header span {
+  border: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+}
+
+
+/* Make today header rounded */
+.calendar .rbc-header.rbc-today {
+  background-color: var(--color-primary-fade);
+  border-radius: 12px 12px 0 0;   /* rounded top corners */
+  overflow: hidden;
+}
+
+/* Make today column background rounded */
+/* .calendar .rbc-day-bg.rbc-today {
+  background-color: var(--color-primary-fade);
+  border-radius: 0 0 12px 12px;   /* rounded bottom corners */
+  /* overflow: hidden;
+} */ 
+
+.calendar .rbc-time-gutter .rbc-time-slot {
+  border: none;
+}
+.rbc-day-slot .rbc-time-slot {
+    border-top: none;
+}
+.calendar .rbc-time-gutter .rbc-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.calendar .rbc-time-content {
+  background: var(--neutral-0);
+}
 
 .rbc-today {
   background-color: var(--color-primary-fade);
 }
 
-/* MAIN EVENT PILL */
+.rbc-current-time-indicator {
+  background-color: var(--color-orange);
+  height: 1px;
+  z-index: 5;
+}
+
 .calendar .rbc-event {
-  display: flex;
-  flex-direction: column;        /* stack time + title cleanly */
-  justify-content: center;
-
-  background-color: var(--color-primary);
-  color: white;
-
-  padding: 6px 10px;
-  border-radius: 14px;
+  background: rgba(251, 133, 0, 0.12);
   border: none;
+  border-left: 4px solid var(--color-orange);
+  border-radius: 6px;
 
-  /* KEY: make even 30-min slots tall enough for 2 lines */
-  min-height: 65px;
+  padding: 6px 8px;           
+  backdrop-filter: saturate(180%) blur(4px);
 
-  overflow: hidden;              /* keep text inside rounded corners */
-
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.25;
-  cursor: pointer;
-
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-}
-
-/* TIME LABEL (top line) */
-.calendar .rbc-event-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-/* TITLE (bottom line) */
-.calendar .rbc-event-content {
-  white-space: normal !important;
-  word-break: break-word;
-  font-size: 0.9rem;
-  line-height: 1.2;
-}
-
-
-/* SPACE BETWEEN BUTTON GROUPS */
-.calendar .rbc-toolbar .rbc-btn-group {
   display: flex;
-  gap: 8px;                      /* consistent spacing between ALL buttons */
-  border-radius: 12px;
-  box-shadow: none !important;
-  margin-bottom: 20px;
+  flex-direction: column;
+  justify-content: center;   
+  text-align: left;
+  line-height: 1.15;            
+  gap: 2px;                    
 }
 
-.calendar .rbc-toolbar-label + .rbc-btn-group {
-  margin-left: 20px;             /* Label → Month/Week/Day separation */
+.calendar .rbc-event-label {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(251, 133, 0, 0.9);
 }
 
-.calendar .rbc-toolbar .rbc-btn-group > button {
-  padding: 0.5rem .8rem;
-  background: transparent;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-  font-weight: bold;
-  font-size: .8rem;
-  border-radius: 12px;
-  border: 1px solid var(--color-primary-light);
-  background-color: var(--neutral-0);
-  color: var(--color-primary);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+.calendar .rbc-event-content {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-orange);
 }
 
-/* HOVER */
-.calendar .rbc-toolbar .rbc-btn-group > button:hover {
-  background-color: var(--color-primary-bg);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  box-shadow: 0 3px 6px rgba(242, 88, 27, 0.15);
-  transform: translateY(-1px);
+.rbc-day-slot .rbc-time-slot {
+    border-top: none;
 }
 
-/* SELECTED (rbc-active) — CLEAN, SUBTLE, NORMAL */
-.calendar .rbc-toolbar .rbc-btn-group:last-of-type > button.rbc-active {
-  background-color: var(--color-primary);
-  color: white;
-  border-color: var(--color-primary);
-  transform: translateY(0);
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+.calendar .rbc-time-content > * + * {
+    border-left: none;
 }
 
-.calendar .rbc-toolbar .rbc-btn-group:first-of-type > button:active {
-  background-color: var(--color-primary);
-  color: white;
-  border-color: var(--color-primary);
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.15);
-}
-
-/* REMOVE UGLY DARK-GREY PRESS */
-.calendar .rbc-toolbar .rbc-btn-group > button:active,
-.calendar .rbc-toolbar .rbc-btn-group > button:focus {
-  background-color: var(--neutral-0);
-  color: var(--color-primary);
-  border-color: var(--color-primary-light);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  transform: translateY(0);
+.rbc-time-content > * + * > * {
+    border-left: 1px solid rgb(221, 221, 221);
 }
