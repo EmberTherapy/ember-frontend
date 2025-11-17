@@ -113,7 +113,7 @@
 .calendar .rbc-event {
   background: rgba(251, 133, 0, 0.12);
   border: none;
-  border-left: 4px solid var(--color-primary);
+  border-left: 3.5px solid var(--color-primary);
   border-radius: 6px;
 
   padding: 8px 8px;           
@@ -124,7 +124,7 @@
   justify-content: center;   
   text-align: left;
   line-height: 1.15;            
-  gap: 2px;                    
+  gap: 3px;                  
 }
 
 .calendar .rbc-event-label {
