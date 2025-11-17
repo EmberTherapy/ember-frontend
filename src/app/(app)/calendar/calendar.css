@@ -113,10 +113,10 @@
 .calendar .rbc-event {
   background: rgba(251, 133, 0, 0.12);
   border: none;
-  border-left: 4px solid var(--color-orange);
+  border-left: 4px solid var(--color-primary);
   border-radius: 6px;
 
-  padding: 6px 8px;           
+  padding: 8px 8px;           
   backdrop-filter: saturate(180%) blur(4px);
 
   display: flex;
@@ -130,13 +130,13 @@
 .calendar .rbc-event-label {
   font-size: 0.8rem;
   font-weight: 400;
-  color: rgba(251, 133, 0, 0.9);
+  color: var(--color-primary);
 }
 
 .calendar .rbc-event-content {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  color: var(--color-orange);
+  color: var(--color-primary);
 }
 
 .rbc-day-slot .rbc-time-slot {
