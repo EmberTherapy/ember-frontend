@@ -1,55 +1,125 @@
 .calendar-wrapper {
-    padding: 50px 30px;
+    padding: 30px 35px;
     padding-bottom: 0;
 }
 
 .calendar {
-    height: 85vh;
-    background: white; 
-    border-radius: 12px;
-}
-
-.rbc-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.rbc-toolbar button {
-  border-radius: 6px;
-  padding: 4px 10px;
-  border: 1px solid var(--color-primary);
-  background-color: var(--color-surface, #f8fafc);
-  font-size: 0.8rem;
-  cursor: pointer;
+  height: calc(100vh - 140px);
+  padding: 20px;
+  background: var(--neutral-0);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
   font-family: inherit;
-}
-
-.rbc-toolbar button.rbc-active {
-  background-color: var(--color-primary);
-  color: white;
-}
-
-
-.rbc-toolbar-label {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--color-text, #111827);
+  color: var(--color-text);
 }
 
 .rbc-today {
-  background-color: rgba(242, 88, 27, 0.04); 
+  background-color: var(--color-primary-fade);
 }
 
-.rbc-event {
-  border-radius: 8px;
-  padding: 3px 6px;
-  border: none;
-  font-size: 0.75rem;
-  line-height: 1.2;
+/* MAIN EVENT PILL */
+.calendar .rbc-event {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  flex-direction: column;        /* stack time + title cleanly */
+  justify-content: center;
+
   background-color: var(--color-primary);
+  color: white;
+
+  padding: 6px 10px;
+  border-radius: 14px;
+  border: none;
+
+  /* KEY: make even 30-min slots tall enough for 2 lines */
+  min-height: 65px;
+
+  overflow: hidden;              /* keep text inside rounded corners */
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.25;
+  cursor: pointer;
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+/* TIME LABEL (top line) */
+.calendar .rbc-event-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* TITLE (bottom line) */
+.calendar .rbc-event-content {
+  white-space: normal !important;
+  word-break: break-word;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+
+/* SPACE BETWEEN BUTTON GROUPS */
+.calendar .rbc-toolbar .rbc-btn-group {
+  display: flex;
+  gap: 8px;                      /* consistent spacing between ALL buttons */
+  border-radius: 12px;
+  box-shadow: none !important;
+  margin-bottom: 20px;
+}
+
+.calendar .rbc-toolbar-label + .rbc-btn-group {
+  margin-left: 20px;             /* Label → Month/Week/Day separation */
+}
+
+.calendar .rbc-toolbar .rbc-btn-group > button {
+  padding: 0.5rem .8rem;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  font-size: .8rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-primary-light);
+  background-color: var(--neutral-0);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* HOVER */
+.calendar .rbc-toolbar .rbc-btn-group > button:hover {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 3px 6px rgba(242, 88, 27, 0.15);
+  transform: translateY(-1px);
+}
+
+/* SELECTED (rbc-active) — CLEAN, SUBTLE, NORMAL */
+.calendar .rbc-toolbar .rbc-btn-group:last-of-type > button.rbc-active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(0);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.calendar .rbc-toolbar .rbc-btn-group:first-of-type > button:active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* REMOVE UGLY DARK-GREY PRESS */
+.calendar .rbc-toolbar .rbc-btn-group > button:active,
+.calendar .rbc-toolbar .rbc-btn-group > button:focus {
+  background-color: var(--neutral-0);
+  color: var(--color-primary);
+  border-color: var(--color-primary-light);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transform: translateY(0);
 }
