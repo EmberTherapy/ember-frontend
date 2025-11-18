@@ -1,10 +1,10 @@
-.calendar-wrapper {
+.calendar-page {
     padding: 30px 35px;
     padding-bottom: 0;
 }
 
-.calendar {
-  height: calc(100vh - 140px);
+.calendar-wrapper {
+  height: calc(100vh - 20vh);
   padding: 20px;
   background: var(--neutral-0);
   border-radius: 12px;
@@ -13,140 +13,63 @@
   font-family: inherit;
   color: var(--color-text);
 }
-/* STRIP MOST OF RBC'S DEFAULT BORDERS */
-.calendar .rbc-time-view,
-.calendar .rbc-time-header,
-.calendar .rbc-time-content,
-.calendar .rbc-time-gutter,
-.calendar .rbc-time-header-content,
-.calendar .rbc-day-slot {
-  border: none;
-}
 
-/* REMOVE ALL-DAY ROW COMPLETELY */
-.calendar .rbc-allday-cell,
-.calendar .rbc-allday-events,
-.calendar .rbc-row.rbc-allday-cell,
-.calendar .rbc-allday-cell + .rbc-timeslot-group {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  overflow: hidden !important;
-}
-
-/* REMOVE THE GAP LEFT BEHIND BY THE ALL-DAY ROW */
-.calendar .rbc-time-header {
-  border-bottom: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.calendar .rbc-time-header-content {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* MAKE HEADER + GRID VERTICAL LINES LINE UP PERFECTLY */
-.calendar .rbc-time-header-content > .rbc-row > .rbc-header + .rbc-header,
-.calendar .rbc-time-content > * + * {
-  border-left: none;
-}
-
-/* REMOVE RBC’S EXTRA BORDER ON THE HEADER ROW */
-.calendar .rbc-header {
-  border: none !important;
-  padding-top: 5px;
-}
-
-
-.calendar .rbc-header span {
-  border: none;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  color: var(--color-text-muted);
-  font-family: 'DM Sans', sans-serif;
-}
-
-
-/* Make today header rounded */
-.calendar .rbc-header.rbc-today {
-  background-color: var(--color-primary-fade);
-  border-radius: 12px 12px 0 0;   /* rounded top corners */
-  overflow: hidden;
-}
-
-/* Make today column background rounded */
-/* .calendar .rbc-day-bg.rbc-today {
-  background-color: var(--color-primary-fade);
-  border-radius: 0 0 12px 12px;   /* rounded bottom corners */
-  /* overflow: hidden;
-} */ 
-
-.calendar .rbc-time-gutter .rbc-time-slot {
-  border: none;
-}
-.rbc-day-slot .rbc-time-slot {
-    border-top: none;
-}
-.calendar .rbc-time-gutter .rbc-label {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-}
-
-.calendar .rbc-time-content {
-  background: var(--neutral-0);
-}
-
-.rbc-today {
-  background-color: var(--color-primary-fade);
-}
-
-.rbc-current-time-indicator {
-  background-color: var(--color-orange);
-  height: 1px;
-  z-index: 5;
-}
-
-.calendar .rbc-event {
-  background: rgba(251, 133, 0, 0.12);
-  border: none;
-  border-left: 3.5px solid var(--color-primary);
-  border-radius: 6px;
-
-  padding: 8px 8px;           
-  backdrop-filter: saturate(180%) blur(4px);
-
+.toolbar {
   display: flex;
-  flex-direction: column;
-  justify-content: center;   
-  text-align: left;
-  line-height: 1.15;            
-  gap: 3px;                  
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem 0.5rem;
+  margin-bottom: 20px;
 }
 
-.calendar .rbc-event-label {
-  font-size: 0.8rem;
-  font-weight: 400;
+.btn-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tool-button {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--neutral-200);
+  background: transparent;
+  font-size: .9rem;
+  font-family: inherit;
+  color: var(--neutral-600);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tool-button:hover {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary-light);
   color: var(--color-primary);
+  transform: translateY(-1px);
 }
 
-.calendar .rbc-event-content {
-  font-size: 0.9rem;
-  font-weight: 700;
+.tool-button:active {
+  background-color: var(--color-light-orange);
+  border-color: var(--color-primary);
+  transform: translateY(0);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.tool-button.arrow {
+  height: 32px;
+  width: 32px;
+}
+
+.tool-button.text {
+  padding: 0 12px;
+  font-weight: 510;
+  width: 65px;
+}
+
+.selected-view {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary-light);
   color: var(--color-primary);
-}
-
-.rbc-day-slot .rbc-time-slot {
-    border-top: none;
-}
-
-.calendar .rbc-time-content > * + * {
-    border-left: none;
-}
-
-.rbc-time-content > * + * > * {
-    border-left: 1px solid rgb(221, 221, 221);
 }

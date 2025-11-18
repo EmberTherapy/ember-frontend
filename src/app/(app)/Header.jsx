@@ -15,23 +15,26 @@ export default function Header() {
         <h1>Ember</h1>
         <nav className="nav">
           <Link
-            href="/clients"
-            className={isActive('/clients') ? 'nav-item active' : 'nav-item'}
-          >
-            Clients
-          </Link>
-          <Link
             href="/calendar"
             className={isActive('/calendar') ? 'nav-item active' : 'nav-item'}
           >
             Calendar
           </Link>
+          
+          <Link
+            href="/clients"
+            className={isActive('/clients') ? 'nav-item active' : 'nav-item'}
+          >
+            Clients
+          </Link>
+
           <Link
             href="/billing"
             className={isActive('/billing') ? 'nav-item active' : 'nav-item'}
           >
             Billing
           </Link>
+          
         </nav>
       </div>
       <UserIcon />

@@ -1,0 +1,173 @@
+.calendar .rbc-time-view,
+.calendar .rbc-time-header,
+.calendar .rbc-time-content,
+.calendar .rbc-time-gutter,
+.calendar .rbc-time-header-content,
+.calendar .rbc-day-slot {
+  border: none;
+}
+
+.calendar .rbc-allday-cell,
+.calendar .rbc-allday-events,
+.calendar .rbc-row.rbc-allday-cell,
+.calendar .rbc-allday-cell + .rbc-timeslot-group {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+
+/* REMOVE THE GAP LEFT BEHIND BY THE ALL-DAY ROW */
+.calendar .rbc-time-header {
+  border-bottom: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.calendar .rbc-time-header-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* MAKE HEADER + GRID VERTICAL LINES LINE UP PERFECTLY */
+.calendar .rbc-time-header-content > .rbc-row > .rbc-header + .rbc-header,
+.calendar .rbc-time-content > * + * {
+  border-left: none;
+}
+
+/* REMOVE RBC’S EXTRA BORDER ON THE HEADER ROW */
+.calendar .rbc-header {
+  border: none !important;
+  padding-top: 5px;
+}
+
+.rbc-month-header {
+  padding-bottom: 10px;
+  padding-top: 5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.rbc-calendar {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.calendar .rbc-header span {
+  border: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+}
+
+
+/* Make today header rounded */
+.calendar .rbc-header.rbc-today {
+  background-color: var(--color-primary-fade);
+  border-radius: 12px 12px 0 0;   /* rounded top corners */
+  overflow: hidden;
+}
+
+
+.calendar .rbc-time-gutter .rbc-time-slot {
+  border: none;
+}
+.rbc-day-slot .rbc-time-slot {
+    border-top: none;
+}
+.calendar .rbc-time-gutter .rbc-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.calendar .rbc-time-content {
+  background: var(--neutral-0);
+}
+
+.rbc-today {
+  background-color: var(--color-primary-fade);
+}
+
+.rbc-current-time-indicator {
+  background-color: var(--color-orange);
+  opacity: .5;
+  height: 1px;
+  z-index: 5;
+}
+
+.calendar .rbc-day-slot .rbc-events-container {
+  left: 0 !important;
+  width: 100% !important;
+}
+
+.calendar .rbc-event {
+    background: rgba(251, 133, 0, 0.12);
+    border: none;
+    border-left: 3.5px solid var(--color-primary);
+    border-radius: 6px;
+
+    padding: 8px 8px;           
+    backdrop-filter: saturate(180%) blur(4px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+    text-align: left;
+    line-height: 1.15;            
+    gap: 3px;         
+    width: 100% !important;         
+}
+
+.calendar .rbc-event-label {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-primary);
+}
+
+.calendar .rbc-event-content {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.rbc-day-slot .rbc-time-slot {
+    border-top: none;
+}
+
+.calendar .rbc-time-content > * + * {
+    border-left: none;
+}
+
+.rbc-time-content > * + * > * {
+    border-left: 1px solid var(--border);
+}
+
+.rbc-button-link  {
+  font-family: "DM Sans" !important;
+  color: var(--color-text-muted) !important;
+}
+
+.rbc-month-view {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.rbc-month-view .rbc-date-cell.rbc-off-range .rbc-button-link {
+  color: var(--color-text-muted) !important;  /* lighter / muted */
+}
+
+.rbc-month-view .rbc-off-range-bg {
+  background-color: #F6F6F8;
+}
+
+.rbc-time-gutter .rbc-label {
+  display: block;
+  width: 100%;
+  text-align: right;  
+  padding-top: 5px;       /* push text toward the right edge */
+  padding-right: 10px;       /* space between text and grid line */
+  /* optional for consistency */
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.85rem;
+}

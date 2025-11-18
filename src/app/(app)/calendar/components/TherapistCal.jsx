@@ -2,6 +2,8 @@
 
 import { Calendar, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import Toolbar from './Toolbar';
+import "../rbc.css" 
 import { useState } from "react";
 
 import { localizer } from "@/app/lib/calendarLocalizer";
@@ -18,7 +20,7 @@ export default function TherapistCalendar() {
       id: 2,
       title: "Elias Sasson",
       start: new Date(2025, 10, 18, 14, 0),
-      end: new Date(2025, 10, 18, 15, 0),
+      end: new Date(2025, 10, 18, 16, 0),
     },
     {
       id: 3,
@@ -38,7 +40,7 @@ export default function TherapistCalendar() {
     <Calendar
       className="calendar"
       localizer={localizer}
-      toolbar={false}
+      components={{ toolbar: Toolbar }}
       events={events}
       date={date}
       view={view}
