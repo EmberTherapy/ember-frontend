@@ -3,7 +3,7 @@
 import { Toaster } from 'sonner';
 import { useState, useEffect } from 'react';
 import { ModalContextProvider } from '@/app/lib/ModalContextProvider';
-import Header from './Header';
+import Header from './components/Header';
 import './app.css';
 
 export default function AppLayout({

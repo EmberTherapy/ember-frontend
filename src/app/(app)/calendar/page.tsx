@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import './calendar.css';    
 import TherapistCal from '@/app/(app)/calendar/components/TherapistCal';
-import ModalHost from '@/app/(app)/calendar/components/ModalHost';
+import ModalHost from "@/app/(app)/components/ModalHost";
 
 
 export default function CalendarPage() {

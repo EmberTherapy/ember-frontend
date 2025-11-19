@@ -133,3 +133,87 @@
   max-height: 93%;
   overflow: scroll;
 }
+
+.exit-prompt-overlay {
+  position: fixed;
+  inset: 0; 
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+.exit-prompt {
+  background: white;
+  padding: 0 1.5rem 0 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 20%;
+  height: auto;
+  max-height: 93%;
+  overflow: scroll;
+}
+
+.exit-prompt .button-group {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 1.5rem 0;
+
+}
+
+.prompt-btn {
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-primary-light);
+  background-color: var(--neutral-0);
+  color: var(--color-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.exit-prompt .edit {
+  border: 1px solid var(--neutral-200);
+  background: transparent;
+  color: var(--neutral-600);
+}
+
+.exit-prompt .edit:hover {
+  background-color: var(--neutral-300);
+  border-color: var(--neutral-600);
+  color: var(--neutral-600);
+  transform: translateY(-1px);
+}
+
+.exit-prompt .edit:active {
+  background-color: var(--neutral-250);
+  border-color: var(--neutral-600);
+  transform: translateY(0);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.exit-prompt .exit {
+  border: 1px solid var(--color-red);
+  background: transparent;
+  color: var(--color-red);
+}
+
+.exit-prompt .exit:hover {
+  background-color: var(--color-light-red);
+  border-color: var(--color-red);
+  color: var(--color-red);
+  transform: translateY(-1px);
+}
+
+.exit-prompt .exit:active {
+  background-color: var(--color-light-red);
+  border-color: var(--color-danger);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.15);
+}
