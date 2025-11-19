@@ -24,7 +24,7 @@ export default function Toolbar(toolbar_props) {
         <button className={`tool-button text${selectedView === 'day' ? ' selected-view' : ''}`} onClick={() => { onView('day'); setSelectedView('day'); }}>Day</button>
         <button className={`tool-button text${selectedView === 'week' ? ' selected-view' : ''}`} onClick={() => { onView('week'); setSelectedView('week'); }}>Week</button>
         <button className={`tool-button text${selectedView === 'month' ? ' selected-view' : ''}`} onClick={() => { onView('month'); setSelectedView('month'); }}>Month</button>
-        <button className="new-event-button" onClick={() => setModalState({ mode: 'new', type: 'event' })}>
+        <button className="new-event-button" onClick={() => setModalState({ visible: true, mode: 'new', type: 'event' })}>
           New Event <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>

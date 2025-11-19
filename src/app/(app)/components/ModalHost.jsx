@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import './modal.css'
 import { useModalContext } from "@/app/lib/ModalContextProvider";
 
 import ExitPrompt from "@/app/(app)/components/ExitPrompt";

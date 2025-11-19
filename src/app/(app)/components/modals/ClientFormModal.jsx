@@ -165,9 +165,9 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 <h1>{mode === "edit" ? "Edit Client" : mode === "new" ? "New Client" : ""}</h1>
                 <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
-            <form className="client-form">
+            <form className="form">
                 <div className = "form-section">   
-                    <div className = "emergency-contact-grid">
+                    <div className = "grid">
                         <div className="form-group">
                             <label>First Name: </label>
                             <input id="first_name" type="text" name="first_name" value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} />
@@ -238,7 +238,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 </div>
                 <div className="form-section-emergency">
                     <h2>Emergency Contact</h2>
-                    <div className="emergency-contact-grid">
+                    <div className="grid">
                         <div className="form-group">
                             <label>Name: </label>
                             <input id = "ec_name" type="text" name="emergency_contact_name" value={form.emergency_contact.name} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, name: e.target.value } })} />

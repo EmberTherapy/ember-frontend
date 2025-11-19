@@ -8,33 +8,34 @@ export default function EventFormModal({attemptCloseModal, mode}) {
     return (
         <div id="modal-content">
             <div className="top-bar">
-                <h1>New Event</h1>
+                <h1>{mode === "edit" ? "Edit Event" : mode === "new" ? "New Event" : ""}</h1>
                 <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
-            <form className="event-form">
-                <label>
-                    Title:
-                    <input type="text" name="title" />
-                </label>
-                <label>
-                    Notes:
-                    <textarea name="description" />
-                </label>
-                <label>
-                    Date:
-                    <input type="date" name="date" />
-                </label>
-                <label>
-                    Start Time:
-                    <input type="time" name="time" />
-                </label>
-                <label>
-                    End Time:
-                    <input type="time" name="end-time" />
-                </label>
-
-                <div className="button-group">
-                    <button type="submit" className="save-button">Save</button>
+            <form className="form">
+                <div className = "form-section">   
+                    <div className="form-group">
+                        <label>Title: </label>
+                        <input id="title" type="text" name="title" />
+                    </div>
+                    <div className="form-group">
+                        <label>Notes: </label>
+                        <input id="notes" type="text" name="notes" />
+                    </div>
+                    <div className="form-group">
+                        <label>Date: </label>
+                        <input id="date" type="date" name="date" />
+                    </div>
+                    <div className="form-group">
+                        <label> Regular Meeting Time: </label>
+                        <div className="meeting-time-inputs">
+                            <input type="time" name="meeting_start_time"/>
+                            <span className="to-label"> to </span>
+                            <input type="time" name="meeting_end_time"/>
+                        </div>
+                    </div>
+                </div>
+                <div className="footer">
+                    <button className="submit-button" type="submit"> {mode === "edit" ? "Save Changes" : "Add Event"}</button>
                 </div>
             </form>
         </div>
