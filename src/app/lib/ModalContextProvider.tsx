@@ -2,26 +2,24 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-type ModalMode = string | null; 
+type ModalState = {
+  mode: "read" | "edit" | "new" ;
+  type: "record" | "client" | "event";
+  id?: string;
+} | null;
 
 type ModalContextType = {
-  modalMode: ModalMode;
-  setModalMode: (modal_mode: ModalMode) => void;
+  modalState: ModalState;
+  setModalState: (state: ModalState) => void;
 };
 
 const ModalContext = createContext<ModalContextType | null>(null);
 
 export function ModalContextProvider({ children }: { children: ReactNode }) {
-  const [modalMode, setModalMode] = useState<ModalMode>(null);
-
-  const value: ModalContextType = 
-    {
-      modalMode,        
-      setModalMode,
-    };
+  const [modalState, setModalState] = useState<ModalState>(null);
 
   return (
-    <ModalContext.Provider value={value}>
+    <ModalContext.Provider value={{ modalState, setModalState }}>
       {children}
     </ModalContext.Provider>
   );

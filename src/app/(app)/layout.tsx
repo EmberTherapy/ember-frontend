@@ -2,6 +2,7 @@
 
 import { Toaster } from 'sonner';
 import { useState, useEffect } from 'react';
+import { ModalContextProvider } from '@/app/lib/ModalContextProvider';
 import Header from './Header';
 import './app.css';
 
@@ -12,7 +13,7 @@ export default function AppLayout({
 }) {
 
   return (
-    <div>
+    <ModalContextProvider>
       <Header/>
       {children}
       <Toaster
@@ -20,6 +21,6 @@ export default function AppLayout({
         richColors
         visibleToasts={1}
         />
-    </div>
+    </ModalContextProvider>
   );
 }
