@@ -4,8 +4,11 @@ import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 
 import { getFlagsPanelData, resolveFlags } from '@/app/lib/api/fakeApi';
+
+import { useModalContext } from "@/app/lib/ModalContextProvider";
     
-export default function RightPanel({ source, onClosePanel, clientId, openModal}) {
+export default function RightPanel({ source, onClosePanel, clientId}) {
+    const { setModalState } = useModalContext();
 
     const [flagPanelData, setFlagPanelData] = useState(null);
     
@@ -43,7 +46,7 @@ export default function RightPanel({ source, onClosePanel, clientId, openModal})
                                     <p><strong>{flag.date_flagged}</strong></p>
                                 </div>
                                 <p><strong>Type:</strong> {flag.type}</p>
-                                <p><strong>Chat Snippet:</strong> {flag.chat_snippet} &nbsp;&nbsp;<span className='read-more-flag' onClick={() => openModal("viewRecord", flag.record_id)}>read more</span></p>
+                                <p><strong>Chat Snippet:</strong> {flag.chat_snippet} &nbsp;&nbsp;<span className='read-more-flag' onClick={() => setModalState({visible: true, mode: 'view', type: 'record', id: flag.record_id })}>read more</span></p>
                             </div>
                         ))}
                     </div>

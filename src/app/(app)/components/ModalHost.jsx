@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useModalContext } from "@/app/lib/ModalContextProvider";
 
 import ExitPrompt from "@/app/(app)/components/ExitPrompt";
-
-import NewEventModal from './modals/NewEventModal';
+import EventFormModal from './modals/EventFormModal';
+import ClientFormModal from './modals/ClientFormModal';
+import ViewRecordModal from './modals/ViewRecordModal';
+import WriteRecordModal from './modals/WriteRecordModal';
 
 export default function ModalHost() {
 
@@ -11,10 +13,11 @@ export default function ModalHost() {
   const modalStateString = modalState?.mode + "-" + modalState?.type;
 
   const writeMode = modalState?.mode === 'edit' || modalState?.mode === 'new';
-  const readMode = modalState?.mode === 'read';
+  const readMode = modalState?.mode === 'view';
+
 
   const [showExitPrompt, setShowExitPrompt] = useState(false);
-
+  
   function attemptCloseModal() {
     if (writeMode) {
       setShowExitPrompt(true);
@@ -26,7 +29,7 @@ export default function ModalHost() {
   }
 
   function closeModal() {
-    setModalState(null);
+    setModalState({visible: false, mode: null, type: null, id: null});
     setShowExitPrompt(false);
   }
 
@@ -44,15 +47,18 @@ export default function ModalHost() {
   const ModalContainer = 
       <div className="modal-overlay" onClick={attemptCloseModal}>
           <div className="modal" onClick={e => e.stopPropagation()}> 
-              {modalStateString === 'new-event' && <NewEventModal attemptCloseModal={attemptCloseModal} />}
+              {modalStateString === 'new-event' && <EventFormModal attemptCloseModal={attemptCloseModal} mode={modalState?.mode} />}
+              {modalState?.type=== 'client' &&  <ClientFormModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} clientId={modalState?.id} />}
+              {modalStateString === 'view-record' &&  <ViewRecordModal closeModal={closeModal} recordId={modalState?.id} />}
+              {(modalState?.type === 'record' && writeMode) && <WriteRecordModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} clientId={modalState?.clientId} recordId={modalState?.id} onDeleteRecord={modalState?.onDeleteRecord} />}
           </div>
       </div>
 
-  if (modalState) {
+  if (modalState?.visible) {
     return (
       <div>
         {ModalContainer}
-        {showExitPrompt && <ExitPrompt onExit={closeModal} onContinueEditing={() => {setShowExitPrompt(false)}} />}
+        {showExitPrompt && <ExitPrompt closeModal={closeModal} continueEditing={() => setShowExitPrompt(false)} />}
       </div>
     );
   }

@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { createNewClient, updateClient, getClientFormData } from '@/app/lib/api/fakeApi';
 import { checkFormValidity } from '@/app/lib/dataUtils';
 
-export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyClose }) {
+export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {
     const user_template = {
         first_name: "",
         last_name: "",
@@ -39,7 +39,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
     ];
 
     useEffect(() => {
-        if (mode != "editClient") return;
+        if (mode != "edit") return;
 
         (async () => {
             const form_data = await getClientFormData(clientId);
@@ -105,7 +105,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
         const toastId = toast.loading("Creating client...");
         if (await createNewClient(newUser)) {
             toast.dismiss(toastId);
-            onCloseModal();
+            closeModal();
             toast.success("Client created successfully!");    
         }
         else {
@@ -138,7 +138,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
         const toastId = toast.loading("Saving changes...");
         if (await updateClient(updatedUser)) {
             toast.dismiss(toastId);
-            onCloseModal();
+            closeModal();
             toast.success("Client updated successfully!");
         }
         else {
@@ -162,8 +162,8 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
     return (
         <div id="modal-content">
             <div className="top-bar">
-                <h1>{mode === "editClient" ? "Edit Client" : mode === "newClient" ? "New Client" : ""}</h1>
-                <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
+                <h1>{mode === "edit" ? "Edit Client" : mode === "new" ? "New Client" : ""}</h1>
+                <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form className="client-form">
                 <div className = "form-section">   
@@ -258,7 +258,7 @@ export default function ClientFormModal({ mode, clientId, onCloseModal, onEarlyC
                     </div>
                 </div>
                 <div className="footer">
-                    <button className="submit-button" type="submit" onClick={(e) => { e.preventDefault(); mode === "editClient" ? handleUpdateClient() : handleCreateNewClient(); }}> {mode === "editClient" ? "Save Changes" : "Add & Invite Client"}</button>
+                    <button className="submit-button" type="submit" onClick={(e) => { e.preventDefault(); mode === "edit" ? handleUpdateClient() : handleCreateNewClient(); }}> {mode === "edit" ? "Save Changes" : "Add & Invite Client"}</button>
                 </div>
             </form>
         </div>

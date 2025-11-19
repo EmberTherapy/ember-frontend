@@ -4,8 +4,11 @@ import { faXmark, faPencil } from '@fortawesome/free-solid-svg-icons';
 
 import { getRecordById } from '@/app/lib/api/fakeApi';
 
-export default function ViewRecordModal({ mode, closeModal, onOpenModal, recordId }) {
+import { useModalContext } from "@/app/lib/ModalContextProvider";
+
+export default function ViewRecordModal({ closeModal, recordId }) {
     const [record, setRecord] = useState(null);
+    const { modalState, setModalState } = useModalContext();
 
     function formatType(type) {
         return type
@@ -36,11 +39,11 @@ export default function ViewRecordModal({ mode, closeModal, onOpenModal, recordI
                 <div className='button-group'>
                     {record ?
                         record.type == "session_note" ? (
-                            <button className="edit-button" onClick={() => onOpenModal("editRecord", record.id)}><FontAwesomeIcon icon={faPencil} /></button>
+                            <button className="edit-button" onClick={() => setModalState({ mode: 'edit', type: 'record', id: record.id })}><FontAwesomeIcon icon={faPencil} /></button>
                         ) : null
                      : null
                     }
-                    <button className="exit-button" onClick={closeModal}><FontAwesomeIcon icon={faXmark} /></button>
+                    <button className="exit-button" onClick={() => setModalState({ mode: null, type: null, id: null })}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
             </div>
             {record ? (

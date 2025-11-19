@@ -11,7 +11,6 @@ export default function CalendarPage() {
         // <ModalContextProvider>
             <div className="calendar-page">
                 <TherapistCal />
-                <ModalHost />
             </div>
         // </ModalContextProvider>
     );

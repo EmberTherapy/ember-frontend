@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 
-export default function NewEventModal({attemptCloseModal}) {
+export default function EventFormModal({attemptCloseModal, mode}) {
     return (
         <div id="modal-content">
             <div className="top-bar">

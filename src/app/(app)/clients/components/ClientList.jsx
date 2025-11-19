@@ -3,8 +3,12 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { getClientList } from '@/app/lib/api/fakeApi';
 
-export default function ClientList({ selected, onChangeDisplay, onOpenModal }) {
+import { useModalContext } from "@/app/lib/ModalContextProvider";
+
+export default function ClientList({ selected, onChangeDisplay }) {
   const [clients, setClients] = useState([]);
+
+  const { modalState, setModalState } = useModalContext();
   
   useEffect(() => {
     getClientList().then(clients => {
@@ -22,7 +26,7 @@ export default function ClientList({ selected, onChangeDisplay, onOpenModal }) {
             {client.first_name} {client.last_name}
         </div>
       ))}
-      <div className="add-client" onClick={() => onOpenModal("newClient")}>
+      <div className="add-client" onClick={() => setModalState({visible: true, mode: 'new', type: 'client' })}>
         Add Client <FontAwesomeIcon icon={faPlus} />
       </div>
 

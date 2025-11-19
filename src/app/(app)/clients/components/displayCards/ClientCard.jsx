@@ -4,12 +4,16 @@ import { faFlag, faPencil  } from '@fortawesome/free-solid-svg-icons';
 import { getClientData } from "@/app/lib/api/fakeApi";
 import { formatTime } from "@/app/lib/dataUtils";
 
-export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
+import { useModalContext } from "@/app/lib/ModalContextProvider";
+
+export default function ClientCard({ client_id, onOpenPanel}) {
     const [client, setClient] = useState(null);
     const [inviteStatus, setInviteStatus] = useState(null);
+    
+    const { modalState, setModalState } = useModalContext();
 
     useEffect(() => {
-    getClientData(client_id).then(setClient);
+        getClientData(client_id).then(setClient);
     }, [client_id]);
 
     useEffect(() => {
@@ -59,7 +63,7 @@ export default function ClientCard({ client_id, onOpenPanel, onOpenModal }) {
                     <button className="red-button" onClick={() => onOpenPanel("flag")}>
                         <FontAwesomeIcon icon={faFlag} />
                     </button>}
-                    <button className="edit-button" onClick={() => onOpenModal("editClient")}>
+                    <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'client', id: client.id })}>
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                 </div>

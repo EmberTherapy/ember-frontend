@@ -5,9 +5,13 @@ import { faPlus, faPencil, faEllipsis, faTrashCan } from '@fortawesome/free-soli
 
 import EllipsesActions from "../EllipsesActions";
 import { formatDate } from "@/app/lib/dataUtils";
-import { on } from "events";
 
-export default function RecordsCard({ client_id, onOpenModal, onOpenRecord, onDeleteRecord}) {
+import { useModalContext } from "@/app/lib/ModalContextProvider";
+
+export default function RecordsCard({ client_id }) {
+    const { modalState, setModalState } = useModalContext();
+    const { deleteState, setDeleteState } = useModalContext();
+
     const [records, setRecords] = useState([]);
     useEffect(() => {
       getClientRecords(client_id).then(setRecords);
@@ -37,14 +41,14 @@ export default function RecordsCard({ client_id, onOpenModal, onOpenRecord, onDe
                         <th></th>
                     </tr>
                     {records.length > 0 ? records.map((record, index) => (
-                        <tr className={`record-row ${record.flag_severity == 2 ? "flagged_high" : (record.flag_severity == 1 ? "flagged_medium" : "")}`} key={index} onClick={() => { onOpenModal("viewRecord", record.id); }}>
+                        <tr className={`record-row ${record.flag_severity == 2 ? "flagged_high" : (record.flag_severity == 1 ? "flagged_medium" : "")}`} key={index} onClick={() => { setModalState({ visible: true, mode: 'view', type: 'record', id: record.id }); }}>
                             <td>{formatDate(record.date)}</td>
                             <td>{record.type == "chat_summary" ? "Chat Summary" : "Session Note"}</td>
                             <td>{record.content.length > 100 ? record.content.substring(0, 100) + "..." : record.content}</td>
                             <td onClick={(e) => e.stopPropagation()}>
                                 <EllipsesActions
-                                    onEdit={() => onOpenModal("editRecord", record.id)}
-                                    onDeleteRecord={onDeleteRecord}
+                                    onEdit={() => setModalState({ visible: true, mode: 'edit', type: 'record', id: record.id })}
+                                    onDeleteRecord={() => setDeleteState({ visible: true, type: 'record', id: record.id })}
                                     recordId={record.id}
                                 />
                             </td>

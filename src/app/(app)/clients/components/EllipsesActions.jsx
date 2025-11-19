@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import DeletePrompt from './DeletePrompt';
-import { on } from 'events';
+import { useModalContext } from "@/app/lib/ModalContextProvider";
 
-export default function EllipsesActions({ onEdit, recordId, onDeleteRecord }) {
+
+export default function EllipsesActions({ onEdit, recordId }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
+
+  const { setDeleteState } = useModalContext();
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -39,7 +41,7 @@ export default function EllipsesActions({ onEdit, recordId, onDeleteRecord }) {
       {isOpen && (
         <div className="actions-menu-dropdown">
           <div className='actions-menu-item' onClick={handleEdit}>Edit</div>
-          <div className='actions-menu-item delete' onClick={() => { onDeleteRecord(recordId); setIsOpen(false); }}>Delete</div>
+          <div className='actions-menu-item delete' onClick={() => { setDeleteState({ visible: true, type: "record", id: recordId }); setIsOpen(false); }}>Delete</div>
         </div>
       )}
     </div>

@@ -5,15 +5,17 @@ import { faXmark, faCalendar, faTrashCan } from '@fortawesome/free-solid-svg-ico
 import { toast } from 'sonner';
 import { createClientRecord, updateClientRecord, getRecordById } from "@/app/lib/api/fakeApi";
 import { formatDate, getCurrentDate } from "@/app/lib/dataUtils";
+import { useModalContext } from "@/app/lib/ModalContextProvider";
 
-export default function WriteRecordModal({ mode, clientId, recordId, onCloseModal, onEarlyClose, onDeleteRecord }) {
+export default function WriteRecordModal({ mode, clientId, recordId, closeModal, attemptCloseModal, onDeleteRecord }) {
     const [record, setRecord] = useState(null);
     const [content, setContent] = useState();
     const [date, setDate] = useState(getCurrentDate());
+    const { deleteState, setDeleteState } = useModalContext();
 
 
     useEffect(() => {
-        if (mode != "editRecord") return;
+        if (mode != "edit") return;
         getRecordById(recordId).then(record_data => {
             setRecord(record_data);
             setContent(record_data.content);
@@ -28,13 +30,12 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
         
         if (await createClientRecord({clientId, content, date})) {
             toast.dismiss(toastId);
-            onCloseModal();
+            closeModal();
             toast.success("Record saved!");    
         }
         else {
             toast.error("Couldn’t save. Try again.");
         }
-        onCloseModal();
     }
 
     async function handleEditSave(e) {
@@ -44,21 +45,20 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
         const new_record = {clientId, recordId, content, date: record.date};
         if (await updateClientRecord(new_record)) {
             toast.dismiss(toastId);
-            onCloseModal();
+            closeModal();
             toast.success("Changes saved!");    
         }
         else {
             toast.error("Couldn’t save. Try again.");
         }
-        onCloseModal();
     }
 
     return (
         <div id="modal-content">
             <div className="top-bar">
-                {(mode === "newRecord" || mode === "editRecord") && (
+                {(mode === "new" || mode === "edit") && (
                     <h1>
-                        {mode === "newRecord" ? "New Record" : "Edit Record"} [
+                        {mode === "new" ? "New Record" : "Edit Record"} [
                         <input
                         className="date-inline-input"
                         type="date"
@@ -69,8 +69,8 @@ export default function WriteRecordModal({ mode, clientId, recordId, onCloseModa
                     </h1>
                 )}
                 <div className="button-group">
-                    <button className="red-button" onClick={() => onDeleteRecord(recordId)}><FontAwesomeIcon icon={faTrashCan} /></button>
-                    <button className="exit-button" onClick={onEarlyClose}><FontAwesomeIcon icon={faXmark} /></button>
+                    <button className="red-button" onClick={() => setDeleteState({ visible: true, type: 'record', id: recordId })}><FontAwesomeIcon icon={faTrashCan} /></button>
+                    <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
             </div>
             <form className="record-form">
