@@ -1,12 +1,17 @@
 import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faPlus} from '@fortawesome/free-solid-svg-icons';
+
+import { useModalContext } from "@/app/lib/ModalContextProvider";
 
 export default function Toolbar(toolbar_props) {
   const [selectedView, setSelectedView] = useState(toolbar_props.view);
   const { label, onNavigate, onView, view } = toolbar_props;
 
+  const { modalMode, setModalMode } = useModalContext();
+  console.log("Toolbar modalMode:", modalMode);
+  
   return (
     <div className="toolbar">
 
@@ -20,6 +25,9 @@ export default function Toolbar(toolbar_props) {
         <button className={`tool-button text${selectedView === 'day' ? ' selected-view' : ''}`} onClick={() => { onView('day'); setSelectedView('day'); }}>Day</button>
         <button className={`tool-button text${selectedView === 'week' ? ' selected-view' : ''}`} onClick={() => { onView('week'); setSelectedView('week'); }}>Week</button>
         <button className={`tool-button text${selectedView === 'month' ? ' selected-view' : ''}`} onClick={() => { onView('month'); setSelectedView('month'); }}>Month</button>
+        <button className="new-event-button" onClick={() => setModalMode("newEvent")}>
+          New Event <FontAwesomeIcon icon={faPlus} />
+        </button>
       </div>
 
     </div>

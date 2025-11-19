@@ -1,14 +1,19 @@
 'use client';
 
+import { useState } from 'react';
+import './calendar.css';    
+import { ModalContextProvider } from '@/app/lib/ModalContextProvider';
 import TherapistCal from '@/app/(app)/calendar/components/TherapistCal';
-import './calendar.css';
+import ModalHost from '@/app/(app)/calendar/components/ModalHost';
+
 
 export default function CalendarPage() {
     return (
-        <div className="calendar-page">
-            <div className="calendar-wrapper">
+        <ModalContextProvider>
+            <div className="calendar-page">
                 <TherapistCal />
+                <ModalHost />
             </div>
-        </div>
+        </ModalContextProvider>
     );
 }

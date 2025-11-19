@@ -405,3 +405,41 @@ export const client_records: ClientRecord[] = [
     content: "Positive update—client maintained study plan and commute routine. Offered monthly reflection template. No flagged language detected; client reported greater control and improved sleep continuity."
   }
 ];
+
+export const calendar_events = [
+  {
+      id: 1,
+      title: "Benjy Diamond",
+      client_id: 4,
+      start: new Date(2025, 10, 17, 10, 0),
+      end: new Date(2025, 10, 17, 11, 0),
+    },
+    {
+      id: 2,
+      title: "Elias Sasson",
+      client_id: 3,
+      start: new Date(2025, 10, 18, 14, 0),
+      end: new Date(2025, 10, 18, 16, 0),
+    },
+    {
+      id: 3,
+      title: "Ayelet Cantor",
+      client_id: 2,
+      start: new Date(2025, 10, 19, 9, 30),
+      end: new Date(2025, 10, 19, 10, 30),
+    },
+    {
+      id: 4,
+      title: "Leeanne Mann",
+      client_id: 1,
+      start: new Date(2025, 10, 20, 13, 0),
+      end: new Date(2025, 10, 20, 14, 0),
+    },
+    {
+      id: 5,
+      title: "Joshua Fleicher",
+      client_id: 5,
+      start: new Date(2025, 10, 21, 11, 0),
+      end: new Date(2025, 10, 21, 12, 0),
+    }
+]

@@ -1,5 +1,5 @@
 import { Client, EmergencyContact, ClientRecord, Flag } from "@/app/lib/types";
-import { emergency_contacts, flags, clients, client_records } from "./data";
+import { emergency_contacts, flags, clients, client_records, calendar_events } from "./data";
 
 export async function authenticateUser(email: string, password: string) {
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -153,4 +153,9 @@ export async function getUserInfo() {
         first_name: "Elie",
         last_name: "Esses"
     }
+}
+
+export async function getCalendarEvents() {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    return calendar_events;
 }
