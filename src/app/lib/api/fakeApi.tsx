@@ -159,3 +159,19 @@ export async function getCalendarEvents() {
     await new Promise((resolve) => setTimeout(resolve, 50));
     return calendar_events;
 }
+
+export async function getClientNames() {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    return clients.map(client => ({
+        id: client.id,
+        first_name: client.first_name ?? "",
+        last_name: client.last_name ?? ""
+    }));
+}
+
+export async function createCalendarEvent(event: any) {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    console.log("Creating calendar event:", event);
+
+    return true;
+}

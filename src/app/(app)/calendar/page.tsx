@@ -2,16 +2,14 @@
 
 import { useState } from 'react';
 import './calendar.css';    
-import TherapistCal from '@/app/(app)/calendar/components/TherapistCal';
+import CalendarContainer from '@/app/(app)/calendar/components/CalendarContainer';
 import ModalHost from "@/app/(app)/components/ModalHost";
 
 
 export default function CalendarPage() {
     return (
-        // <ModalContextProvider>
             <div className="calendar-page">
-                <TherapistCal />
+                <CalendarContainer />
             </div>
-        // </ModalContextProvider>
     );
 }

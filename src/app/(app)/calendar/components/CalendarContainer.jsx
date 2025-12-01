@@ -9,7 +9,7 @@ import { getCalendarEvents } from "@/app/lib/api/fakeApi";
 
 import { localizer } from "@/app/lib/calendarLocalizer";
 
-export default function TherapistCalendar() {
+export default function CalendarContainer() {
   const [events, setEvents] = useState();
 
   useEffect(() => {

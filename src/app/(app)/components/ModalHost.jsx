@@ -46,9 +46,9 @@ export default function ModalHost() {
   }, [attemptCloseModal]);
 
   const ModalContainer = 
-      <div className="modal-overlay" onClick={attemptCloseModal}>
-          <div className="modal" onClick={e => e.stopPropagation()}> 
-              {modalStateString === 'new-event' && <EventFormModal attemptCloseModal={attemptCloseModal} mode={modalState?.mode} />}
+      <div className={"modal-overlay" + (modalState?.type == "event"? " event-modal-overlay" : "")} onClick={attemptCloseModal}>
+          <div className={"modal" + (modalState?.type == "event"? " event-modal" : "")} onClick={e => e.stopPropagation()}> 
+              {modalStateString === 'new-event' && <EventFormModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} />}
               {modalState?.type=== 'client' &&  <ClientFormModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} clientId={modalState?.id} />}
               {modalStateString === 'view-record' &&  <ViewRecordModal closeModal={closeModal} recordId={modalState?.id} />}
               {(modalState?.type === 'record' && writeMode) && <WriteRecordModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} clientId={modalState?.clientId} recordId={modalState?.id} onDeleteRecord={modalState?.onDeleteRecord} />}

@@ -194,12 +194,12 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                         <input type="text" name="focus_areas" placeholder="e.g. anxiety, relationships, trauma" value={form.focus_areas.join(", ")} onChange={(e) => setForm({ ...form, focus_areas: e.target.value.split(", ") })} />
                     </div>
                     <div className="form-group">
-                        <label> Regular Meeting Time: </label>
-                        <div className="meeting-time-inputs">
-                            <div className="meeting-day-wrapper">
+                        <label>Regular Meeting Time: </label>
+                        <div className="double-input">
+                            <div className="dropdown-wrapper">
                                 <select
                                 id="meeting_day"
-                                className="meeting-day-select"
+                                className="dropdown-select half-input"
                                 name="meeting_day"
                                 value={form.meeting_day}
                                 onChange={(e) => setForm({ ...form, meeting_day: e.target.value })}
@@ -213,10 +213,10 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                                 </select>
                                 <FontAwesomeIcon
                                     icon={faChevronDown}
-                                    className="meeting-day-icon"
+                                    className="dropdown-icon"
                                 />
                             </div>
-                            <input type="time" name="meeting_time" value={form.meeting_time} onChange={(e) => setForm({ ...form, meeting_time: e.target.value })} />
+                            <input className="half-input" type="time" name="meeting_time" value={form.meeting_time} onChange={(e) => setForm({ ...form, meeting_time: e.target.value })} />
                         </div>
                     </div>
                     <div className="form-group">

@@ -103,3 +103,30 @@ export function formatTime (timeString: string): string {
     const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
     return `${formattedHour}:${String(minute).padStart(2, '0')} ${period}`;
 }
+
+export function checkEventFormValidity(form: any): boolean | string[] {
+    const empty_fields = [];
+
+    if (!form.title || form.title.trim() === "") {
+        empty_fields.push("title");
+    }
+
+    if (!form.date || form.date.trim() === "") {
+        empty_fields.push("date");
+    }
+
+    if (!form.meeting_start_time || form.meeting_start_time.trim() === "") {
+        empty_fields.push("meeting_start_time");
+    }
+
+    if (!form.meeting_end_time || form.meeting_end_time.trim() === "") {
+        empty_fields.push("meeting_end_time");
+    }
+
+    if (empty_fields.length > 0) {
+        return empty_fields;
+    }
+
+    return true;
+}
+

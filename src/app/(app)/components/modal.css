@@ -1,7 +1,41 @@
+.modal-content {
+  padding-bottom: 2rem;
+}
+
+.modal-content .top-bar {
+  margin-top: 10px;
+}
+
 .modal .form {
   padding: 0 1rem;
   margin-top: 2rem;
 }
+
+#modal-content, #modal-content * {
+  box-sizing: border-box;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0; 
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  backdrop-filter: blur(3px); /*do we like? */
+}
+
+.modal {
+  background: white;
+  padding: 0 1.5rem 0 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 65%;
+  height: auto;
+  max-height: 93%;
+  overflow: scroll;
+}
+
 .modal .top-bar {
   display: flex;
   align-items: center;
@@ -19,59 +53,6 @@
   margin-bottom: 1.25rem;         
 }
 
-.meeting-time-inputs {
-  display: flex;
-  gap: 10px;
-  width: 65%;
-}
-
-.meeting-day-wrapper {
-  position: relative;
-  width: 65%; /* or 100% and let the parent control width */
-}
-
-.meeting-day-select {
-  width: 100%;
-  padding: 10px 40px 10px 12px;  /* extra right padding for the icon */
-  border: 1px solid #cfd3d8;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  outline: none;
-  font-family: inherit;
-  background-color: #fff;
-
-  /* hide native arrow */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.meeting-day-select:focus {
-  border-color: var(--color-primary-light);
-  box-shadow: 0 0 4px rgba(242, 88, 27, 0.3);
-}
-
-.meeting-day-icon {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;   /* clicks still hit the select */
-  font-size: 0.8rem;
-  color: #9ca3af;         /* tweak if you want it darker/lighter */
-}
-
-.modal .half-group {
-  display: flex;
-  justify-content: space-between;  
-  align-items: flex-start;    
-}
-
-.modal .half-group label {
-  padding-right: 20px;
-}
-
-
 .modal .form-group label {
   font-weight: 600;
   font-size: 0.95rem;
@@ -87,10 +68,6 @@
   font-family: inherit; 
 }
 
-.modal .half-group {
-  display: inline-block;
-  width: 48%;
-}
 .modal .form-group textarea {
   width: 65%;
   min-height: 3.5rem; 
@@ -180,4 +157,76 @@
   border-color: var(--color-primary);
   transform: translateY(0);
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-select {
+  padding: 10px 40px 10px 12px; 
+  border: 1px solid #cfd3d8;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit;
+  background-color: #fff;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.dropdown-select:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 4px rgba(242, 88, 27, 0.3);
+}
+
+.dropdown-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;  
+  font-size: 0.8rem;
+  color: #9ca3af;        
+}
+
+.double-input {
+  width: 65%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.double-input .half-input {
+  flex: 1;             
+}
+
+.dropdown-wrapper {
+  position: relative;
+  flex: 1;              
+}
+
+.dropdown-wrapper select {
+  width: 100%;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.with-client {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.with-client-label {
+  color: #666;
+  white-space: var(--color-text-muted);
+}
+
+.mandatory-field {
+  border: 1px solid var(--color-red) !important;
+  background-color: var(--color-light-red);
 }

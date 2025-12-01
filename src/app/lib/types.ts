@@ -63,3 +63,14 @@ export interface UserFormData {
         ai_instructions: string;
         emergency_contact: EmergencyContact;
     }
+
+export interface CalendarEvent {
+  id: number;
+  type: "session" | "other";
+  client_id: number | null;
+  title: string;
+  notes: string;
+  link: string | null;
+  start: Date;
+  end: Date;
+}
