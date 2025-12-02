@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faChevronDown, faLink } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 
 import { getClientNames, createCalendarEvent } from '@/app/lib/api/fakeApi';
 import { checkEventFormValidity } from '@/app/lib/dataUtils';
 
-export default function EventFormModal({attemptCloseModal, closeModal,mode}) {
+export default function EventFormModal({attemptCloseModal, closeModal, mode, eventId}) {
 
     const event_template = {
         title: "",
@@ -83,6 +83,7 @@ export default function EventFormModal({attemptCloseModal, closeModal,mode}) {
         <div id="modal-content">
             <div className="top-bar">
                 <h1>{mode === "edit" ? "Edit Event" : mode === "new" ? "New Event" : ""}</h1>
+                <h2>{eventId}</h2>
                 <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form className="form event-form">
@@ -148,7 +149,19 @@ export default function EventFormModal({attemptCloseModal, closeModal,mode}) {
                     </div>
                     <div className="form-group">
                         <label>Link: </label>
-                        <input id="meeting_link" type="text" name="meeting_link" value={eventData.meeting_link} onChange={e => setEventData({...eventData, meeting_link: e.target.value})} />
+                        <div className="input-with-icon">
+                            <input 
+                                id="meeting_link"
+                                type="text"
+                                name="meeting_link"
+                                value={eventData.meeting_link}
+                                onChange={(e) =>
+                                    setEventData({ ...eventData, meeting_link: e.target.value })
+                                }
+                            />
+                            <FontAwesomeIcon icon={faLink} className="input-icon" />
+                        </div>
+                        
                     </div>                    
 
                     <div className="form-group">
@@ -161,7 +174,7 @@ export default function EventFormModal({attemptCloseModal, closeModal,mode}) {
                             <input id="meeting_start_time" className="meeting-time" type="time" name="meeting_start_time" value={eventData.meeting_start_time} onChange={e => setEventData({...eventData, meeting_start_time: e.target.value})} />
                             <span className="to-label"> to </span>
                             <input id="meeting_end_time" className="meeting-time" type="time" name="meeting_end_time" value={eventData.meeting_end_time} onChange={e => setEventData({...eventData, meeting_end_time: e.target.value})} />
-                        </div>
+                        </div>  
                     </div>
                 <div className="footer">
                     <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault(); handleCreateNewEvent();}}>{mode === "edit" ? "Save Changes" : mode === "new" ? "Create Event" : ""}</button>

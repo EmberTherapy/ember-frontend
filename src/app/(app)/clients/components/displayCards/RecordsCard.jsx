@@ -18,7 +18,7 @@ export default function RecordsCard({ client_id }) {
     }, [client_id]);
 
     function handleCreateRecord() {
-        onOpenModal("newRecord");
+        setModalState({ visible: true, mode: 'new', type: 'record'});
     }
 
     return (

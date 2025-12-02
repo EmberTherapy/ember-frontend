@@ -201,7 +201,7 @@ export const clients: Client[] = [
     flagged: false,
     flag_severity: null,
     invite_status: "accepted",
-    accepted_date: "2025-11-10"
+    accepted_date: "2025-12-1"
   },
   {
     id: 8,
@@ -414,7 +414,7 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Discuss progress on motivation techniques.",
       link: null,
       client_id: 4,
-      start: new Date(2025, 10, 17, 10, 0),
+      start: new Date(2025, 11, 17, 10, 0),
       end: new Date(2025, 10, 17, 11, 0),
     },
     {
@@ -424,8 +424,8 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Bringing wife to session.",
       link: null,
       client_id: 3,
-      start: new Date(2025, 10, 18, 14, 0),
-      end: new Date(2025, 10, 18, 16, 0),
+      start: new Date(2025, 11, 2, 14, 0),
+      end: new Date(2025, 11, 2, 16, 0),
     },
     {
       id: 3,
@@ -434,8 +434,8 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Focus on anger management strategies.",
       link: null,
       client_id: 2,
-      start: new Date(2025, 10, 19, 9, 30),
-      end: new Date(2025, 10, 19, 10, 30),
+      start: new Date(2025, 11, 3, 9, 30),
+      end: new Date(2025, 11, 3, 10, 30),
     },
     {
       id: 4,
@@ -444,8 +444,8 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Discuss academic stress and procrastination.",
       link: null,
       client_id: 1,
-      start: new Date(2025, 10, 20, 13, 0),
-      end: new Date(2025, 10, 20, 14, 0),
+      start: new Date(2025, 11, 1, 13, 0),
+      end: new Date(2025, 11, 1, 14, 0),
     },
     {
       id: 5,
@@ -454,8 +454,8 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Review sleep hygiene techniques.",
       link: "https://videocall.example.com/joshua-fleicher",
       client_id: 5,
-      start: new Date(2025, 10, 21, 11, 0),
-      end: new Date(2025, 10, 21, 12, 0),
+      start: new Date(2025, 11, 4, 11, 0),
+      end: new Date(2025, 11, 4, 12, 0),
     },
     {
       id: 6,
@@ -464,7 +464,7 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Monthly team sync-up.",
       link: "https://videocall.example.com/team-meeting",
       client_id: null,
-      start: new Date(2025, 10, 21, 15, 0),
-      end: new Date(2025, 10, 21, 16, 0),
+      start: new Date(2025, 11, 1, 15, 0),
+      end: new Date(2025, 11, 1, 16, 0),
     }
 ]

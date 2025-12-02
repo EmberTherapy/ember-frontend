@@ -8,9 +8,12 @@ import { useState, useEffect } from "react";
 import { getCalendarEvents } from "@/app/lib/api/fakeApi";
 
 import { localizer } from "@/app/lib/calendarLocalizer";
+import { useModalContext } from "@/app/lib/ModalContextProvider";
 
 export default function CalendarContainer() {
   const [events, setEvents] = useState();
+
+  const { modalState, setModalState } = useModalContext();
 
   useEffect(() => {
     getCalendarEvents().then(events => {
@@ -39,6 +42,9 @@ export default function CalendarContainer() {
         step={30}
         onNavigate={newDate => setDate(newDate)}
         onView={newView => setView(newView)}
+        onSelectEvent={(event) => {
+          setModalState({ visible: true, mode: 'edit', type: 'event', id: event.id });
+        }}
       />
     </div>
   );

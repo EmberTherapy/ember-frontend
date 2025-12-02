@@ -126,9 +126,9 @@ export async function getRecordById(record_id: number) {
     return null;
 }
 
-export async function createClientRecord(text: string, client_id: number) {
+export async function createClientRecord(text: string, client_id: number, date: string) {
     await new Promise((resolve) => setTimeout(resolve, 500));
-    console.log("Creating new client record:", text, client_id);
+    console.log("Creating new client record:", text, date, client_id);
     
     return true;
 }

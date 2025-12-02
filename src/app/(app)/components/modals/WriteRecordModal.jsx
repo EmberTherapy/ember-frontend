@@ -7,7 +7,7 @@ import { createClientRecord, updateClientRecord, getRecordById } from "@/app/lib
 import { formatDate, getCurrentDate } from "@/app/lib/dataUtils";
 import { useModalContext } from "@/app/lib/ModalContextProvider";
 
-export default function WriteRecordModal({ mode, clientId, recordId, closeModal, attemptCloseModal, onDeleteRecord }) {
+export default function WriteRecordModal({ mode, clientId, recordId, closeModal, attemptCloseModal }) {
     const [record, setRecord] = useState(null);
     const [content, setContent] = useState();
     const [date, setDate] = useState(getCurrentDate());
@@ -26,9 +26,8 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
     async function handleNewSave(e) {
         e.preventDefault();
         
-        const toastId = toast.loading("Creating record...");
-        
-        if (await createClientRecord({clientId, content, date})) {
+        const toastId = toast.loading("Creating Record...");
+        if (await createClientRecord(content, clientId, date)) {
             toast.dismiss(toastId);
             closeModal();
             toast.success("Record saved!");    
@@ -83,7 +82,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
                 {record ? record.content : ""}
                 </div>
                 <div className="footer">
-                    <button className="submit-button" type="submit" onClick={mode === "newRecord" ? handleNewSave : handleEditSave}>Save</button>
+                    <button className="submit-button" type="submit" onClick={mode === "new" ? handleNewSave : handleEditSave }>Save</button>
                 </div>
             </form>
         </div>

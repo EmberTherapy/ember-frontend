@@ -230,3 +230,22 @@
   border: 1px solid var(--color-red) !important;
   background-color: var(--color-light-red);
 }
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  width: 65%;  
+  position: relative;       
+}
+
+.input-with-icon input {
+  flex: 1;
+}
+
+.input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
