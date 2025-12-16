@@ -249,3 +249,8 @@
   transform: translateY(-50%);
   pointer-events: none;
 }
+
+.button-group {
+  display: flex;
+  gap: 10px;                        
+}

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { getUserInfo } from '@/app/lib/api/fakeApi';
+import { getUserInfo } from '@/app/lib/api/user';
 
 export default function UserIcon() {
   const [isOpen, setIsOpen] = useState(false);

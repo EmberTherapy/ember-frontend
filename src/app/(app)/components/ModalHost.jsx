@@ -21,6 +21,7 @@ export default function ModalHost() {
   
   function attemptCloseModal() {
     if (writeMode) {
+      console.log("Attempting to close modal in write mode, showing exit prompt.");
       setShowExitPrompt(true);
     } 
     
@@ -45,7 +46,6 @@ export default function ModalHost() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [attemptCloseModal]);
 
-  console.log("Modal State:", modalState);
   const ModalContainer = 
       <div className={"modal-overlay" + (modalState?.type == "event"? " event-modal-overlay" : "")} onClick={attemptCloseModal}>
           <div className={"modal" + (modalState?.type == "event"? " event-modal" : "")} onClick={e => e.stopPropagation()}> 

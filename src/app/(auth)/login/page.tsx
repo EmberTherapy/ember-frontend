@@ -3,7 +3,7 @@
 import { redirect } from "next/dist/server/api-utils";
 import "../auth.css";
 import {useState} from 'react';
-import { authenticateUser } from "@/app/lib/api/fakeApi";
+import { authenticateUser } from "@/app/lib/api/auth";
 import { log } from "console";
 
 export default function LoginPage() {

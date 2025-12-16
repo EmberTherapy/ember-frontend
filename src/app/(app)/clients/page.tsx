@@ -6,7 +6,7 @@ import { PanelSource } from "@/app/lib/types";
 import ClientList from "./components/ClientList";
 import ClientDisplay from "./components/ClientDisplay";
 import RightPanel from "./components/RightPanel";
-import { isFlagged } from "@/app/lib/api/fakeApi";
+import { isFlagged } from "@/app/lib/api/flag";
 
 
 export default function DashboardPage() {

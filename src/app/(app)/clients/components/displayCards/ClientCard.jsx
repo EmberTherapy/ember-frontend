@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag, faPencil  } from '@fortawesome/free-solid-svg-icons';
-import { getClientData } from "@/app/lib/api/fakeApi";
+import { getClientData } from "@/app/lib/api/client";
 import { formatTime } from "@/app/lib/dataUtils";
 
 import { useModalContext } from "@/app/lib/ModalContextProvider";

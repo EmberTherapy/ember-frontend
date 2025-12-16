@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 
-import { createNewClient, updateClient, getClientFormData } from '@/app/lib/api/fakeApi';
+import { createClient, editClient,getClientFormData} from '@/app/lib/api/client';
 import { checkFormValidity } from '@/app/lib/dataUtils';
 
 export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {

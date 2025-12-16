@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getClientRecords } from "@/app/lib/api/fakeApi";
+import { getClientRecords } from "@/app/lib/api/record";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencil, faEllipsis, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 

@@ -3,7 +3,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 
-import { getFlagsPanelData, resolveFlags } from '@/app/lib/api/fakeApi';
+import { getFlagsPanelData, resolveFlags } from '@/app/lib/api/flag';
 
 import { useModalContext } from "@/app/lib/ModalContextProvider";
     

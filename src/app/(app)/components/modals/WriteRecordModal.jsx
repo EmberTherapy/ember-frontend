@@ -1,9 +1,10 @@
 import { use, useEffect, useState } from "react";
-import { getClientRecords } from "@/app/lib/api/fakeApi";
+import { getClientRecords } from "@/app/lib/api/record";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCalendar, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
-import { createClientRecord, updateClientRecord, getRecordById } from "@/app/lib/api/fakeApi";
+
+import { createRecord, editRecord, getRecordById} from "@/app/lib/api/record";
 import { formatDate, getCurrentDate } from "@/app/lib/dataUtils";
 import { useModalContext } from "@/app/lib/ModalContextProvider";
 
@@ -42,7 +43,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
         
         const toastId = toast.loading("Saving changes...");
         const new_record = {clientId, recordId, content, date: record.date};
-        if (await updateClientRecord(new_record)) {
+        if (await editRecord(new_record)) {
             toast.dismiss(toastId);
             closeModal();
             toast.success("Changes saved!");    
@@ -68,7 +69,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
                     </h1>
                 )}
                 <div className="button-group">
-                    <button className="red-button" onClick={() => setDeleteState({ visible: true, type: 'record', id: recordId })}><FontAwesomeIcon icon={faTrashCan} /></button>
+                    {mode == "edit" ? <button className="red-button" onClick={() => setDeleteState({ visible: true, type: 'record', id: recordId })}><FontAwesomeIcon icon={faTrashCan} /></button> : null}
                     <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import {useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faPencil } from '@fortawesome/free-solid-svg-icons';
 
-import { getRecordById } from '@/app/lib/api/fakeApi';
+import { getRecordById } from '@/app/lib/api/record';
 
 import { useModalContext } from "@/app/lib/ModalContextProvider";
 
@@ -39,7 +39,7 @@ export default function ViewRecordModal({ closeModal, recordId }) {
                 <div className='button-group'>
                     {record ?
                         record.type == "session_note" ? (
-                            <button className="edit-button" onClick={() => setModalState({ mode: 'edit', type: 'record', id: record.id })}><FontAwesomeIcon icon={faPencil} /></button>
+                            <button className="edit-button" onClick={() => {setModalState({ mode: 'edit', type: 'record', id: record.id, visible: true }) }}><FontAwesomeIcon icon={faPencil} /></button>
                         ) : null
                      : null
                     }

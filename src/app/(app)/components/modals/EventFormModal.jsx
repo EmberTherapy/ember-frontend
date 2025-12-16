@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faChevronDown, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faChevronDown, faLink, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
-
-import { getClientNames, createCalendarEvent } from '@/app/lib/api/fakeApi';
+import { getClientNames, getClientNameById } from '@/app/lib/api/client';
+import { createEvent, editEvent, getEventById } from '@/app/lib/api/event';
 import { checkEventFormValidity } from '@/app/lib/dataUtils';
+import { useModalContext } from '@/app/lib/ModalContextProvider';
 
 export default function EventFormModal({attemptCloseModal, closeModal, mode, eventId}) {
-
+    const { setDeleteState } = useModalContext();
     const event_template = {
         title: "",
         notes: "",
@@ -21,8 +21,41 @@ export default function EventFormModal({attemptCloseModal, closeModal, mode, eve
     };
 
     const [eventData, setEventData] = useState(event_template);
-
     const [clientList, setClientList] = useState([]);
+
+    function toHHMM(date) {
+        const hh = String(date.getHours()).padStart(2, "0");
+        const mm = String(date.getMinutes()).padStart(2, "0");
+        return `${hh}:${mm}`;
+    }
+
+    function getDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
+    useEffect(() => {
+            if (mode != "edit") return;
+    
+            (async () => {
+                const form_data = await getEventById(eventId);
+                const client_name = await getClientNameById(form_data.client_id);
+                
+                setEventData({
+                    id: eventId,
+                    title: form_data.title || "",
+                    notes: form_data.notes || "",
+                    meeting_type: form_data.meeting_type || "Appointment",
+                    client_name: client_name || "",
+                    meeting_link: form_data.link || "",
+                    date: getDate(form_data.start) || "",
+                    meeting_start_time: toHHMM(form_data.start) || "",
+                    meeting_end_time: toHHMM(form_data.end) || ""
+                });
+            })();
+        }, [mode, eventId]);
 
     function validateForm(form) {
         const validationResult = checkEventFormValidity(form);
@@ -40,7 +73,7 @@ export default function EventFormModal({attemptCloseModal, closeModal, mode, eve
         }
     }
 
-    async function handleCreateNewEvent() {
+    async function handleCreateEvent() {
         const newEvent = {
             title: eventData.title,
             notes: eventData.notes,
@@ -57,10 +90,37 @@ export default function EventFormModal({attemptCloseModal, closeModal, mode, eve
             return;
         }
         const toastId = toast.loading("Creating event...");
-        if (await createCalendarEvent(newEvent)) {
+        if (await createEvent(newEvent)) {
             toast.dismiss(toastId);
             closeModal();
             toast.success("Event created successfully!");    
+        }
+        else {
+            toast.error("Couldn’t save. Try again.");
+        }
+    }
+
+    async function handleEditEvent() {
+        const newEvent = {
+            title: eventData.title,
+            notes: eventData.notes,
+            meeting_type: eventData.meeting_type,
+            client_name: eventData.client_name,
+            meeting_link: eventData.meeting_link,
+            date: eventData.date,
+            meeting_start_time: eventData.meeting_start_time,
+            meeting_end_time: eventData.meeting_end_time
+        };
+
+        if (!validateForm(newEvent)) {
+            toast.error("Please fill in all required fields correctly.");
+            return;
+        }
+        const toastId = toast.loading("Updating event...");
+        if (await editEvent(newEvent)) {
+            toast.dismiss(toastId);
+            closeModal();
+            toast.success("Event updated successfully!");    
         }
         else {
             toast.error("Couldn’t save. Try again.");
@@ -83,8 +143,10 @@ export default function EventFormModal({attemptCloseModal, closeModal, mode, eve
         <div id="modal-content">
             <div className="top-bar">
                 <h1>{mode === "edit" ? "Edit Event" : mode === "new" ? "New Event" : ""}</h1>
-                <h2>{eventId}</h2>
-                <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                <div className="button-group">
+                    {mode == "edit" ? <button className="red-button" onClick={() => setDeleteState({ visible: true, type: 'event', id: eventId })}><FontAwesomeIcon icon={faTrashCan} /></button> : null}
+                    <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                </div>
             </div>
             <form className="form event-form">
                     <div className="form-group">
@@ -177,7 +239,16 @@ export default function EventFormModal({attemptCloseModal, closeModal, mode, eve
                         </div>  
                     </div>
                 <div className="footer">
-                    <button className="submit-button" type="submit" onClick={(e) => {e.preventDefault(); handleCreateNewEvent();}}>{mode === "edit" ? "Save Changes" : mode === "new" ? "Create Event" : ""}</button>
+                    <button
+                    className="submit-button"
+                    type="submit"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        mode === "edit" ? handleEditEvent() : handleCreateEvent();
+                    }}
+                    >
+                    {mode === "edit" ? "Save Changes" : "Create Event"}
+                    </button>
                 </div>
             </form>
         </div>

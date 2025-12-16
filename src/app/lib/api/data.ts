@@ -424,8 +424,8 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Bringing wife to session.",
       link: null,
       client_id: 3,
-      start: new Date(2025, 11, 2, 14, 0),
-      end: new Date(2025, 11, 2, 16, 0),
+      start: new Date(2025, 11, 18, 14, 0),
+      end: new Date(2025, 11, 18, 16, 0),
     },
     {
       id: 3,
@@ -434,8 +434,8 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Focus on anger management strategies.",
       link: null,
       client_id: 2,
-      start: new Date(2025, 11, 3, 9, 30),
-      end: new Date(2025, 11, 3, 10, 30),
+      start: new Date(2025, 11, 16, 9, 30),
+      end: new Date(2025, 11, 16, 10, 30),
     },
     {
       id: 4,
@@ -444,8 +444,8 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Discuss academic stress and procrastination.",
       link: null,
       client_id: 1,
-      start: new Date(2025, 11, 1, 13, 0),
-      end: new Date(2025, 11, 1, 14, 0),
+      start: new Date(2025, 11, 15, 13, 0),
+      end: new Date(2025, 11, 15, 14, 0),
     },
     {
       id: 5,
@@ -454,8 +454,8 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Review sleep hygiene techniques.",
       link: "https://videocall.example.com/joshua-fleicher",
       client_id: 5,
-      start: new Date(2025, 11, 4, 11, 0),
-      end: new Date(2025, 11, 4, 12, 0),
+      start: new Date(2025, 11, 17, 11, 0),
+      end: new Date(2025, 11, 17, 12, 0),
     },
     {
       id: 6,
@@ -464,7 +464,7 @@ export const calendar_events: CalendarEvent[] = [
       notes: "Monthly team sync-up.",
       link: "https://videocall.example.com/team-meeting",
       client_id: null,
-      start: new Date(2025, 11, 1, 15, 0),
-      end: new Date(2025, 11, 1, 16, 0),
+      start: new Date(2025, 11, 15, 15, 0),
+      end: new Date(2025, 11, 15, 16, 0),
     }
 ]
