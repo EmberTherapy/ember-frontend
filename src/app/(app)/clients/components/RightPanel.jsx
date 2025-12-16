@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { getFlagsPanelData, resolveFlags } from '@/app/lib/api/flag';
 
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
     
 export default function RightPanel({ source, onClosePanel, clientId}) {
     const { setModalState } = useModalContext();

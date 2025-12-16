@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag, faPencil  } from '@fortawesome/free-solid-svg-icons';
 import { getClientData } from "@/app/lib/api/client";
-import { formatTime } from "@/app/lib/dataUtils";
+import { formatTime } from "@/app/lib/utils/dateHelpers";
 
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 export default function ClientCard({ client_id, onOpenPanel}) {
     const [client, setClient] = useState(null);

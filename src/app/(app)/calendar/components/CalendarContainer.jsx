@@ -10,8 +10,8 @@ import "../rbc.css";
 
 import { useState, useEffect, useCallback } from "react";
 import { getEvents } from "@/app/lib/api/event";
-import { localizer } from "@/app/lib/calendarLocalizer";
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { localizer } from "@/app/lib/utils/calendarLocalizer";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 const DnDCalendar = withDragAndDrop(Calendar);
 

@@ -2,7 +2,7 @@
 
 import { Toaster } from 'sonner';
 import { useState, useEffect } from 'react';
-import { ModalContextProvider } from '@/app/lib/ModalContextProvider';
+import { ModalContextProvider } from '@/app/lib/contextProvider';
 import Header from './components/Header';
 import ModalHost from "@/app/(app)/components/ModalHost";
 import DeleteHost from "@/app/(app)/components/DeleteHost";

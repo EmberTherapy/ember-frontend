@@ -4,7 +4,7 @@ import { faXmark, faPencil } from '@fortawesome/free-solid-svg-icons';
 
 import { getRecordById } from '@/app/lib/api/record';
 
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 export default function ViewRecordModal({ closeModal, recordId }) {
     const [record, setRecord] = useState(null);

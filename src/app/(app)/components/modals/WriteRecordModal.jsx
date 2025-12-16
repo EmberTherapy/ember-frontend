@@ -5,8 +5,8 @@ import { faXmark, faCalendar, faTrashCan } from '@fortawesome/free-solid-svg-ico
 import { toast } from 'sonner';
 
 import { createRecord, editRecord, getRecordById} from "@/app/lib/api/record";
-import { formatDate, getCurrentDate } from "@/app/lib/dataUtils";
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { formatDate, getCurrentDate } from "@/app/lib/utils/dateHelpers";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 export default function WriteRecordModal({ mode, clientId, recordId, closeModal, attemptCloseModal }) {
     const [record, setRecord] = useState(null);

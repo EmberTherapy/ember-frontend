@@ -1,4 +1,4 @@
-import { calendar_events } from "./data";
+import { calendar_events } from "./db/data";
 
 export async function createEvent(event: any) {
     await new Promise((resolve) => setTimeout(resolve, 500));

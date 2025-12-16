@@ -1,4 +1,4 @@
-import { Client, ClientRecord, EmergencyContact, Flag, CalendarEvent } from "../types";
+import { Client, ClientRecord, EmergencyContact, Flag, CalendarEvent } from "../../types";
 
 export const emergency_contacts: EmergencyContact[] = [
   {

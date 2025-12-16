@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 
 export default function EllipsesActions({ onEdit, recordId }) {

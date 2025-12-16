@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faPlus} from '@fortawesome/free-solid-svg-icons';
 
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 export default function Toolbar(toolbar_props) {
   const [selectedView, setSelectedView] = useState(toolbar_props.view);

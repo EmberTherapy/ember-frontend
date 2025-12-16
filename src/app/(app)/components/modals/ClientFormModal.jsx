@@ -5,7 +5,7 @@ import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
 
 import { createClient, editClient,getClientFormData} from '@/app/lib/api/client';
-import { checkFormValidity } from '@/app/lib/dataUtils';
+import { checkFormValidity } from '@/app/lib/utils/formHelpers';
 
 export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {
     const user_template = {

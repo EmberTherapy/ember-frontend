@@ -1,5 +1,5 @@
 import { ClientRecord } from "@/app/lib/types";
-import { client_records } from "./data";
+import { client_records } from "./db/data";
 
 
 export async function createRecord(text: string, client_id: number, date: string) {

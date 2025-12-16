@@ -8,7 +8,7 @@ import { deleteEvent } from '@/app/lib/api/event';
 import { deleteClient } from '@/app/lib/api/client';
 import { deleteRecord } from '@/app/lib/api/record';
 
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 import { set } from 'date-fns';
 
 export default function DeleteHost( ) {

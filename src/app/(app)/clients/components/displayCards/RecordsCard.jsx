@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencil, faEllipsis, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 import EllipsesActions from "../EllipsesActions";
-import { formatDate } from "@/app/lib/dataUtils";
+import { formatDate } from "@/app/lib/utils/dateHelpers";
 
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 export default function RecordsCard({ client_id }) {
     const { modalState, setModalState } = useModalContext();

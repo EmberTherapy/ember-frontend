@@ -3,7 +3,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { getClientList } from '@/app/lib/api/client';
 
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 export default function ClientList({ selected, onChangeDisplay }) {
   const [clients, setClients] = useState([]);

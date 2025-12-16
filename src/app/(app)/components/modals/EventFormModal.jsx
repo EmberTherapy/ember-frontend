@@ -4,8 +4,8 @@ import { faXmark, faChevronDown, faLink, faTrashCan } from '@fortawesome/free-so
 import { toast } from 'sonner';
 import { getClientNames, getClientNameById } from '@/app/lib/api/client';
 import { createEvent, editEvent, getEventById } from '@/app/lib/api/event';
-import { checkEventFormValidity } from '@/app/lib/dataUtils';
-import { useModalContext } from '@/app/lib/ModalContextProvider';
+import { checkEventFormValidity } from '@/app/lib/utils/formHelpers';
+import { useModalContext } from '@/app/lib/contextProvider';
 
 export default function EventFormModal({attemptCloseModal, closeModal, mode, eventId}) {
     const { setDeleteState } = useModalContext();

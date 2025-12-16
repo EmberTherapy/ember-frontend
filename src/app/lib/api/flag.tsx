@@ -1,4 +1,4 @@
-import { emergency_contacts, flags, clients } from "./data";
+import { emergency_contacts, flags, clients } from "./db/data";
 
 export async function getFlagsPanelData(client_id: number) {
     await new Promise((resolve) => setTimeout(resolve, 50));

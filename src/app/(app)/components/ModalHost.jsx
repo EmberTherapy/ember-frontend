@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import './modal.css'
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 import ExitPrompt from "@/app/(app)/components/ExitPrompt";
 import EventFormModal from './modals/EventFormModal';

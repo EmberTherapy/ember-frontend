@@ -1,5 +1,5 @@
 import { Client, EmergencyContact } from "@/app/lib/types";
-import { emergency_contacts, clients } from "./data";
+import { emergency_contacts, clients } from "./db/data";
 
 export async function createClient(client: Client) {
     await new Promise((resolve) => setTimeout(resolve, 500));

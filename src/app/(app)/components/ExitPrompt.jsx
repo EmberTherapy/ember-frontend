@@ -5,7 +5,7 @@ import ClientFormModal from './modals/ClientFormModal';
 import RecordModal from './modals/ViewRecordModal';
 import { on } from 'events';
 
-import { useModalContext } from "@/app/lib/ModalContextProvider";
+import { useModalContext } from "@/app/lib/contextProvider";
 
 export default function ExitPrompt( {closeModal, continueEditing} ) {
 
