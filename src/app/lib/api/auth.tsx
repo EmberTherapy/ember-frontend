@@ -23,8 +23,8 @@ export async function authenticateUser(email: string, password: string) {
         throw new Error(data.message ?? "Login failed");
     }
 
-    console.log(data.user + "");
-    console.log("RAW RESPONSE:", data + "");
+    // console.log(data.user + "");
+    // console.log("RAW RESPONSE:", data + "");
     return true;
 }
 
