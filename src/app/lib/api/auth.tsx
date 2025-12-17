@@ -15,15 +15,14 @@ export async function createUser(email: string, password: string, firstName: str
         last_name: lastName
     };
 
-    fetch(base_api_url + "api/create_user", {
+    const response = await fetch(base_api_url + "api/create_user", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(jsonBody),
     })
-    .then(response => response.json())
-    .then(data => {
+    response.json().then(data => {
         if (data.status == "success") {
             console.log('Success:', data);
             return { status: true };
