@@ -1,8 +1,17 @@
 const base_api_url = "http://localhost:5000/";
 
-export async function authenticateUser(email: string, password: string) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    return { status: true, token: "fake-jwt-token" };
+// returns boolean`
+export async function authenticateUser(email: string, password: string): Promise<boolean> {
+  const response = await fetch(base_api_url + "api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, passkey: password }),
+  });
+
+  if (!response.ok) return false;
+
+  const data = await response.json();
+  return data.status === "success";
 }
 
 export async function createUser(email: string, password: string, firstName: string, lastName: string) {
