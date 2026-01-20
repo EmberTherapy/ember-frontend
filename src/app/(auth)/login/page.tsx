@@ -17,14 +17,11 @@ export default function LoginPage() {
 
     async function handleLogin() {
         const auth_res = await authenticateUser(email, password);
-        setLoginStatus(auth_res.status);
+        setLoginStatus(auth_res);
 
-        if (auth_res.status) {
-            console.log("Login successful, token:", auth_res.token);
+        if (auth_res === true) {
             window.location.href = "/calendar";
         }
-
-        return;
     }
 
     return (

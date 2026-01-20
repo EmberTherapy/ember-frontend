@@ -19,8 +19,6 @@ export default function SignupPage() {
     const successMessage = <p className="success">Successful. Redirecting...</p>
     const failMessage = <p className="fail">{errorMessage}</p>;
 
-    let [loginStatus, setLoginStatus] = useState<boolean | null>(null); // null, true, false
-
     function checkForm(): boolean {
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match.");
@@ -46,11 +44,10 @@ export default function SignupPage() {
 
     async function handleSignup() {
         if (!checkForm()) {
-            const apiStatus = true;
-            setLoginStatus(apiStatus);
+            setApiStatus(false);
         }
         else {
-            const apiStatus = await createUser(email, password, firstName, lastName);
+            const response = await createUser(email, password, firstName, lastName);
     
             if (apiStatus) {
                 window.location.href = "/verify";
