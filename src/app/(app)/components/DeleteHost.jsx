@@ -16,7 +16,6 @@ export default function DeleteHost( ) {
     const { modalState, setModalState } = useModalContext();
 
     const ignoreFirstEscapeUp = useRef(true); 
-    console.log("DeleteHost render, deleteState:", deleteState);
 
     async function handleDeleteRecord(id) {
         const toastId = toast.loading("Deleting client record...");

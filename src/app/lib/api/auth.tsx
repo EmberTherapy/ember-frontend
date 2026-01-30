@@ -5,18 +5,32 @@ export async function authenticateUser(email: string, password: string): Promise
   const response = await fetch(base_api_url + "api/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify({ email, passkey: password }),
-  });
+    });
 
   if (!response.ok) return false;
 
   const data = await response.json();
+  console.log("Authentication response:", data);
   return data.status === "success";
 }
 
+export async function validateSession() {
+    const response = await fetch(base_api_url + "api/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", 
+        body: JSON.stringify({}),
+    });
+
+    if (!response.ok) return false;
+    
+    const data = await response.json();
+    return data.status === "success";
+}
+
 export async function createUser(email: string, password: string, firstName: string, lastName: string) {
-    // await new Promise((resolve) => setTimeout(resolve, 500));
-    // return { status: true };
     const jsonBody = {
         email: email,
         passkey: password,
@@ -33,16 +47,13 @@ export async function createUser(email: string, password: string, firstName: str
     });
     response.json().then(data => {
         if (data.status == "success") {
-            console.log('Success:', data);
             return true;
 
         } else {
-            console.log('Failed:', data);
             return false;
         }
     })
     .catch((error) => {
-        console.error('Error:', error);
         return false;
     });
 }

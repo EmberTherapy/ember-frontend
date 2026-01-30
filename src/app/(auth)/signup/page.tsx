@@ -20,6 +20,11 @@ export default function SignupPage() {
     const failMessage = <p className="fail">{errorMessage}</p>;
 
     function checkForm(): boolean {
+        if (firstName.trim() === "" || lastName.trim() === "" || email.trim() === "" || password.trim() === "") {
+
+            setErrorMessage("All fields are required.");
+            return false;
+        }
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match.");
             return false;
@@ -30,11 +35,6 @@ export default function SignupPage() {
         }
         if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
             setErrorMessage("Password must contain both letters and numbers.");
-            return false;
-        }
-        if (firstName.trim() === "" || lastName.trim() === "" || email.trim() === "" || password.trim() === "") {
-
-            setErrorMessage("All fields are required.");
             return false;
         }
 
@@ -48,7 +48,8 @@ export default function SignupPage() {
         }
         else {
             const response = await createUser(email, password, firstName, lastName);
-    
+            console.log("Signup attempt result:", response);
+            
             if (apiStatus) {
                 window.location.href = "/verify";
             }
@@ -92,7 +93,7 @@ export default function SignupPage() {
                 <p className="footer">
                 Already have an account? <a href="/login">Log in</a>
                 </p>
-                {failMessage}
+                {/* {failMessage} */}
                 {apiStatus === true ? successMessage : apiStatus === false ? failMessage : null}
         </div>
     );
