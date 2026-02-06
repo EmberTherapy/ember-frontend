@@ -103,7 +103,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             return;
         }
         const toastId = toast.loading("Creating client...");
-        if (await createNewClient(newUser)) {
+        if (await createClient(newUser)) {
             toast.dismiss(toastId);
             closeModal();
             toast.success("Client created successfully!");    

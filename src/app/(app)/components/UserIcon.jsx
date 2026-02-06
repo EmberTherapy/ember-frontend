@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from "next/navigation";
 import { getUserInfo } from '@/app/lib/api/user';
+import { logoutUser } from '@/app/lib/api/auth';
 
 export default function UserIcon() {
+  const router = useRouter();
+  
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -48,7 +52,7 @@ export default function UserIcon() {
         <div className="user-menu-dropdown">
           <div className='user-menu-name'>{userName}</div>
           <a className='user-menu-item' href="/settings">User Settings</a>
-          <a className='user-menu-item logout'>Log Out</a>
+          <a className='user-menu-item logout' onClick={() => { logoutUser(); router.replace("/login"); }}>Log Out</a>
         </div>
       )}
     </div>

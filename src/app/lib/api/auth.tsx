@@ -16,6 +16,21 @@ export async function authenticateUser(email: string, password: string): Promise
   return data.status === "success";
 }
 
+export async function logoutUser() {
+      const response = await fetch(base_api_url + "api/logout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({ }),
+    });
+
+  if (!response.ok) return false;
+
+  const data = await response.json();
+  console.log("Logout response:", data);
+  return data.status === "success";
+}
+
 export async function validateSession() {
     const response = await fetch(base_api_url + "api/validate", {
         method: "POST",
