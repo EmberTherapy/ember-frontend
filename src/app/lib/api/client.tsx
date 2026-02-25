@@ -1,5 +1,6 @@
 import { Client, EmergencyContact } from "@/app/lib/types";
 import { emergency_contacts, clients } from "./db/data";
+import { createResponse } from "@/app/lib/utils/apiHelpers";
 
 export async function createClient(client: Client) {
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -23,64 +24,36 @@ export async function deleteClient(client_id: number) {
 }
 
 export async function getClientList() {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    return [...clients]
-        .sort((a, b) => {
-        if (a.flagged && !b.flagged) return -1;
-        if (!a.flagged && b.flagged) return 1;
-
-        if (a.flagged && b.flagged) {
-            if ((a.flag_severity ?? 0) > (b.flag_severity ?? 0)) return -1;
-            if ((a.flag_severity ?? 0) < (b.flag_severity ?? 0)) return 1;
-        }
-        const lastA = a.last_name.toLowerCase();
-        const lastB = b.last_name.toLowerCase();
-        return lastA.localeCompare(lastB);
-    })
-    .map(client => ({
-        id: client.id,
-        first_name: client.first_name ?? "",
-        last_name: client.last_name ?? "",
-        flagged: client.flagged ?? false,
-        flag_severity: client.flag_severity ?? null
-        }));
+    const data = await createResponse("get_clients", "GET");
+    return data.clients;
 }
 
 export async function getClientData(client_id: number) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    for (let client of clients) {
-        if (client.id === client_id) {
-            return client;
-        }
+    const body = {
+        "client_id": client_id
     }
-    return null;
+    const data = await createResponse('get_client_data', "POST", body);
+    return data.client_data;
 }
 
 export async function getClientFormData(client_id: number) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    const client = await getClientData(client_id);
-    const emergency_contact = emergency_contacts.find(ec => ec.client_id === client_id) || null;
-
-    return {
-        client: client,
-        emergency_contact: emergency_contact
-    };
+    const body = {
+        "client_id": client_id
+    }
+    const data = await createResponse('get_client_form_data', "POST", body);
+    console.log("Received form data:", data);
+    return data.form_data;
 }
 
 export async function getClientNames() {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    return clients.map(client => ({
-        id: client.id,
-        first_name: client.first_name ?? "",
-        last_name: client.last_name ?? ""
-    }));
+    const data = await createResponse('get_client_names', "GET", {});
+    return data.client_names;
 }
 
 export async function getClientNameById(client_id: number) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    const client = clients.find(c => c.id === client_id);
-    if (client) {
-        return `${client.first_name ?? ""} ${client.last_name ?? ""}`.trim();
+    const body = {
+        "client_id": client_id
     }
-    return "Unknown Client";
+    const data = await createResponse('get_client_name_by_id', "POST", body);
+    return data.full_name;
 }

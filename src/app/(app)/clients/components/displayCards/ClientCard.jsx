@@ -13,23 +13,26 @@ export default function ClientCard({ client_id, onOpenPanel}) {
     const { modalState, setModalState } = useModalContext();
 
     useEffect(() => {
-        getClientData(client_id).then(setClient);
+        getClientData(client_id).then(client => {
+            setClient(client);
+        }).catch(err => console.error("Error fetching client data:", err));
     }, [client_id]);
 
     useEffect(() => {
         if (!client) return;
 
-        if (client.invite_status === "pending") {
+        if (client.invite_status === 1) {
             setInviteStatus("pending");
             return;
         }
 
-        if (client.invite_status === "accepted") {
-            const accepted = new Date(client.accepted_date);
-            const now = new Date();
+        if (client.invite_status === 2) {
+            // const accepted = new Date(client.accepted_date);
+            // const now = new Date();
 
-            const diffInMs = now - accepted;
-            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+            // const diffInMs = now - accepted;
+            // const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+            // const diffInDays = 0; // Placeholder until backend provides accepted_date
 
             if (diffInDays <= 14) {
                 setInviteStatus("accepted");
@@ -63,14 +66,14 @@ export default function ClientCard({ client_id, onOpenPanel}) {
                     <button className="red-button" onClick={() => onOpenPanel("flag")}>
                         <FontAwesomeIcon icon={faFlag} />
                     </button>}
-                    <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'client', id: client.id })}>
+                    <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'client', id: client.client_id })}>
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                 </div>
             </div>
             <div className="client-card-row">
                 <h3 className="client-card-label">Next Meeting:</h3>
-                <p className="client-card-content">{client.meeting_day} {formatTime(client.meeting_time)}</p>
+                <p className="client-card-content">{client.meeting_day} {client.meeting_time ? formatTime(client.meeting_time) : "No time set."}</p>
             </div>
             <div className="client-card-row client-card-bottom-row">
                 <h3 className="client-card-label">Focus Areas:</h3>

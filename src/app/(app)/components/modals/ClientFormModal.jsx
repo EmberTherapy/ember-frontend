@@ -55,10 +55,10 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 meeting_time: form_data.client?.meeting_time ?? "",
                 ai_instructions: form_data.client?.ai_instructions ?? "",
                 emergency_contact: {
-                    name: form_data.emergency_contact?.name ?? "",
-                    relationship: form_data.emergency_contact?.relationship ?? "",
-                    email: form_data.emergency_contact?.email ?? "",
-                    phone: form_data.emergency_contact?.phone ?? "",
+                    name: form_data.ecs?.first_name + " " + form_data.ecs?.last_name ?? "",
+                    relationship: form_data.ecs?.relationship ?? "",
+                    email: form_data.ecs?.email ?? "",
+                    phone: form_data.ecs?.phone ?? "",
                 },
             });
         })();

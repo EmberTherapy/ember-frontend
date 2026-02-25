@@ -12,9 +12,12 @@ export default function RecordsCard({ client_id }) {
     const { modalState, setModalState } = useModalContext();
     const { deleteState, setDeleteState } = useModalContext();
 
-    const [records, setRecords] = useState([]);
+    const [records, setRecords] = useState();
+
     useEffect(() => {
-      getClientRecords(client_id).then(setRecords);
+        getClientRecords(client_id).then(records => {
+            setRecords(records);
+        }).catch(err => console.error("Error fetching client records: ", err));
     }, [client_id]);
 
     function handleCreateRecord() {
@@ -40,11 +43,11 @@ export default function RecordsCard({ client_id }) {
                         <th></th>
                         <th></th>
                     </tr>
-                    {records.length > 0 ? records.map((record, index) => (
+                    {records && records.length > 0 ? records.map((record, index) => (
                         <tr className={`record-row ${record.flag_severity == 2 ? "flagged_high" : (record.flag_severity == 1 ? "flagged_medium" : "")}`} key={index} onClick={() => { setModalState({ visible: true, mode: 'view', type: 'record', id: record.id }); }}>
-                            <td>{formatDate(record.date)}</td>
-                            <td>{record.type == "chat_summary" ? "Chat Summary" : "Session Note"}</td>
-                            <td>{record.content.length > 100 ? record.content.substring(0, 100) + "..." : record.content}</td>
+                            <td>{formatDate(record.created_at)}</td>
+                            <td>{record.record_type_id == 1 ? "Chat Summary" : "Session Note"}</td>
+                            <td>{record.content.content.length > 100 ? record.content.content.substring(0, 100) + "..." : record.content.content}</td>
                             <td onClick={(e) => e.stopPropagation()}>
                                 <EllipsesActions
                                     onEdit={() => setModalState({ visible: true, mode: 'edit', type: 'record', id: record.id })}

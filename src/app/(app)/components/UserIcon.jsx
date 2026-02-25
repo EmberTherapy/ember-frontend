@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from "next/navigation";
-import { getUserInfo } from '@/app/lib/api/user';
+import { getUserInitials, getUserFullName} from '@/app/lib/api/user';
 import { logoutUser } from '@/app/lib/api/auth';
 
 export default function UserIcon() {
@@ -12,14 +12,12 @@ export default function UserIcon() {
   const [userInitials, setUserInitials] = useState(null);
   const [userName, setUserName] = useState(null);
 
-  function getUserInitials(firstName, lastName) {
-      return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-  }
-
   useEffect(() => {
-      getUserInfo().then(userInfo => {
-          setUserInitials(getUserInitials(userInfo.first_name, userInfo.last_name));
-          setUserName(`${userInfo.first_name} ${userInfo.last_name}`);
+      getUserInitials().then(initials => {
+          setUserInitials(initials);
+      }).catch(console.error);
+      getUserFullName().then(name => {
+          setUserName(name);
       }).catch(console.error);
   }, []);
 
@@ -50,6 +48,7 @@ export default function UserIcon() {
 
       {isOpen && (
         <div className="user-menu-dropdown">
+          {/* <div className='user-menu-name'>{userName}</div> */}
           <div className='user-menu-name'>{userName}</div>
           <a className='user-menu-item' href="/settings">User Settings</a>
           <a className='user-menu-item logout' onClick={() => { logoutUser(); router.replace("/login"); }}>Log Out</a>
