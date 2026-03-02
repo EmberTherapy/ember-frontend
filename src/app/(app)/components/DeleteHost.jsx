@@ -1,25 +1,24 @@
-import { useEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect, useRef } from 'react';
+import { useRouter } from "next/navigation";
 import { on } from 'events';
 import { toast } from 'sonner';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useContextProvider } from "@/app/lib/contextProvider";
 import { deleteEvent } from '@/app/lib/api/event';
 import { deleteClient } from '@/app/lib/api/client';
 import { deleteRecord } from '@/app/lib/api/record';
 
-import { useModalContext } from "@/app/lib/contextProvider";
-import { set } from 'date-fns';
-
 export default function DeleteHost( ) {
-    const { deleteState, setDeleteState } = useModalContext();
-    const { modalState, setModalState } = useModalContext();
+    const router = useRouter();
+    const { deleteState, setDeleteState } = useContextProvider();
+    const { modalState, setModalState } = useContextProvider();
+    const { setRefreshKey } = useContextProvider();
 
     const ignoreFirstEscapeUp = useRef(true); 
 
-    async function handleDeleteRecord(id) {
+    async function handleDeleteRecord() {
         const toastId = toast.loading("Deleting client record...");
-        
         const delete_status = await deleteRecord(deleteState.id);
 
         if (delete_status) {
@@ -27,6 +26,7 @@ export default function DeleteHost( ) {
             toast.success("Client record deleted successfully.");
             setDeleteState({ visible: false, type: null, id: null });
             setModalState(null);
+            setRefreshKey(prev => prev + 1);
         }
     }
 
@@ -39,7 +39,7 @@ export default function DeleteHost( ) {
             toast.dismiss(toastId);
             toast.success("Client deleted successfully.");
             setDeleteState({ visible: false, type: null, id: null });
-            setModalState({ mode: null, type: null, id: null });
+            setModalState({ mode: null, type: null, client_id: null });
         }
     }
 
@@ -84,7 +84,7 @@ export default function DeleteHost( ) {
                     <div className = "button-group">
                         <button className="prompt-btn edit" onClick={() => setDeleteState({ visible: false, type: null, id: null })}>Cancel</button>
                         <button className="prompt-btn exit" onClick={
-                            deleteState.type == "record" ? () => handleDeleteRecord(deleteState.id) : 
+                            deleteState.type == "record" ? () => handleDeleteRecord() : 
                             deleteState.type == "client" ? () => handleDeleteClient(deleteState.id) : 
                             deleteState.type == "event" ? () => handleDeleteEvent(deleteState.id) : undefined}>Delete</button>
                     </div>

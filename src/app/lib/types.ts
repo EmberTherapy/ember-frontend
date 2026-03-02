@@ -1,22 +1,24 @@
 export type PanelSource = "flag" | null;
 export type ModalMode = "editClient" | "newClient" | "viewRecord" | "newRecord" | "editRecord" | null;
 
-export interface Client {
-  id: number;
+
+export interface ClientForm {
   first_name: string;
   last_name: string;
+  email: string;
   date_of_birth: string;
   phone: string;
-  email: string;
   focus_areas: string[];
   meeting_day: string;
   meeting_time: string;
   ai_instructions: string;
-  flagged: boolean;
-  invite_status: "invited" | "pending" | "accepted" | "none";
-  accepted_date: string | null;
-  flag_severity: 1 | 2 | null;
-  emergency_contact?: EmergencyContact;
+  emergency_contacts: {
+    first_name: string;
+    last_name: string;
+    relationship: string;
+    email: string;
+    phone: string;
+  }[];
 }
 
 export interface ClientRecord {

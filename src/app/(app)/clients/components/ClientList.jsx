@@ -1,20 +1,22 @@
+import { useState, useEffect } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
-import { getClientList } from '@/app/lib/api/client';
 
-import { useModalContext } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/lib/contextProvider";
+
+import { getClientList } from '@/app/lib/api/client';
 
 export default function ClientList({ selected, onChangeDisplay }) {
   const [clients, setClients] = useState([]);
 
-  const { modalState, setModalState } = useModalContext();
+  const { modalState, setModalState, refreshKey } = useContextProvider();
   
   useEffect(() => {
     getClientList().then(clients => {
       setClients(clients);
     }).catch(console.error);
-  }, []);
+  }, [refreshKey]);
   
   return (
     <div className="left-panel">

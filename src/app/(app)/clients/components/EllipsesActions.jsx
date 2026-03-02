@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { useModalContext } from "@/app/lib/contextProvider";
+
+import { useContextProvider } from "@/app/lib/contextProvider";
 
 
 export default function EllipsesActions({ onEdit, recordId }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const { setDeleteState } = useModalContext();
+  const { setDeleteState } = useContextProvider();
 
   useEffect(() => {
     function handleClickOutside(e) {

@@ -1,4 +1,4 @@
-import { UserFormData } from "@/app/lib/types";
+import { ClientForm } from "@/app/lib/types";
 
 export function checkEmailValidity(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,57 +21,54 @@ export function checkFocusAreasValidity(input: string): boolean {
   return list.length > 0;
 }
 
-export function checkRequiredFields(form: UserFormData): true | string[] {
+export function isEmpty(value: any): boolean {
+    return (
+        value === undefined ||
+        value === null ||
+        value === "" ||
+        (Array.isArray(value) && value.length === 0)
+    );
+}
+export function checkRequiredFields(form: ClientForm): true | string[] {
+    console.log("Checking required fields for form:", form);
     const missingFields: string[] = [];
 
-    const mandatoryFields: (keyof UserFormData)[] = [
-        'first_name',
-        'last_name',
-        'phone',
-        'email',
+    const mandatoryFields: (keyof ClientForm)[] = [
+        "first_name",
+        "last_name",
+        "phone",
+        "email",
     ];
 
     for (const field of mandatoryFields) {
         const value = form[field];
 
-        const isEmpty =
-            value === undefined ||
-            value === null ||
-            value === '' ||
-            (Array.isArray(value) && value.length === 0);
-
-        if (isEmpty) {
+        if (isEmpty(value)) {
             missingFields.push(field as string);
         }
     }
 
-    const emergencyFields: (keyof UserFormData['emergency_contact'])[] = [
-        'name',
-        'phone',
-    ];
+    // check emergency contact object for required fields if it exist
+    // console.log('Checking emergency contacts:', form.emergency_contacts);
+    form.emergency_contacts.forEach((ec, index) => {
+        console.log('Checking emergency contact ' + ec);
+        if (isEmpty(ec.first_name)) missingFields.push(`ec_${index}_first_name`);
+        if (isEmpty(ec.last_name))  missingFields.push(`ec_${index}_last_name`);
+        if (isEmpty(ec.phone))      missingFields.push(`ec_${index}_phone`);
+    });
 
-    for (const field of emergencyFields) {
-        const value = form.emergency_contact[field];
-
-        const isEmpty =
-            value === undefined ||
-            value === null ||
-            value === '';
-
-        if (isEmpty) {
-            missingFields.push(
-                "ec_"+field as string);
-        }
-    }
-    if (missingFields.length > 0) {
-        return missingFields;
-    }
-    return true;
+    return missingFields.length > 0 ? missingFields : true;
 }
 
-export function checkFormValidity(form: UserFormData): boolean | string[] {
-    if (checkRequiredFields(form) != true || !checkEmailValidity(form.email) || !checkPhoneNumberValidity(form.phone)) {
+export function checkFormValidity(form: ClientForm): boolean | string[] | string {
+    if (checkRequiredFields(form) != true ) {
         return checkRequiredFields(form);
+    }
+    else if (!checkEmailValidity(form.email)) {
+        return "bad email";
+    }
+    else if (!checkPhoneNumberValidity(form.phone)) {
+        return "bad phone";
     }
     else {
         console.log("Form validation passed");

@@ -1,11 +1,10 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
-
+import { toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import { toast } from 'sonner';
-
-import { createClient, editClient,getClientFormData} from '@/app/lib/api/client';
 import { checkFormValidity } from '@/app/lib/utils/formHelpers';
+import { createClient, editClient, getClientFormData } from '@/app/lib/api/client';
+import { emergency_contacts } from '@/app/lib/api/db/data';
 
 export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {
     const user_template = {
@@ -18,15 +17,19 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
         meeting_day: "",
         meeting_time: "",
         ai_instructions: "",
-        emergency_contact: { 
-            name: "", 
-            relationship: "", 
-            email: "", 
+        emergency_contacts: [ 
+            {
+                first_name: "", 
+                last_name: "", 
+                relationship: "", 
+                email: "", 
             phone: "" 
-        },
+        }
+    ]
     };
-
     const [form, setForm] = useState(user_template);
+
+    const [ecCount, setEcCount] = useState(1); // start with 1 emergency contact form
 
     const daysOfWeek = [
         'Monday',
@@ -54,18 +57,30 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 meeting_day: form_data.client?.meeting_day ?? "",
                 meeting_time: form_data.client?.meeting_time ?? "",
                 ai_instructions: form_data.client?.ai_instructions ?? "",
-                emergency_contact: {
-                    name: form_data.ecs?.first_name + " " + form_data.ecs?.last_name ?? "",
-                    relationship: form_data.ecs?.relationship ?? "",
-                    email: form_data.ecs?.email ?? "",
-                    phone: form_data.ecs?.phone ?? "",
-                },
+                emergency_contacts: [
+                    {
+                        first_name: form_data.ecs?.first_name ?? "",
+                        last_name: form_data.ecs?.last_name ?? "",
+                        relationship: form_data.ecs?.relationship ?? "",
+                        email: form_data.ecs?.email ?? "",
+                        phone: form_data.ecs?.phone ?? "",
+                    }
+                ],
             });
         })();
     }, [mode, clientId]);
 
+    function splitFocusAreas(focus_areas) {
+        if (focus_areas == null || focus_areas == undefined || focus_areas == "") return [];
+        return focus_areas
+            .split(",")
+            .map(s => s.trim())
+            .filter(Boolean);
+    }
+
     function validateForm(form) {
         const validationResult = checkFormValidity(form);
+        console.log("Validation result:", validationResult);
         if (validationResult !== true) {
             for (const field of validationResult) {
                 const el = document.getElementById(field);
@@ -74,7 +89,6 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 }
             }
         }
-
         else {
             return true;
         }
@@ -87,16 +101,17 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             email: form.email,
             date_of_birth: form.date_of_birth,
             phone: form.phone,
-            focus_areas: form.focus_areas,
+            focus_areas: splitFocusAreas(form.focus_areas),
             meeting_day: form.meeting_day,
             meeting_time: form.meeting_time,
             ai_instructions: form.ai_instructions,
-            emergency_contact: {
-                name: form.emergency_contact.name,
-                relationship: form.emergency_contact.relationship,
-                email: form.emergency_contact.email,
-                phone: form.emergency_contact.phone
-            }
+            emergency_contacts: [{
+                first_name: form.emergency_contacts.first_name,
+                last_name: form.emergency_contacts.last_name,
+                relationship: form.emergency_contacts.relationship,
+                email: form.emergency_contacts.email,
+                phone: form.emergency_contacts.phone
+            }]
         };
         if (!validateForm(newUser)) {
             toast.error("Please fill in all required fields correctly.");
@@ -120,16 +135,17 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             date_of_birth: form.date_of_birth,
             phone: form.phone,
             email: form.email,
-            focus_areas: form.focus_areas,
+            focus_areas: splitFocusAreas(form.focus_areas),
             meeting_day: form.meeting_day,
             meeting_time: form.meeting_time,
             ai_instructions: form.ai_instructions,
-            emergency_contact: {
-                name: form.emergency_contact.name,
-                relationship: form.emergency_contact.relationship,
-                email: form.emergency_contact.email,
-                phone: form.emergency_contact.phone
-            }
+            emergency_contacts: [{
+                first_name: form.emergency_contacts.first_name,
+                last_name: form.emergency_contacts.last_name,
+                relationship: form.emergency_contacts.relationship,
+                email: form.emergency_contacts.email,
+                phone: form.emergency_contacts.phone
+            }]
         };
         if (!validateForm(updatedUser)) {
             toast.error("Please fill in all required fields correctly.");
@@ -154,7 +170,6 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
         el.style.height = "auto";                      // allow shrink
         el.style.height = `${el.scrollHeight}px`;      // fit content
     }
-
     useLayoutEffect(() => {
         resizeTextarea();
     }, [form.ai_instructions]);
@@ -191,7 +206,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                     </div>
                     <div className="form-group">
                         <label>Focus Areas: </label>
-                        <input type="text" name="focus_areas" placeholder="e.g. anxiety, relationships, trauma" value={form.focus_areas.join(", ")} onChange={(e) => setForm({ ...form, focus_areas: e.target.value.split(", ") })} />
+                        <input type="text" name="focus_areas" placeholder="e.g. anxiety, relationships, trauma" value={form.focus_areas} onChange={(e) => setForm({ ...form, focus_areas: e.target.value })} />
                     </div>
                     <div className="form-group">
                         <label>Regular Meeting Time: </label>
@@ -238,24 +253,31 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 </div>
                 <div className="form-section-emergency">
                     <h2>Emergency Contact</h2>
-                    <div className="grid">
-                        <div className="form-group">
-                            <label>Name: </label>
-                            <input id = "ec_name" type="text" name="emergency_contact_name" value={form.emergency_contact.name} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, name: e.target.value } })} />
+                    {Array.from({ length: ecCount }, (_, i) => (
+                        <div key={i} className="grid">
+                                <div className="form-group">
+                                    <label>First Name: </label>
+                                    <input type="text" id = {"ec_" + i + "_first_name"} name="emergency_contact_name" value={form.emergency_contacts[i]?.first_name ?? ""} onChange={(e) => setForm({ ...form, emergency_contacts: form.emergency_contacts.map((ec, idx) => idx === i ? { ...ec, first_name: e.target.value } : ec) })} />
+                                </div>
+                            <div className="form-group">
+                                <label>Last Name: </label>
+                                <input type="text" id = {"ec_" + i + "_last_name"} name="emergency_contact_last_name" value={form.emergency_contacts[i]?.last_name ?? ""} onChange={(e) => setForm({ ...form, emergency_contacts: form.emergency_contacts.map((ec, idx) => idx === i ? { ...ec, last_name: e.target.value } : ec) })} />
+                            </div>
+                            <div className="form-group">
+                                <label>Relationship: </label>
+                                <input type="text" id = {"ec_" + i + "_relationship"} name="emergency_contact_relationship" value={form.emergency_contacts[i]?.relationship ?? ""} onChange={(e) => setForm({ ...form, emergency_contacts: form.emergency_contacts.map((ec, idx) => idx === i ? { ...ec, relationship: e.target.value } : ec) })} />
+                            </div>
+                            <div className="form-group">
+                                <label>Email: </label>
+                                <input type="text" id = {"ec_" + i + "_email"} name="emergency_contact_email" value={form.emergency_contacts[i]?.email ?? ""} onChange={(e) => setForm({ ...form, emergency_contacts: form.emergency_contacts.map((ec, idx) => idx === i ? { ...ec, email: e.target.value } : ec) })} />
+                            </div>
+                            <div className="form-group">
+                                <label>Phone Number: </label>
+                                <input id = {"ec_" + i + "_phone"} type="text" name="emergency_contact_phone" value={form.emergency_contacts[i]?.phone ?? ""} onChange={(e) => setForm({ ...form, emergency_contacts: form.emergency_contacts.map((ec, idx) => idx === i ? { ...ec, phone: e.target.value } : ec) })} />
+                            </div>
+
                         </div>
-                        <div className="form-group">
-                            <label>Relationship: </label>
-                            <input type="text" name="emergency_contact_relationship" value={form.emergency_contact.relationship} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, relationship: e.target.value } })} />
-                        </div>
-                        <div className="form-group">
-                            <label>Email: </label>
-                            <input type="text" name="emergency_contact_email" value={form.emergency_contact.email} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, email: e.target.value } })} />
-                        </div>
-                        <div className="form-group">
-                            <label>Phone Number: </label>
-                            <input id = "ec_phone" type="text" name="emergency_contact_phone" value={form.emergency_contact.phone} onChange={(e) => setForm({ ...form, emergency_contact: { ...form.emergency_contact, phone: e.target.value } })} />
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 <div className="footer">
                     <button className="submit-button" type="submit" onClick={(e) => { e.preventDefault(); mode === "edit" ? handleUpdateClient() : handleCreateNewClient(); }}> {mode === "edit" ? "Save Changes" : "Add & Invite Client"}</button>

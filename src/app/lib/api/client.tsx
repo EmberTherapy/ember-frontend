@@ -1,15 +1,14 @@
-import { Client, EmergencyContact } from "@/app/lib/types";
-import { emergency_contacts, clients } from "./db/data";
+import { ClientForm } from "@/app/lib/types";
 import { createResponse } from "@/app/lib/utils/apiHelpers";
 
-export async function createClient(client: Client) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    console.log("Creating new client:", client);
+export async function createClient(user_created: ClientForm) {
+    const body = user_created;
+    const res = await createResponse('new_client', "POST", body);
 
-    return true;
+    return res.status == "success";
 }
 
-export async function editClient(client: Client) {
+export async function editClient(client: ClientForm) {
     await new Promise((resolve) => setTimeout(resolve, 500));
     console.log("Updating client:", client);
 

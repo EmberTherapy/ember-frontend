@@ -4,13 +4,13 @@ import { faFlag, faPencil  } from '@fortawesome/free-solid-svg-icons';
 import { getClientData } from "@/app/lib/api/client";
 import { formatTime } from "@/app/lib/utils/dateHelpers";
 
-import { useModalContext } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/lib/contextProvider";
 
 export default function ClientCard({ client_id, onOpenPanel}) {
     const [client, setClient] = useState(null);
     const [inviteStatus, setInviteStatus] = useState(null);
     
-    const { modalState, setModalState } = useModalContext();
+    const { modalState, setModalState } = useContextProvider();
 
     useEffect(() => {
         getClientData(client_id).then(client => {
@@ -21,20 +21,18 @@ export default function ClientCard({ client_id, onOpenPanel}) {
     useEffect(() => {
         if (!client) return;
 
-        if (client.invite_status === 1) {
+        if (client.accepted_date === null) {
             setInviteStatus("pending");
             return;
         }
 
-        if (client.invite_status === 2) {
-            // const accepted = new Date(client.accepted_date);
-            // const now = new Date();
+        else {
+            const accepted = new Date(client.accepted_date);
+            const now = new Date();
 
-            // const diffInMs = now - accepted;
-            // const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-            // const diffInDays = 0; // Placeholder until backend provides accepted_date
-
-            if (diffInDays <= 14) {
+            const diffInMs = now - accepted;
+            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+            if (diffInDays <= 7) {
                 setInviteStatus("accepted");
             } else {
                 setInviteStatus(null);
@@ -66,7 +64,7 @@ export default function ClientCard({ client_id, onOpenPanel}) {
                     <button className="red-button" onClick={() => onOpenPanel("flag")}>
                         <FontAwesomeIcon icon={faFlag} />
                     </button>}
-                    <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'client', id: client.client_id })}>
+                    <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'client', client_id: client.client_id })}>
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                 </div>

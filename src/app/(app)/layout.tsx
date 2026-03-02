@@ -1,9 +1,8 @@
 'use client';
-
-import { Toaster } from 'sonner';
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
-import { ModalContextProvider } from '@/app/lib/contextProvider';
+import { Toaster } from 'sonner';
+import { ContextProvider } from '@/app/lib/contextProvider';
 import Header from './components/Header';
 import ModalHost from "@/app/(app)/components/ModalHost";
 import DeleteHost from "@/app/(app)/components/DeleteHost";
@@ -26,16 +25,13 @@ export default function AppLayout({
         console.log("No valid session, redirecting to login.");
         router.replace("/login");
       }
-      else {
-        console.log("Valid session found.");
-      }
     }
 
     check();
   }, []);
 
   return (
-    <ModalContextProvider>
+    <ContextProvider>
       <Header/>
       {children}
       <ModalHost />
@@ -45,6 +41,6 @@ export default function AppLayout({
         richColors
         visibleToasts={1}
         />
-    </ModalContextProvider>
+    </ContextProvider>
   );
 }

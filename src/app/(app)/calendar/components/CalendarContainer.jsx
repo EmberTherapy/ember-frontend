@@ -1,23 +1,20 @@
 "use client";
-
-import { Calendar, Views } from "react-big-calendar";
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+import "../rbc.css";
+import { useState, useEffect, useCallback } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+import { Calendar, Views } from "react-big-calendar";
 import Toolbar from "./Toolbar";
-import "../rbc.css";
-
-import { useState, useEffect, useCallback } from "react";
+import { useContextProvider } from "@/app/lib/contextProvider";
 import { getEvents } from "@/app/lib/api/event";
 import { localizer } from "@/app/lib/utils/calendarLocalizer";
-import { useModalContext } from "@/app/lib/contextProvider";
 
 const DnDCalendar = withDragAndDrop(Calendar);
 
 export default function CalendarContainer() {
   const [events, setEvents] = useState([]);
-  const { setModalState } = useModalContext();
+  const { setModalState } = useContextProvider();
 
   useEffect(() => {
     getEvents()
@@ -70,7 +67,7 @@ export default function CalendarContainer() {
             visible: true,
             mode: "edit",
             type: "event",
-            id: event.id,
+            event_id: event.id,
           })
         }
       />

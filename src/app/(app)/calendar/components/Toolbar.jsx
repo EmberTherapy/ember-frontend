@@ -1,15 +1,13 @@
 import { useState } from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faPlus} from '@fortawesome/free-solid-svg-icons';
-
-import { useModalContext } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/lib/contextProvider";
 
 export default function Toolbar(toolbar_props) {
   const [selectedView, setSelectedView] = useState(toolbar_props.view);
   const { label, onNavigate, onView, view } = toolbar_props;
 
-  const { modalState, setModalState } = useModalContext();
+  const { modalState, setModalState } = useContextProvider();
 
   return (
     <div className="toolbar">
@@ -24,7 +22,7 @@ export default function Toolbar(toolbar_props) {
         <button className={`tool-button text${selectedView === 'day' ? ' selected-view' : ''}`} onClick={() => { onView('day'); setSelectedView('day'); }}>Day</button>
         <button className={`tool-button text${selectedView === 'week' ? ' selected-view' : ''}`} onClick={() => { onView('week'); setSelectedView('week'); }}>Week</button>
         <button className={`tool-button text${selectedView === 'month' ? ' selected-view' : ''}`} onClick={() => { onView('month'); setSelectedView('month'); }}>Month</button>
-        <button className="new-event-button" onClick={() => setModalState({ visible: true, mode: 'new', type: 'event' })}>
+        <button className="new-event-button" onClick={() => setModalState({ visible: true, mode: 'new', type: 'event'})}>
           New Event <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>

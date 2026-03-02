@@ -11,9 +11,7 @@ export async function createRecord(client_id: number, record_type_id: number, co
     };
 
     const response = await createResponse("create_record", "POST", body);
-    console.log("Response from createRecord:", response);
-
-    return true;
+    return response.status == "success";
 }
 
 export async function editRecord(record: ClientRecord) {
@@ -24,26 +22,13 @@ export async function editRecord(record: ClientRecord) {
 }
 
 export async function deleteRecord(record_id: number) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    console.log("Deleting client record:", record_id);
-
-    return true;
+    const body = {
+        "record_id": record_id
+    }
+    const data = await createResponse("delete_record", "POST", body);
+    return data.status == "success";
 }
 
-// export async function getClientRecords(id: number) {
-//     await new Promise((resolve) => setTimeout(resolve, 50));
-
-//     const records = client_records.filter(record => record.client_id === id);
-
-//     records.sort((a, b) => {
-//         if (b.flag_severity !== a.flag_severity) {
-//             return (b.flag_severity ?? 0) - (a.flag_severity ?? 0);
-//         }
-//         return new Date(b.date).getTime() - new Date(a.date).getTime();
-//     });
-
-//     return records;
-// }
 export async function getClientRecords(client_id: number) {
     const body = {
         "client_id": client_id
@@ -53,11 +38,9 @@ export async function getClientRecords(client_id: number) {
 }
 
 export async function getRecordById(record_id: number) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    for (let record of client_records) {
-        if (record.id === record_id) {
-            return record;
-        }
+    const body = {
+        "record_id": record_id
     }
-    return null;
+    const data = await createResponse("get_record_by_id", "POST", body);
+    return data.record;
 }

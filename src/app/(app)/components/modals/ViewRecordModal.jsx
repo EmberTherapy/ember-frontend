@@ -1,20 +1,21 @@
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faPencil } from '@fortawesome/free-solid-svg-icons';
-
+import { useContextProvider } from "@/app/lib/contextProvider";
 import { getRecordById } from '@/app/lib/api/record';
 
-import { useModalContext } from "@/app/lib/contextProvider";
-
 export default function ViewRecordModal({ closeModal, recordId }) {
+    const RECORD_TYPES = {
+        1: "Unknown",
+        2: "Chat Summary",
+        3: "Session Note"
+    };
+
     const [record, setRecord] = useState(null);
-    const { modalState, setModalState } = useModalContext();
+    const { modalState, setModalState } = useContextProvider();
 
     function formatType(type) {
-        return type
-            .split('_')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
+        return RECORD_TYPES[type] || "Unknown";
     }
 
     function formatDateForRecord(dateString) {
@@ -29,17 +30,19 @@ export default function ViewRecordModal({ closeModal, recordId }) {
     }
 
     useEffect(() => {
-        getRecordById(recordId).then(setRecord);
+        getRecordById(recordId).then((record) => {
+            setRecord(record);
+        }).catch(console.error);
     }, [recordId]);
 
     return (
         <div className="modal-content">
             <div className="top-bar">
-                <h2>{record ? <span className="type">{formatType(record.type)}</span> : "View Record"}</h2>
+                <h2>{record ? <span className="type">{formatType(record.record_type_id)}</span> : "View Record"}</h2>
                 <div className='button-group'>
                     {record ?
-                        record.type == "session_note" ? (
-                            <button className="edit-button" onClick={() => {setModalState({ mode: 'edit', type: 'record', id: record.id, visible: true }) }}><FontAwesomeIcon icon={faPencil} /></button>
+                        record.record_type_id == 3 ? (
+                            <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'record', record_id: recordId })}><FontAwesomeIcon icon={faPencil} /></button>
                         ) : null
                      : null
                     }
@@ -49,10 +52,10 @@ export default function ViewRecordModal({ closeModal, recordId }) {
             {record ? (
                 <div className="record-details">
                     <div className="record-header">
-                        <p><strong>{formatDateForRecord(record.date)}</strong></p>
+                        <p><strong>{formatDateForRecord(record.created_at)}</strong></p>
                         <span className={`severity-label severity-${record.flag_severity}`}>{record.flag_severity == 1 ? "Concerning" : record.flag_severity == 2 ? "Critical" : ""}</span>
                     </div>
-                    <p>{record ? record.content : null}</p>
+                    <p>{record ? record.content.content : null}</p>
                 </div>
             ) 
             : (

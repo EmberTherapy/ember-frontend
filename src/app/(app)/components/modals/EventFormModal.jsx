@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import { toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faChevronDown, faLink, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { toast } from 'sonner';
+import { useContextProvider } from '@/app/lib/contextProvider';
 import { getClientNames, getClientNameById } from '@/app/lib/api/client';
 import { createEvent, editEvent, getEventById } from '@/app/lib/api/event';
 import { checkEventFormValidity } from '@/app/lib/utils/formHelpers';
-import { useModalContext } from '@/app/lib/contextProvider';
 
 export default function EventFormModal({attemptCloseModal, closeModal, mode, eventId}) {
-    const { setDeleteState } = useModalContext();
+    const { setDeleteState } = useContextProvider();
     const event_template = {
         title: "",
         notes: "",

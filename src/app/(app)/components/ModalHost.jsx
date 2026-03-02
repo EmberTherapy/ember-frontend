@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import './modal.css'
-import { useModalContext } from "@/app/lib/contextProvider";
-
+import { useState, useEffect } from "react";
+import { useContextProvider } from "@/app/lib/contextProvider";
 import ExitPrompt from "@/app/(app)/components/ExitPrompt";
 import EventFormModal from './modals/EventFormModal';
 import ClientFormModal from './modals/ClientFormModal';
@@ -10,18 +9,16 @@ import WriteRecordModal from './modals/WriteRecordModal';
 
 export default function ModalHost() {
 
-  const { modalState, setModalState } = useModalContext();
+  const { modalState, setModalState } = useContextProvider();
   const modalStateString = modalState?.mode + "-" + modalState?.type;
 
   const writeMode = modalState?.mode === 'edit' || modalState?.mode === 'new';
   const readMode = modalState?.mode === 'view';
 
-
   const [showExitPrompt, setShowExitPrompt] = useState(false);
   
   function attemptCloseModal() {
     if (writeMode) {
-      console.log("Attempting to close modal in write mode, showing exit prompt.");
       setShowExitPrompt(true);
     } 
     
@@ -49,10 +46,10 @@ export default function ModalHost() {
   const ModalContainer = 
       <div className={"modal-overlay" + (modalState?.type == "event"? " event-modal-overlay" : "")} onClick={attemptCloseModal}>
           <div className={"modal" + (modalState?.type == "event"? " event-modal" : "")} onClick={e => e.stopPropagation()}> 
-              {modalState?.type === 'client' &&  <ClientFormModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} clientId={modalState?.id} />}
-              {modalStateString === 'view-record' &&  <ViewRecordModal closeModal={closeModal} recordId={modalState?.id} />}
-              {(modalState?.type === 'record' && writeMode) && <WriteRecordModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} recordId={modalState?.id} />}
-              {modalState?.type  === 'event' && <EventFormModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} eventId={modalState?.id}/>}
+              {modalState?.type === 'client' &&  <ClientFormModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} clientId={modalState?.client_id} />}
+              {modalStateString === 'view-record' &&  <ViewRecordModal closeModal={closeModal} recordId={modalState?.record_id} />}
+              {(modalState?.type === 'record' && writeMode) && <WriteRecordModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} recordId={modalState?.record_id} clientId={modalState?.client_id} />}
+              {modalState?.type  === 'event' && <EventFormModal attemptCloseModal={attemptCloseModal} closeModal={closeModal} mode={modalState?.mode} eventId={modalState?.event_id}/>}
           </div>
       </div>
 
