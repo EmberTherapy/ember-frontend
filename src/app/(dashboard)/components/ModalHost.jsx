@@ -1,7 +1,7 @@
 import './modal.css'
 import { useState, useEffect } from "react";
 import { useContextProvider } from "@/app/lib/contextProvider";
-import ExitPrompt from "@/app/(app)/components/ExitPrompt";
+import ExitPrompt from "@/app/(dashboard)/components/ExitPrompt";
 import EventFormModal from './modals/EventFormModal';
 import ClientFormModal from './modals/ClientFormModal';
 import ViewRecordModal from './modals/ViewRecordModal';

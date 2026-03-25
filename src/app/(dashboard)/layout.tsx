@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { Toaster } from 'sonner';
 import { ContextProvider } from '@/app/lib/contextProvider';
 import Header from './components/Header';
-import ModalHost from "@/app/(app)/components/ModalHost";
-import DeleteHost from "@/app/(app)/components/DeleteHost";
+import ModalHost from "@/app/(dashboard)/components/ModalHost";
+import DeleteHost from "@/app/(dashboard)/components/DeleteHost";
 import { validateSession} from '@/app/lib/api/auth';
 import './app.css';
 

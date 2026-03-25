@@ -29,5 +29,15 @@ export async function createUser(email: string, password: string, firstName: str
     };
 
     const data = await createResponse("create_user", "POST", body);
-    return data.status === "success";
+    return data;
 }
+
+export async function validateLinkToken(token: string) {
+    const body = {
+        token: token,
+    };
+
+    const data = await createResponse("validate_link_token", "POST", body);
+    return data;
+}
+

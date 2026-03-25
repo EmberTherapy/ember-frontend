@@ -1,7 +1,7 @@
 import { createResponse } from "@/app/lib/utils/apiHelpers";
 
 import { emergency_contacts, flags, clients } from "./db/data";
-import RightPanel from "@/app/(app)/clients/components/RightPanel";
+import RightPanel from "@/app/(dashboard)/clients/components/RightPanel";
 
 export async function getFlagsPanelData(client_id: number) {
     const body = { "client_id": client_id };

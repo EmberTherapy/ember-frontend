@@ -1,11 +1,20 @@
 import { ClientForm } from "@/app/lib/types";
 import { createResponse } from "@/app/lib/utils/apiHelpers";
 
-export async function createClient(user_created: ClientForm) {
-    const body = user_created;
+export async function createClient(new_user: ClientForm) {
+    const body = new_user;
     const res = await createResponse('new_client', "POST", body);
+    if (res.status == "error") {
+        return false;
+    }
+    const email_body = {
+        "client_id": res.client_id
+    }
 
-    return res.status == "success";
+    const email_res = await createResponse('invite', "POST", email_body);
+
+    return email_res.status == "success";
+    
 }
 
 export async function editClient(client: ClientForm) {
@@ -54,5 +63,5 @@ export async function getClientNameById(client_id: number) {
         "client_id": client_id
     }
     const data = await createResponse('get_client_name_by_id', "POST", body);
-    return data.full_name;
+    return data.client_name;
 }

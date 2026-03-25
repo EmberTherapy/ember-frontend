@@ -1,0 +1,66 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+:root {
+  --color-primary: #F2581B;
+  --color-primary-light: #FF6A2A;
+  --color-primary-bg: #FFF4E6;
+  --color-primary-fade: #FFFAF3;
+
+  --color-red: #E63946;
+  --color-light-red: #FDEAEA;
+
+  --neutral-0: #FFFFFF;
+  --neutral-50: #FFFBF7;
+  --neutral-100: #F5F6F7;
+  --neutral-200: #E7EAEE;
+  --neutral-600: #5A6472;
+  --neutral-800: #1F242C;
+
+  --color-text: #3E3E3E;
+  --border: var(--neutral-200);
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+body {
+  background-color: var(--neutral-50);
+  color: var(--color-text);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.invalid-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.invalid-card {
+  max-width: 500px;
+  width: 100%;
+  background: var(--neutral-0);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.invalid-card h1 {
+  margin: 0 0 12px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+
+.invalid-card p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--neutral-600);
+}

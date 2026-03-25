@@ -23,6 +23,7 @@ export async function deleteEvent(event_id: number) {
 
 export async function getEvents() {
     await new Promise((resolve) => setTimeout(resolve, 50));
+    console.log(calendar_events)
     return calendar_events;
 }
 

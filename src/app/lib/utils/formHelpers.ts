@@ -30,7 +30,6 @@ export function isEmpty(value: any): boolean {
     );
 }
 export function checkRequiredFields(form: ClientForm): true | string[] {
-    console.log("Checking required fields for form:", form);
     const missingFields: string[] = [];
 
     const mandatoryFields: (keyof ClientForm)[] = [
@@ -51,7 +50,6 @@ export function checkRequiredFields(form: ClientForm): true | string[] {
     // check emergency contact object for required fields if it exist
     // console.log('Checking emergency contacts:', form.emergency_contacts);
     form.emergency_contacts.forEach((ec, index) => {
-        console.log('Checking emergency contact ' + ec);
         if (isEmpty(ec.first_name)) missingFields.push(`ec_${index}_first_name`);
         if (isEmpty(ec.last_name))  missingFields.push(`ec_${index}_last_name`);
         if (isEmpty(ec.phone))      missingFields.push(`ec_${index}_phone`);

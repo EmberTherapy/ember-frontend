@@ -1,6 +1,6 @@
 'use client'
 
-import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from 'next/navigation';
 import "../auth.css";
 import {useState} from 'react';
 import { createUser } from "@/app/lib/api/auth";
@@ -15,6 +15,8 @@ export default function SignupPage() {
     const [errorMessage, setErrorMessage] = useState("");
     
     const [apiStatus, setApiStatus] = useState<boolean | null>(null);
+
+    const router = useRouter();
 
     const successMessage = <p className="success">Successful. Redirecting...</p>
     const failMessage = <p className="fail">{errorMessage}</p>;
@@ -48,10 +50,22 @@ export default function SignupPage() {
         }
         else {
             const response = await createUser(email, password, firstName, lastName);
-            console.log("Signup attempt result:", response);
-            
-            if (apiStatus) {
-                window.location.href = "/verify";
+            if (response.message === "User already exists") {
+                setErrorMessage("An account with this email already exists. Please log in!");
+                setApiStatus(false);
+                return;
+            }
+            else if (response.status !== "success") {
+                setErrorMessage("An error occurred. Please try again.");
+                setApiStatus(false);
+                return;
+            }
+
+            setApiStatus(true);
+
+            if (apiStatus === true) {
+                console.log("Redirecting to verification page...");
+                router.push("/verify");
             }
         }
     }

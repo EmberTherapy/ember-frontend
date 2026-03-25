@@ -11,8 +11,6 @@ export async function createResponse(endpoint: string, method: HttpMethod, body:
         credentials: "include", 
         body: body,
     });
-
-    if (!response.ok) return false;
     
     const data = await response.json();
     return data;

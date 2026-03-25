@@ -7,6 +7,8 @@ import { createClient, editClient, getClientFormData } from '@/app/lib/api/clien
 import { emergency_contacts } from '@/app/lib/api/db/data';
 
 export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {
+    const { setRefreshKey } = useContextProvider();
+
     const user_template = {
         first_name: "",
         last_name: "",
@@ -59,11 +61,11 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 ai_instructions: form_data.client?.ai_instructions ?? "",
                 emergency_contacts: [
                     {
-                        first_name: form_data.ecs?.first_name ?? "",
-                        last_name: form_data.ecs?.last_name ?? "",
-                        relationship: form_data.ecs?.relationship ?? "",
-                        email: form_data.ecs?.email ?? "",
-                        phone: form_data.ecs?.phone ?? "",
+                        first_name: form_data.emergency_contacts?.first_name ?? "",
+                        last_name: form_data.emergency_contacts?.last_name ?? "",
+                        relationship: form_data.emergency_contacts?.relationship ?? "",
+                        email: form_data.emergency_contacts?.email ?? "",
+                        phone: form_data.emergency_contacts?.phone ?? "",
                     }
                 ],
             });
@@ -80,9 +82,9 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
 
     function validateForm(form) {
         const validationResult = checkFormValidity(form);
-        console.log("Validation result:", validationResult);
         if (validationResult !== true) {
             for (const field of validationResult) {
+                console.log("Highlighting missing field:", field);
                 const el = document.getElementById(field);
                 if (el) {
                     el.classList.add("mandatory-field");
@@ -106,13 +108,14 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             meeting_time: form.meeting_time,
             ai_instructions: form.ai_instructions,
             emergency_contacts: [{
-                first_name: form.emergency_contacts.first_name,
-                last_name: form.emergency_contacts.last_name,
-                relationship: form.emergency_contacts.relationship,
-                email: form.emergency_contacts.email,
-                phone: form.emergency_contacts.phone
+                first_name: form.emergency_contacts[0]?.first_name,
+                last_name: form.emergency_contacts[0]?.last_name,
+                relationship: form.emergency_contacts[0]?.relationship,
+                email: form.emergency_contacts[0]?.email,
+                phone: form.emergency_contacts[0]?.phone
             }]
         };
+        console.log("Creating new client with data:", newUser);
         if (!validateForm(newUser)) {
             toast.error("Please fill in all required fields correctly.");
             return;
@@ -122,6 +125,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             toast.dismiss(toastId);
             closeModal();
             toast.success("Client created successfully!");    
+            setRefreshKey(prev => prev + 1); // trigger refresh of client list
         }
         else {
             toast.error("Couldn’t save. Try again.");
@@ -156,6 +160,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             toast.dismiss(toastId);
             closeModal();
             toast.success("Client updated successfully!");
+            setRefreshKey(prev => prev + 1); // trigger refresh of client list
         }
         else {
             toast.error("Couldn’t save changes. Please try again.");
@@ -257,7 +262,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                         <div key={i} className="grid">
                                 <div className="form-group">
                                     <label>First Name: </label>
-                                    <input type="text" id = {"ec_" + i + "_first_name"} name="emergency_contact_name" value={form.emergency_contacts[i]?.first_name ?? ""} onChange={(e) => setForm({ ...form, emergency_contacts: form.emergency_contacts.map((ec, idx) => idx === i ? { ...ec, first_name: e.target.value } : ec) })} />
+                                    <input type="text" id = {"ec_" + i + "_first_name"} name="emergency_contact_name" value={form.emergency_contacts[i]?.first_name ?? ""} onChange={(e) => setForm(prev => ({ ...prev, emergency_contacts: [{ ...prev.emergency_contacts[0], first_name: e.target.value }] }))} />
                                 </div>
                             <div className="form-group">
                                 <label>Last Name: </label>

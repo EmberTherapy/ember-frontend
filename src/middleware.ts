@@ -11,6 +11,14 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // Special handling for chat links with url token
+  if (pathname.startsWith('/chat')) {
+    const token = req.nextUrl.searchParams.get('token');
+    if (!token) {
+      return NextResponse.redirect(new URL('/invalid', req.url));
+    }
+  }
+
   const accessToken = req.cookies.get('access_token')?.value;
   const refreshToken = req.cookies.get('refresh_token')?.value;
 

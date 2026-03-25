@@ -6,7 +6,7 @@ import { getClientRecords } from '@/app/lib/api/record';
 import { getClientData } from '@/app/lib/api/client';
 import { getUserFirstName } from '@/app/lib/api/user';
 
-export default function ClientDisplay({ selected_id, onOpenPanel}) {
+export default function ClientDisplay({ selected_id, onOpenPanel }) {
 
     const [userFirstName, setUserFirstName] = useState("");
     
