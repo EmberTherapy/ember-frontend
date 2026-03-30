@@ -21,9 +21,13 @@ export default function AppLayout({
     const check = async () => {
       const res = await validateSession();
 
-      if (!res) {
+      if (res.status !== "success") {
         console.log("No valid session, redirecting to login.");
         router.replace("/login");
+      }
+
+      else if (res.role == "client") {
+        router.replace("/chat");
       }
     }
 

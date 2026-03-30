@@ -1,55 +1,46 @@
 'use client'
 import '../chat.css'
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/navigation';
-import { validateLinkToken } from '@/app/lib/api/auth';
-import { getClientNameById } from '@/app/lib/api/client';
 import { useEffect, useState } from 'react';
+import { getUserFirstName } from '@/app/lib/api/user';
+import { getDefaultConvoId , getChatHistory, sendMessage } from '@/app/lib/api/chat';
 
 export default function ChatPage() {
-    const router = useRouter();
-    const searchParams = useSearchParams()
-    const token = searchParams.get('token')
-
-    const [clientId, setClientId] = useState('');
     const [clientName, setClientName] = useState('');
+    const [history, setHistory] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const validateToken = async () => {
-            console.log("Validating token:", token);
-            const token_validation = await validateLinkToken(token ?? '');
-
-            if (token_validation.status == 'failure') {
-                router.replace("/invalid");
-                return;
-            }
-
-            if (!token_validation.client_id) {
-                router.replace("/invalid");
-                return;
-            }
-            
-            if (token_validation.status == 'success') {
-                setClientId(token_validation.client_id);
-                const name = await getClientNameById(token_validation.client_id);
-                setClientName(name);
-            }
+        async function fetchStuff() {
+            const firstName =  await getUserFirstName();
+            setClientName(firstName);
+            const convoId = await getDefaultConvoId();
+            const chatHistory = await getChatHistory(convoId);
+            setHistory(chatHistory);
+            setLoading(false);
         }
+        fetchStuff();
+    }, []);
 
-        validateToken();
-    }, [token, router]);
-
-    if (clientName !== '') {
+    if (loading) {
         return (
-             <div>
+            <div>
                 <h1>Chat page</h1>
-                <p>Welcome, {clientName.split(" ")[0]}!</p>
+                <p>Loading...</p>
             </div>
         )
     }
     return (
         <div>
-            <h1>Loading...</h1>
+            <h1>Chat page</h1>
+            <p>Welcome, {clientName}!</p>
+            <h2>Chat History:</h2>
+            <ul>
+                {history.map((entry, index) => (
+                    <li key={index}>
+                        <strong>{entry.role}:</strong> {entry.message}
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }

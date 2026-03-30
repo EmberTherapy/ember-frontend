@@ -2,11 +2,39 @@
 
 import { useRouter } from 'next/navigation';
 import "../auth.css";
-import {useState} from 'react';
-import { createUser } from "@/app/lib/api/auth";
-import { fail } from "assert";
+import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { createUser, createClient, validateLinkToken } from "@/app/lib/api/auth";
+import { getClientNameById } from '@/app/lib/api/client';
+import { useEffect } from 'react';
 
 export default function SignupPage() {
+    const router = useRouter();
+    const searchParams = useSearchParams()
+    const token = searchParams.get('token')
+    const [clientId, setClientId] = useState("");
+
+    useEffect(() => {
+        const validateToken = async () => {
+            console.log("Validating token:", token);
+            const token_validation = await validateLinkToken(token ?? '');
+
+            if (token_validation.status == 'failure') {
+                router.replace("/invalid");
+                return;
+            }
+
+            if (!token_validation.client_id) {
+                router.replace("/invalid");
+                return;
+            }
+            setClientId(token_validation.client_id);
+        }
+        if (token) {
+            validateToken();
+        }
+    }, [token, router]);
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -16,7 +44,6 @@ export default function SignupPage() {
     
     const [apiStatus, setApiStatus] = useState<boolean | null>(null);
 
-    const router = useRouter();
 
     const successMessage = <p className="success">Successful. Redirecting...</p>
     const failMessage = <p className="fail">{errorMessage}</p>;
@@ -49,7 +76,12 @@ export default function SignupPage() {
             setApiStatus(false);
         }
         else {
-            const response = await createUser(email, password, firstName, lastName);
+            let response;
+            if (clientId) {
+                response = await createClient(email, password, firstName, lastName, clientId);
+            } else {
+                response = await createUser(email, password, firstName, lastName);
+            }
             if (response.message === "User already exists") {
                 setErrorMessage("An account with this email already exists. Please log in!");
                 setApiStatus(false);
@@ -62,11 +94,7 @@ export default function SignupPage() {
             }
 
             setApiStatus(true);
-
-            if (apiStatus === true) {
-                console.log("Redirecting to verification page...");
-                router.push("/verify");
-            }
+            router.push("/verify");
         }
     }
 

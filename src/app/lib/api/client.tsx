@@ -4,7 +4,8 @@ import { createResponse } from "@/app/lib/utils/apiHelpers";
 export async function createClient(new_user: ClientForm) {
     const body = new_user;
     const res = await createResponse('new_client', "POST", body);
-    if (res.status == "error") {
+    console.log("Received response:", res);
+    if (res.status != "success") {
         return false;
     }
     const email_body = {

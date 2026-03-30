@@ -14,7 +14,7 @@ export default function Header() {
       <div className="left">
         <h1>Ember</h1>
         <nav className="nav">
-          <Link
+          {/* <Link
             href="/calendar"
             className={isActive('/calendar') ? 'nav-item active' : 'nav-item'}
           >
@@ -33,7 +33,7 @@ export default function Header() {
             className={isActive('/billing') ? 'nav-item active' : 'nav-item'}
           >
             Billing
-          </Link>
+          </Link> */}
           
         </nav>
       </div>

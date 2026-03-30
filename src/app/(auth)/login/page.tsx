@@ -4,23 +4,36 @@ import { redirect } from "next/dist/server/api-utils";
 import "../auth.css";
 import {useState} from 'react';
 import { authenticateUser } from "@/app/lib/api/auth";
+import { useRouter } from "next/navigation";
 import { log } from "console";
+import { set } from "date-fns";
 
 export default function LoginPage() {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const successMessage = <p className="success">Log in successful. Redirecting...</p>
-    const failMessage = <p className="fail">Log in unsuccessful. Please try again...</p>
+    const failMessage = <p className="fail">{errorMessage}</p>
+        
 
     let [loginStatus, setLoginStatus] = useState<boolean | null>(null); // null, true, false
 
     async function handleLogin() {
         const auth_res = await authenticateUser(email, password);
-        setLoginStatus(auth_res);
+        let status = auth_res.status === 'success'
+        setLoginStatus(status);
 
-        if (auth_res === true) {
-            window.location.href = "/calendar";
+        if (auth_res.role === "therapist") {
+            router.push("/clients");
+        }
+        else if (auth_res.role === "client") {
+            router.push("/chat");
+        }
+        else {
+            setLoginStatus(false);
+            setErrorMessage(auth_res.message);
         }
     }
 

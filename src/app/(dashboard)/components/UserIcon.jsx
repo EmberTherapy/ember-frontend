@@ -50,7 +50,7 @@ export default function UserIcon() {
         <div className="user-menu-dropdown">
           {/* <div className='user-menu-name'>{userName}</div> */}
           <div className='user-menu-name'>{userName}</div>
-          <a className='user-menu-item' href="/settings">User Settings</a>
+          {/* <a className='user-menu-item' href="/settings">User Settings</a> */}
           <a className='user-menu-item logout' onClick={() => { logoutUser(); router.replace("/login"); }}>Log Out</a>
         </div>
       )}

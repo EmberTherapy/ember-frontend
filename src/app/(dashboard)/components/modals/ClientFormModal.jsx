@@ -5,6 +5,7 @@ import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { checkFormValidity } from '@/app/lib/utils/formHelpers';
 import { createClient, editClient, getClientFormData } from '@/app/lib/api/client';
 import { emergency_contacts } from '@/app/lib/api/db/data';
+import { useContextProvider } from '@/app/lib/contextProvider';
 
 export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {
     const { setRefreshKey } = useContextProvider();
