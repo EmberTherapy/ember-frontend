@@ -1,7 +1,10 @@
 export type PanelSource = "flag" | null;
 export type ModalMode = "editClient" | "newClient" | "viewRecord" | "newRecord" | "editRecord" | null;
 
-
+export type Message = {
+    role: 'user' | 'assistant';
+    content: string;
+}
 export interface ClientForm {
   first_name: string;
   last_name: string;

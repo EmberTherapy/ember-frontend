@@ -59,9 +59,9 @@ html, body { height: 100%; margin: 0; }
   letter-spacing: 0.5px;
 }
 
-.card {
+.login-card {
   background: var(--neutral-0);
-  padding: 2.5rem 2.75rem;
+  padding: 20px 30px;
   border-radius: 16px;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);

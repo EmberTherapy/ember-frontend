@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import UserIcon from './UserIcon';
+import UserIcon from '@/app/globalComponents/UserIcon';
 
 export default function Header() {
   const pathname = usePathname();

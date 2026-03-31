@@ -1,33 +1,39 @@
 'use client';
-
-import { useEffect } from "react";
-import { validateSession } from "@/app/lib/api/auth";
+import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import { ContextProvider } from '@/app/lib/contextProvider';
+import Header from '@/app/globalComponents/Header';
+import { validateSession} from '@/app/lib/api/auth';
+import '@/app/globalComponents/app.css';
 
-export default function ChatLayout({ children }: { children: React.ReactNode }) {
-    const router = useRouter();
-    useEffect(() => {
-      const check = async () => {
-        const res = await validateSession();
+export default function ChatLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
 
-        console.log("Session validation result:", res);
-  
-        if (res.status !== "success") {
-          console.log("No valid session, redirecting to login.");
-          router.replace("/login");
-        }
-  
-        else if (res.role == "therapist") {
-          router.replace("/clients");
-        }
+  const router = useRouter();
+
+  useEffect(() => {
+    const check = async () => {
+      const res = await validateSession();
+
+      if (res.status !== "success") {
+        router.replace("/login");
       }
-  
-      check();
-    }, []);
-  
-    return (
-      <div>
-        {children}
-      </div>
-    )
+
+      else if (res.role == "therapist") {
+        router.replace("/clients");
+      }
+    }
+
+    check();
+  }, []);
+
+  return (
+    <ContextProvider>
+      <Header/>
+      {children}
+    </ContextProvider>
+  );
 }

@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import { Toaster } from 'sonner';
 import { ContextProvider } from '@/app/lib/contextProvider';
-import Header from './components/Header';
+import Header from '@/app/globalComponents/Header';
 import ModalHost from "@/app/(dashboard)/components/ModalHost";
 import DeleteHost from "@/app/(dashboard)/components/DeleteHost";
 import { validateSession} from '@/app/lib/api/auth';
-import './app.css';
+import '@/app/globalComponents/app.css';
 
 export default function AppLayout({
   children,
