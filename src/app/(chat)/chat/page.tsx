@@ -5,9 +5,11 @@ import { getUserFirstName } from '@/app/lib/api/user';
 import { getDefaultConvoId, getChatHistory, sendMessage } from '@/app/lib/api/chat';
 import { Message } from '@/app/lib/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { set } from 'date-fns';
 
 export default function ChatPage() {
+    const [startedConvo, setStartedConvo] = useState(false);
     const [clientName, setClientName] = useState('');
     const [history, setHistory] = useState<Message[]>([]);
     const [loading, setLoading] = useState(true);
@@ -39,6 +41,7 @@ export default function ChatPage() {
     }, [history]);
 
     async function handleSubmit() {
+        setStartedConvo(true);
         if (!input.trim()) return;
         if (!convoId) return;
 
@@ -112,11 +115,11 @@ export default function ChatPage() {
                     value={input}
                     onChange={handleInputChange}
                     onKeyDown={handleInputKeyDown}
-                    placeholder="How are you feeling today?"
+                    placeholder={!startedConvo ? "How are you feeling today?" : "Reply..."}
                     rows={1}
                 />
                 <button className="send-button" type="submit" disabled={!input.trim()}>
-                    <FontAwesomeIcon icon={faCircleArrowUp} />
+                    <FontAwesomeIcon icon={faArrowUp} />
                 </button>
             </form>
         </div>

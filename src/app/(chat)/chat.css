@@ -125,13 +125,12 @@ body {
 
 .send-button {
   height: 48px;
-  padding: 0 18px;
+  padding: 0 15px;
   border: none;
   border-radius: 14px;
   background: var(--color-primary);
   color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.25rem;
   cursor: pointer;
   box-shadow: var(--shadow);
 }
