@@ -22,6 +22,7 @@ export default function LoginPage() {
         setLoginStatus(status);
 
         if (auth_res.role === "therapist") {
+            console.log("Therapist logged in, redirecting to clients page...");
             router.push("/clients");
         }
         else if (auth_res.role === "client") {

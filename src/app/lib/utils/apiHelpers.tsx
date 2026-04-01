@@ -1,11 +1,11 @@
-const base_api_url = "http://localhost:5000/";
+const api_url = process.env.NEXT_PUBLIC_API_URL;
 
 type HttpMethod = "GET" | "POST" | "DELETE";
 
 export async function createResponse(endpoint: string, method: HttpMethod, body: any = null) {
     body = body ? JSON.stringify(body) : null;
     
-    const response = await fetch(base_api_url + "api/" + endpoint, {
+    const response = await fetch(`${api_url}/api/${endpoint}`, {
         method: method,
         headers: { "Content-Type": "application/json" },
         credentials: "include", 
