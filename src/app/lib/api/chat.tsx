@@ -11,7 +11,6 @@ export async function getChatHistory(convo_id: string) {
         "convo_id": convo_id
     }
     const data = await createResponse('get_chat_history', "POST", body);
-    console.log("Received chat history data:", data);
     return data.chat_history;
 }
 
@@ -21,5 +20,5 @@ export async function sendMessage(convo_id: string, message: string) {
         "message": message
     }
     const data = await createResponse('send_message', "POST", body);
-    return data.response;
+    return data.message;
 }

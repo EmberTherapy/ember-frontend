@@ -1,4 +1,3 @@
-import { calendar_events } from "./db/data";
 
 export async function createEvent(event: any) {
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -27,8 +26,9 @@ export async function getEvents() {
 }
 
 export async function getEventById(event_id: number) {
+    const events = [{ id: event_id, title: "Sample Event", date: new Date() }];
     await new Promise((resolve) => setTimeout(resolve, 50));
-    for (let event of calendar_events) {
+    for (let event of events) {
         if (event.id === event_id) {
             return event;
         }

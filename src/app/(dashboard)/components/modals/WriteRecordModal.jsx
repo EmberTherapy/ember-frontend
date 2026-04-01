@@ -10,7 +10,7 @@ import { createRecord, editRecord, getRecordById} from "@/app/lib/api/record";
 
 export default function WriteRecordModal({ mode, clientId, recordId, closeModal, attemptCloseModal }) {
     const [record, setRecord] = useState(null);
-    const [content, setContent] = useState();
+    const [content, setContent] = useState("");
     const [date, setDate] = useState("");
     const { deleteState, setDeleteState } = useContextProvider();
     const { setRefreshKey } = useContextProvider();
@@ -31,7 +31,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
         e.preventDefault();
         
         const toastId = toast.loading("Creating Record...");
-        console.log(clientId, content, date);
+
         if (await createRecord(clientId, 3, content, date)) {
             toast.dismiss(toastId);
             closeModal();
@@ -47,8 +47,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
         e.preventDefault();
         
         const toastId = toast.loading("Saving changes...");
-        const new_record = {clientId, recordId, content, date};
-        if (await editRecord(new_record)) {
+        if (await editRecord(recordId, clientId, 3, content, date)) {
             toast.dismiss(toastId);
             closeModal();
             setRefreshKey(prev => prev + 1);    
@@ -80,14 +79,11 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
                 </div>
             </div>
             <form className="record-form">
-                <div
+                <textarea
                     className="record_textarea"
-                    contentEditable
-                    suppressContentEditableWarning
-                    onInput={(e) => setContent(e.currentTarget.textContent)}
-                >
-                {record ? content : ""}
-                </div>
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                />
                 <div className="footer">
                     <button className="submit-button" type="submit" onClick={mode === "new" ? handleNewSave : handleEditSave }>Save</button>
                 </div>

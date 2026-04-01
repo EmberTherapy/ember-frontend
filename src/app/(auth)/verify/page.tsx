@@ -1,14 +1,6 @@
 'use client'
 
-import { redirect } from "next/dist/server/api-utils";
-import "../auth.css";
-import {useState} from 'react';
 export default function VerifyPage() {
-
-    async function handleRedirect() {
-        window.location.href = "/login"
-    }
-
     return (
         <div className="card-content">
             <p className="subtitle">Welcome to Ember!</p>

@@ -9,7 +9,7 @@ import { useContextProvider } from "@/app/lib/contextProvider";
 export default function RecordsCard({ client_id }) {
     const { modalState, setModalState } = useContextProvider();
     const { deleteState, setDeleteState } = useContextProvider();
-    const { refreshKey } = useContextProvider();
+    const { refreshKey} = useContextProvider();
 
     const [records, setRecords] = useState();
 
@@ -49,7 +49,7 @@ export default function RecordsCard({ client_id }) {
                             <td>{record.content.content.length > 100 ? record.content.content.substring(0, 100) + "..." : record.content.content}</td>
                             <td onClick={(e) => e.stopPropagation()}>
                                 <EllipsesActions
-                                    onEdit={() => setModalState({ visible: true, mode: 'edit', type: 'record', record_id: record.record_id })}
+                                    onEdit={() => setModalState({ visible: true, mode: 'edit', type: 'record', record_id: record.record_id, client_id: client_id })}
                                     onDeleteRecord={() => setDeleteState({ visible: true, type: 'record', id: record.record_id })}
                                     recordId={record.record_id}
                                 />

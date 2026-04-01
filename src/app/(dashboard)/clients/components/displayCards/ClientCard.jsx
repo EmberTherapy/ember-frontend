@@ -9,14 +9,13 @@ import { useContextProvider } from "@/app/lib/contextProvider";
 export default function ClientCard({ client_id, onOpenPanel}) {
     const [client, setClient] = useState(null);
     const [inviteStatus, setInviteStatus] = useState(null);
-    
-    const { modalState, setModalState } = useContextProvider();
+    const { modalState, setModalState, refreshKey} = useContextProvider();
 
     useEffect(() => {
         getClientData(client_id).then(client => {
             setClient(client);
         }).catch(err => console.error("Error fetching client data:", err));
-    }, [client_id]);
+    }, [client_id, refreshKey]);
 
     useEffect(() => {
         if (!client) return;
@@ -27,12 +26,13 @@ export default function ClientCard({ client_id, onOpenPanel}) {
         }
 
         else {
+            // Check if accepted_date is within the last 7 days
             const accepted = new Date(client.accepted_date);
             const now = new Date();
 
             const diffInMs = now - accepted;
             const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-            if (diffInDays <= 7) {
+            if (diffInDays <= 4) {
                 setInviteStatus("accepted");
             } else {
                 setInviteStatus(null);

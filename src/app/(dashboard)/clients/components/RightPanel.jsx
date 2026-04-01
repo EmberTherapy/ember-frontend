@@ -24,7 +24,6 @@ export default function RightPanel({ source, onClosePanel, clientId}) {
 
     useEffect(() => {
         getFlagsPanelData(clientId).then(panel_data => {
-            console.log("Fetched flag panel data:", panel_data);
             setFlagPanelData({
                 emergency_contacts: panel_data?.emergency_contacts ?? [],
                 flags: panel_data?.flags ?? [],
@@ -61,7 +60,7 @@ export default function RightPanel({ source, onClosePanel, clientId}) {
                                     <p><strong>{formatDate(flag.date)}</strong></p>
                                 </div>
                                 <p><strong>Type:</strong> {FLAG_TYPES[flag.flag_type_id] || flag.flag_type_id}</p>
-                                <p><strong>Chat Snippet:</strong> "{flag.snippet}"&nbsp;&nbsp;<span className='read-more-flag' onClick={() => {console.log(flag.record_id); setModalState({visible: true, mode: 'view', type: 'record', record_id: flag.record_id })}}>read more</span></p>
+                                <p><strong>Chat Snippet:</strong> "{flag.snippet}"&nbsp;&nbsp;<span className='read-more-flag' onClick={() => setModalState({visible: true, mode: 'view', type: 'record', record_id: flag.record_id })}>read more</span></p>
                             </div>
                         ))}
                     </div>

@@ -4,7 +4,6 @@ import { createResponse } from "@/app/lib/utils/apiHelpers";
 export async function createClient(new_user: ClientForm) {
     const body = new_user;
     const res = await createResponse('new_client', "POST", body);
-    console.log("Received response:", res);
     if (res.status != "success") {
         return false;
     }
@@ -15,14 +14,12 @@ export async function createClient(new_user: ClientForm) {
     const email_res = await createResponse('invite', "POST", email_body);
 
     return email_res.status == "success";
-    
 }
 
-export async function editClient(client: ClientForm) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    console.log("Updating client:", client);
-
-    return true;
+export async function editClient(client: ClientForm, client_id: number) {
+    const body = { ...client, client_id };
+    const res = await createResponse('edit_client', "POST", body);
+    return res.status == "success";
 }
 
 export async function deleteClient(client_id: number) {
@@ -50,7 +47,6 @@ export async function getClientFormData(client_id: number) {
         "client_id": client_id
     }
     const data = await createResponse('get_client_form_data', "POST", body);
-    console.log("Received form data:", data);
     return data.form_data;
 }
 

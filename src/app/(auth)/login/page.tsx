@@ -1,12 +1,8 @@
 'use client'
 
-import { redirect } from "next/dist/server/api-utils";
-import "../auth.css";
-import {useState} from 'react';
+import { useState } from 'react';
 import { authenticateUser } from "@/app/lib/api/auth";
 import { useRouter } from "next/navigation";
-import { log } from "console";
-import { set } from "date-fns";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -18,11 +14,11 @@ export default function LoginPage() {
     const failMessage = <p className="fail">{errorMessage}</p>
         
 
-    let [loginStatus, setLoginStatus] = useState<boolean | null>(null); // null, true, false
+    const [loginStatus, setLoginStatus] = useState<boolean | null>(null); // null, true, false
 
     async function handleLogin() {
         const auth_res = await authenticateUser(email, password);
-        let status = auth_res.status === 'success'
+        const status = auth_res.status === 'success'
         setLoginStatus(status);
 
         if (auth_res.role === "therapist") {

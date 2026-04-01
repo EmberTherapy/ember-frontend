@@ -37,6 +37,7 @@ export function checkRequiredFields(form: ClientForm): true | string[] {
         "last_name",
         "phone",
         "email",
+        "date_of_birth"
     ];
 
     for (const field of mandatoryFields) {
@@ -48,7 +49,6 @@ export function checkRequiredFields(form: ClientForm): true | string[] {
     }
 
     // check emergency contact object for required fields if it exist
-    // console.log('Checking emergency contacts:', form.emergency_contacts);
     form.emergency_contacts.forEach((ec, index) => {
         if (isEmpty(ec.first_name)) missingFields.push(`ec_${index}_first_name`);
         if (isEmpty(ec.last_name))  missingFields.push(`ec_${index}_last_name`);
@@ -69,7 +69,6 @@ export function checkFormValidity(form: ClientForm): boolean | string[] | string
         return "bad phone";
     }
     else {
-        console.log("Form validation passed");
         return true;
     }
 }

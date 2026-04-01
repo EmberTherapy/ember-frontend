@@ -7,7 +7,7 @@ import Header from '@/app/globalComponents/Header';
 import ModalHost from "@/app/(dashboard)/components/ModalHost";
 import DeleteHost from "@/app/(dashboard)/components/DeleteHost";
 import { validateSession} from '@/app/lib/api/auth';
-import '@/app/globalComponents/app.css';
+import '@/app/globalComponents/header.css';
 
 export default function AppLayout({
   children,

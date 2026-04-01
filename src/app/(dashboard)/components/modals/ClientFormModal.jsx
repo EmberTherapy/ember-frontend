@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { checkFormValidity } from '@/app/lib/utils/formHelpers';
 import { createClient, editClient, getClientFormData } from '@/app/lib/api/client';
-import { emergency_contacts } from '@/app/lib/api/db/data';
 import { useContextProvider } from '@/app/lib/contextProvider';
 
 export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {
@@ -44,6 +43,8 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
         'Sunday',
     ];
 
+    const all_fields = ["first_name", "last_name", "email", "date_of_birth", "phone", "meeting_day", "meeting_time", "ec_0_first_name", "ec_0_last_name", "ec_0_relationship", "ec_0_email", "ec_0_phone"];
+
     useEffect(() => {
         if (mode != "edit") return;
 
@@ -62,11 +63,11 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 ai_instructions: form_data.client?.ai_instructions ?? "",
                 emergency_contacts: [
                     {
-                        first_name: form_data.emergency_contacts?.first_name ?? "",
-                        last_name: form_data.emergency_contacts?.last_name ?? "",
-                        relationship: form_data.emergency_contacts?.relationship ?? "",
-                        email: form_data.emergency_contacts?.email ?? "",
-                        phone: form_data.emergency_contacts?.phone ?? "",
+                        first_name: form_data.ecs?.first_name ?? "",
+                        last_name: form_data.ecs?.last_name ?? "",
+                        relationship: form_data.ecs?.relationship ?? "",
+                        email: form_data.ecs?.email ?? "",
+                        phone: form_data.ecs?.phone ?? "",
                     }
                 ],
             });
@@ -74,6 +75,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
     }, [mode, clientId]);
 
     function splitFocusAreas(focus_areas) {
+        if (Array.isArray(focus_areas)) return focus_areas;
         if (focus_areas == null || focus_areas == undefined || focus_areas == "") return [];
         return focus_areas
             .split(",")
@@ -83,10 +85,16 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
 
     function validateForm(form) {
         const validationResult = checkFormValidity(form);
+        for (const field of all_fields) {
+            const el = document.getElementById(field);
+            if (el) {
+                el.classList.remove("mandatory-field");
+            }
+        }
         if (validationResult !== true) {
             for (const field of validationResult) {
-                console.log("Highlighting missing field:", field);
                 const el = document.getElementById(field);
+                console.log("Highlighting missing field:", field);
                 if (el) {
                     el.classList.add("mandatory-field");
                 }
@@ -116,7 +124,6 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                 phone: form.emergency_contacts[0]?.phone
             }]
         };
-        console.log("Creating new client with data:", newUser);
         if (!validateForm(newUser)) {
             toast.error("Please fill in all required fields correctly.");
             return;
@@ -145,11 +152,11 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             meeting_time: form.meeting_time,
             ai_instructions: form.ai_instructions,
             emergency_contacts: [{
-                first_name: form.emergency_contacts.first_name,
-                last_name: form.emergency_contacts.last_name,
-                relationship: form.emergency_contacts.relationship,
-                email: form.emergency_contacts.email,
-                phone: form.emergency_contacts.phone
+                first_name: form.emergency_contacts[0]?.first_name,
+                last_name: form.emergency_contacts[0]?.last_name,
+                relationship: form.emergency_contacts[0]?.relationship,
+                email: form.emergency_contacts[0]?.email,
+                phone: form.emergency_contacts[0]?.phone
             }]
         };
         if (!validateForm(updatedUser)) {
@@ -157,11 +164,11 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             return;
         }
         const toastId = toast.loading("Saving changes...");
-        if (await updateClient(updatedUser)) {
+        if (await editClient(updatedUser, clientId)) {
             toast.dismiss(toastId);
             closeModal();
             toast.success("Client updated successfully!");
-            setRefreshKey(prev => prev + 1); // trigger refresh of client list
+            setRefreshKey(prev => prev + 1); 
         }
         else {
             toast.error("Couldn’t save changes. Please try again.");

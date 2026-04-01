@@ -1,7 +1,5 @@
 import { ClientRecord } from "@/app/lib/types";
-import { client_records } from "./db/data";
 import { createResponse } from "@/app/lib/utils/apiHelpers";
-
 
 export async function createRecord(client_id: number, record_type_id: number, content: string) {
     const body = {
@@ -14,11 +12,17 @@ export async function createRecord(client_id: number, record_type_id: number, co
     return response.status == "success";
 }
 
-export async function editRecord(record: ClientRecord) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    console.log("Updating client record:", record);
+export async function editRecord(record_id: string, client_id: string, record_type_id: number, content: string, created_at: string) {
+    const body = {
+        "record_id": record_id,
+        "client_id": client_id,
+        "record_type_id": record_type_id,
+        "content": content,
+        "created_at": created_at
+    };
 
-    return true;
+    const response = await createResponse("edit_record", "POST", body);
+    return response.status == "success";
 }
 
 export async function deleteRecord(record_id: number) {

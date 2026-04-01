@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { ContextProvider } from '@/app/lib/contextProvider';
 import Header from '@/app/globalComponents/Header';
 import { validateSession} from '@/app/lib/api/auth';
-import '@/app/globalComponents/app.css';
+import '@/app/globalComponents/header.css';
 
 export default function ChatLayout({
   children,

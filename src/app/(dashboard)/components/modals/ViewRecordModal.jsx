@@ -42,7 +42,7 @@ export default function ViewRecordModal({ closeModal, recordId }) {
                 <div className='button-group'>
                     {record ?
                         record.record_type_id == 3 ? (
-                            <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'record', record_id: recordId })}><FontAwesomeIcon icon={faPencil} /></button>
+                            <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'record', record_id: recordId, client_id: record.client_id })}><FontAwesomeIcon icon={faPencil} /></button>
                         ) : null
                      : null
                     }

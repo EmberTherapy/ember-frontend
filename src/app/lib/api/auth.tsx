@@ -3,7 +3,7 @@ import { createResponse } from "@/app/lib/utils/apiHelpers";
 export async function authenticateUser(email: string, password: string){
     const body = {
         email: email,
-        passkey: password
+        password: password
     }
 
     const data = await createResponse("login", "POST", body);
@@ -23,7 +23,7 @@ export async function validateSession() {
 export async function createUser(email: string, password: string, firstName: string, lastName: string) {
     const body = {
         email: email,
-        passkey: password,
+        password: password,
         first_name: firstName,
         last_name: lastName
     };
@@ -35,7 +35,7 @@ export async function createUser(email: string, password: string, firstName: str
 export async function createClient(email: string, password: string, firstName: string, lastName: string, client_id: string) {
     const body = {
         email: email,
-        passkey: password,
+        password: password,
         client_id: client_id,
         first_name: firstName,
         last_name: lastName

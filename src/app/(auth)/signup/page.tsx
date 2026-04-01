@@ -1,11 +1,9 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import "../auth.css";
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { createUser, createClient, validateLinkToken } from "@/app/lib/api/auth";
-import { getClientNameById } from '@/app/lib/api/client';
 import { useEffect } from 'react';
 
 export default function SignupPage() {

@@ -33,7 +33,7 @@ body {
 }
 
 .chat-shell {
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   max-width: 900px;
@@ -143,4 +143,13 @@ body {
 .send-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.loading-screen {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
