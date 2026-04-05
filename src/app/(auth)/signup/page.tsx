@@ -3,35 +3,46 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { createUser, createClient, validateLinkToken } from "@/app/lib/api/auth";
+import { createTherapist, createClient, validateLinkToken } from "@/app/lib/api/auth";
 import { useEffect } from 'react';
 
 export default function SignupPage() {
     const router = useRouter();
     const searchParams = useSearchParams()
     const token = searchParams.get('token')
+    const role = searchParams.get('role')
     const [clientId, setClientId] = useState("");
 
     useEffect(() => {
-        const validateToken = async () => {
-            console.log("Validating token:", token);
-            const token_validation = await validateLinkToken(token ?? '');
+        const validateToken = async (token: string, role: string) => {
+            const token_validation = await validateLinkToken(token, role);
 
             if (token_validation.status == 'failure') {
                 router.replace("/invalid");
                 return;
             }
-
-            if (!token_validation.client_id) {
-                router.replace("/invalid");
-                return;
+            if (role == "client") {
+                if (!token_validation.client_id) {
+                    router.replace("/invalid");
+                    return;
+                }
+                setClientId(token_validation.client_id);
             }
-            setClientId(token_validation.client_id);
+            else if (role == "therapist") {
+                if (!token_validation.therapist_email) {
+                    router.replace("/invalid");
+                    return;
+                }
+
+            }
         }
-        if (token) {
-            validateToken();
+        if (token && role) {
+            validateToken(token, role);
         }
-    }, [token, router]);
+        else {
+            router.replace("/invalid");
+        }
+    }, [token, role, router]);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -70,23 +81,25 @@ export default function SignupPage() {
     }
 
     async function handleSignup() {
+        console.log("Handling signup for", {firstName, lastName, email, password, confirmPassword, token, role, clientId});
         if (!checkForm()) {
             setApiStatus(false);
         }
         else {
             let response;
             if (clientId) {
-                response = await createClient(email, password, firstName, lastName, clientId);
+                response = await createClient(email, password, firstName, lastName, clientId, token? token : "");
             } else {
-                response = await createUser(email, password, firstName, lastName);
+                response = await createTherapist(email, password, firstName, lastName, token? token : ""); 
             }
+            console.log("Signup response:", response);
             if (response.message === "User already exists") {
                 setErrorMessage("An account with this email already exists. Please log in!");
                 setApiStatus(false);
                 return;
             }
             else if (response.status !== "success") {
-                setErrorMessage("An error occurred. Please try again.");
+                setErrorMessage(response.message || "An error occurred during signup. Please try again.");
                 setApiStatus(false);
                 return;
             }

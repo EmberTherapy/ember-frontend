@@ -20,25 +20,27 @@ export async function validateSession() {
     return data;
 }
 
-export async function createUser(email: string, password: string, firstName: string, lastName: string) {
+export async function createTherapist(email: string, password: string, firstName: string, lastName: string, token: string) {
     const body = {
         email: email,
         password: password,
         first_name: firstName,
-        last_name: lastName
+        last_name: lastName,
+        token: token
     };
 
-    const data = await createResponse("create_user", "POST", body);
+    const data = await createResponse("create_therapist", "POST", body);
     return data;
 }
 
-export async function createClient(email: string, password: string, firstName: string, lastName: string, client_id: string) {
+export async function createClient(email: string, password: string, firstName: string, lastName: string, client_id: string, token: string) {
     const body = {
         email: email,
         password: password,
         client_id: client_id,
         first_name: firstName,
-        last_name: lastName
+        last_name: lastName,
+        token: token
     };
 
     const data = await createResponse("create_client", "POST", body);
@@ -46,9 +48,10 @@ export async function createClient(email: string, password: string, firstName: s
 }
 
 
-export async function validateLinkToken(token: string) {
+export async function validateLinkToken(token: string, role: string) {
     const body = {
         token: token,
+        role: role
     };
 
     const data = await createResponse("validate_link_token", "POST", body);
