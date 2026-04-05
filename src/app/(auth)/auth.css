@@ -70,6 +70,16 @@
   border: 1px solid var(--border);
   text-align: left;
   width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    width: calc(100% - 2rem);
+    padding: 20px;
+    border-radius: 12px;
+  }
 }
 
 .subtitle {
@@ -153,4 +163,9 @@
     display: flex;
     gap: 1rem;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.name-row label {
+    flex: 1 1 140px;
 }
