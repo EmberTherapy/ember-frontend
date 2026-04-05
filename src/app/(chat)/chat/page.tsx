@@ -5,7 +5,7 @@ import { getDefaultConvoId, getChatHistory, sendMessage } from '@/app/lib/api/ch
 import { Message } from '@/app/lib/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import '@/app/globalComponents/header.css';
+import '@/app/(chat)/chat.css';
 
 export default function ChatPage() {
     const [startedConvo, setStartedConvo] = useState(false);
