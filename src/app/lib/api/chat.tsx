@@ -1,4 +1,3 @@
-import { ClientForm } from "@/app/lib/types";
 import { createResponse } from "@/app/lib/utils/apiHelpers";
 
 export async function getDefaultConvoId() {

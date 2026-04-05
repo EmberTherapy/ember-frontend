@@ -1,4 +1,3 @@
-import { ClientRecord } from "@/app/lib/types";
 import { createResponse } from "@/app/lib/utils/apiHelpers";
 
 export async function createRecord(client_id: number, record_type_id: number, content: string) {

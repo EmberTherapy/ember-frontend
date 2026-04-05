@@ -1,12 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { createTherapist, createClient, validateLinkToken } from "@/app/lib/api/auth";
-import { useEffect } from 'react';
 
-export default function SignupPage() {
+function SignupContent() {
     const router = useRouter();
     const searchParams = useSearchParams()
     const token = searchParams.get('token')
@@ -150,4 +149,12 @@ export default function SignupPage() {
                 {apiStatus === true ? successMessage : apiStatus === false ? failMessage : null}
         </div>
     );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupContent />
+    </Suspense>
+  );
 }

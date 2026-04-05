@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ClientForm } from "@/app/lib/types";
 
 export function checkEmailValidity(email: string): boolean {
