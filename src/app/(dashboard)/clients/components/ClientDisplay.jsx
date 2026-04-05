@@ -9,15 +9,28 @@ import { getUserFirstName } from '@/app/lib/api/user';
 export default function ClientDisplay({ selected_id, onOpenPanel }) {
 
     const [userFirstName, setUserFirstName] = useState("");
+    const [isLoaded, setIsLoaded] = useState(false);
     
     useEffect(() => {
         async function fetchUserFirstName() {
             const firstName =  await getUserFirstName();
             setUserFirstName(firstName);
+            setIsLoaded(true);
         }
         fetchUserFirstName();
     }, []);
 
+    if (!isLoaded) {
+        return (
+            <div id="client-display">
+                <div>
+                    <div className="card">
+                        <p>Loading...</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
     if (!selected_id) {
         return (
             <div id="client-display">

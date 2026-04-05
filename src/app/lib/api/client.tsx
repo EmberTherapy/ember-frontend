@@ -11,7 +11,7 @@ export async function createClient(new_user: ClientForm) {
         "client_id": res.client_id
     }
 
-    const email_res = await createResponse('invite', "POST", email_body);
+    const email_res = await createResponse('invite_client', "POST", email_body);
 
     return email_res.status == "success";
 }

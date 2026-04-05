@@ -8,6 +8,7 @@ import { useContextProvider } from '@/app/lib/contextProvider';
 
 export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {
     const { setRefreshKey } = useContextProvider();
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const user_template = {
         first_name: "",
@@ -71,6 +72,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                     }
                 ],
             });
+            setIsLoaded(true);
         })();
     }, [mode, clientId]);
 
@@ -186,6 +188,19 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
     useLayoutEffect(() => {
         resizeTextarea();
     }, [form.ai_instructions]);
+
+
+    if (!isLoaded) {
+        return (
+            <div id="modal-content">
+                <div className="top-bar">
+                    <h1>{mode === "edit" ? "Edit Client" : mode === "new" ? "New Client" : ""}</h1>
+                    <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                </div>
+                <p style={{ padding: "20px" }}>Loading...</p>
+            </div>
+        );
+    }
 
     return (
         <div id="modal-content">

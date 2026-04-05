@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faPencil  } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faPencil, faPaperPlane, faP  } from '@fortawesome/free-solid-svg-icons';
 import { getClientData } from "@/app/lib/api/client";
 import { formatTime } from "@/app/lib/utils/dateHelpers";
-
+import { inviteClient } from "@/app/lib/api/invite";
+import { toast } from 'sonner';
 import { useContextProvider } from "@/app/lib/contextProvider";
 
 export default function ClientCard({ client_id, onOpenPanel}) {
@@ -51,6 +52,15 @@ export default function ClientCard({ client_id, onOpenPanel}) {
         return <div className="card">Loading client data...</div>;
     }
 
+    async function handleResendInvitation(client_id) {
+        const res = await inviteClient(client_id);
+        if (res.status === "success") {
+            toast.success("Invitation resent successfully!");
+        } else {
+            toast.error("Failed to resend invitation.");
+        }
+    }
+
     return (
         <div className="card">
             <div className="top-bar">
@@ -60,6 +70,10 @@ export default function ClientCard({ client_id, onOpenPanel}) {
                     {inviteStatus == "accepted" && <span className="invite-status accepted">Invitation Accepted</span>}
                 </div>
                 <div className="button-group">
+                    {inviteStatus == "pending" && 
+                    <button className="edit-button" onClick={()=> handleResendInvitation(client.client_id)} title="Resend Invitation">
+                        <FontAwesomeIcon icon={faPaperPlane} />
+                    </button>}
                     {client.flagged && 
                     <button className="red-button" onClick={() => onOpenPanel("flag")}>
                         <FontAwesomeIcon icon={faFlag} />

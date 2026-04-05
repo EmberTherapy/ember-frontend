@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { inviteTherapist } from "@/app/lib/api/auth";
+import { inviteTherapist } from "@/app/lib/api/invite";
 import { healthCheck } from "@/app/lib/api/health";
 import AdminModule from "@/app/(admin)/components/AdminModule";
 import { toast } from 'sonner';
