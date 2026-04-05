@@ -32,6 +32,24 @@ body {
   font-family: 'DM Sans', sans-serif;
 }
 
+.invalid-container {
+  height: 100vh;
+  display: flex;
+  padding: 25px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.invalid-card {
+  background: var(--neutral-0);
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
 .chat-shell {
   height: 90vh;
   display: flex;

@@ -1,4 +1,4 @@
-import '../chat.css'
+import '@/app/(chat)/chat.css';
 
 export default function InvalidPage() {
     return (

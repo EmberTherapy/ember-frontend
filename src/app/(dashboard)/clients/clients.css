@@ -1,5 +1,4 @@
 .page {
-  height: 100vh; 
   display: grid;
   grid-template-columns: var(--sidebar-w) 1fr;
   grid-template-areas:
