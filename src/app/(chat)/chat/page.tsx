@@ -14,6 +14,7 @@ export default function ChatPage() {
     const [loading, setLoading] = useState(true);
     const [input, setInput] = useState('');
     const [convoId, setConvoId] = useState<string | null>(null);
+    const [resLoading, setResLoading] = useState(false);
 
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const bottomRef = useRef<HTMLDivElement | null>(null);
@@ -40,6 +41,7 @@ export default function ChatPage() {
     }, [history]);
 
     async function handleSubmit() {
+        setResLoading(true);
         setStartedConvo(true);
         if (!input.trim()) return;
         if (!convoId) return;
@@ -58,6 +60,7 @@ export default function ChatPage() {
             ...prev,
             { role: 'assistant', content: llmRes }
         ]);
+        setResLoading(false);
     }
     function handleInputKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
         if (e.key !== 'Enter' || e.shiftKey) return;
@@ -98,6 +101,11 @@ export default function ChatPage() {
                         </div>
                     </li>
                 ))}
+                <li style={{ display: resLoading ? 'block' : 'none' }}>
+                    <div className='loading-dots'>
+                        <p>...</p>
+                    </div>
+                </li>
                 <div ref={bottomRef} />
             </ul>
 
