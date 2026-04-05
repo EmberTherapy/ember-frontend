@@ -190,7 +190,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
     }, [form.ai_instructions]);
 
 
-    if (!isLoaded) {
+    if (!isLoaded && mode === "edit") {
         return (
             <div id="modal-content">
                 <div className="top-bar">
