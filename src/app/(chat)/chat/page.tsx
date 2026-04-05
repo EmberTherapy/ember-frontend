@@ -1,12 +1,11 @@
 'use client'
-import '../chat.css'
 import { useEffect, useRef, useState } from 'react';
 import { getUserFirstName } from '@/app/lib/api/user';
 import { getDefaultConvoId, getChatHistory, sendMessage } from '@/app/lib/api/chat';
 import { Message } from '@/app/lib/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { set } from 'date-fns';
+import '@/app/globalComponents/header.css';
 
 export default function ChatPage() {
     const [startedConvo, setStartedConvo] = useState(false);
