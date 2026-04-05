@@ -1,5 +1,9 @@
 .auth-root {
   min-height: 100vh;
+  min-height: 100dvh; /* dynamic viewport height - accounts for mobile keyboard */
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  justify-content: flex-start; /* don't force center when content is tall */
 }
 
 :root {
