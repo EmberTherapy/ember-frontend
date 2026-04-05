@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import UserIcon from '@/app/globalComponents/UserIcon';
 
-export default function Header() {
+export default function Header({isAdmin = false}) {
   const pathname = usePathname();
 
   const isActive = (path) => pathname.startsWith(path);
@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="header">
       <div className="left">
-        <h1>Ember</h1>
+        <h1>Ember {isAdmin && ' Admin Panel'} </h1>
         <nav className="nav">
           {/* <Link
             href="/calendar"

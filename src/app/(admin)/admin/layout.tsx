@@ -5,8 +5,9 @@ import { ContextProvider } from '@/app/lib/contextProvider';
 import Header from '@/app/globalComponents/Header';
 import { validateSession} from '@/app/lib/api/auth';
 import '@/app/globalComponents/header.css';
+import { Toaster } from 'sonner';
 
-export default function ChatLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -22,10 +23,9 @@ export default function ChatLayout({
         router.replace("/login");
       }
 
-      else if (res.role == "therapist") {
-        router.replace("/clients");
+      else if (res.role != "admin") {
+        router.replace("/login");
       }
-
     }
 
     check();
@@ -33,8 +33,13 @@ export default function ChatLayout({
 
   return (
     <ContextProvider>
-      <Header/>
+      <Header isAdmin={true} />
       {children}
+      <Toaster
+        position="bottom-right"
+        richColors
+        visibleToasts={1}
+      />
     </ContextProvider>
   );
 }
