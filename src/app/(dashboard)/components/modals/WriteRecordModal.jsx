@@ -74,8 +74,8 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
                     </h1>
                 )}
                 <div className="button-group">
-                    {mode == "edit" ? <button className="red-button" onClick={() => setDeleteState({ visible: true, type: 'record', id: recordId })}><FontAwesomeIcon icon={faTrashCan} /></button> : null}
-                    <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                    {mode == "edit" ? <button className="icon-button icon-button--danger" onClick={() => setDeleteState({ visible: true, type: 'record', id: recordId })}><FontAwesomeIcon icon={faTrashCan} /></button> : null}
+                    <button className="icon-button icon-button--neutral" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
             </div>
             <form className="record-form">
@@ -85,7 +85,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
                     onChange={(e) => setContent(e.target.value)}
                 />
                 <div className="footer">
-                    <button className="submit-button" type="submit" onClick={mode === "new" ? handleNewSave : handleEditSave }>Save</button>
+                    <button className="hollow-button" type="submit" onClick={mode === "new" ? handleNewSave : handleEditSave }>Save</button>
                 </div>
             </form>
         </div>

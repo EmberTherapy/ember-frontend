@@ -51,7 +51,7 @@
 }
 
 .tool-button:active {
-  background-color: var(--color-light-orange);
+  background-color: var(--color-orange-fade);
   border-color: var(--color-primary);
   transform: translateY(0);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
@@ -206,14 +206,14 @@
 }
 
 .exit-prompt .exit:hover {
-  background-color: var(--color-light-red);
+  background-color: var(--color-red-fade);
   border-color: var(--color-red);
   color: var(--color-red);
   transform: translateY(-1px);
 }
 
 .exit-prompt .exit:active {
-  background-color: var(--color-light-red);
+  background-color: var(--color-red-fade);
   border-color: var(--color-danger);
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.15);
 }

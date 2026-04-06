@@ -47,7 +47,7 @@ export default function RightPanel({ source, onClosePanel, clientId}) {
         <div className="right-panel-content">
             <div className="top-bar">
                 <h1>Flag Information</h1>
-                <button className="exit-button" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="icon-button icon-button--neutral" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             {flagPanelData ? (
                 <div className="panel-main-content">

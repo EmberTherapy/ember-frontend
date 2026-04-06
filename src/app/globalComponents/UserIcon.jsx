@@ -9,8 +9,8 @@ export default function UserIcon() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const [userInitials, setUserInitials] = useState(null);
-  const [userName, setUserName] = useState(null);
+  const [userInitials, setUserInitials] = useState("NA");
+  const [userName, setUserName] = useState("User Name");
 
   useEffect(() => {
       getUserInitials().then(initials => {

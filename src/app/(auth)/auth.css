@@ -22,44 +22,6 @@
   }
 }
 
-
-:root {
-  --color-primary: #F2581B;        /* Orange accent */
-  --color-primary-light: #FF6A2A;
-  --color-primary-bg: #FFF4E6;     
-  --color-primary-fade: #fffaf3;  
-  --color-red: #E63946;         /* for alarming actions like flag */
-  --color-light-red: #fdeaea;
-  --color-red-shadow: #E6394699;
-  --color-orange: #FB8500;       /* vivid orange for strong alert */
-  --color-light-orange: #FFF3E0; /* gentle, warm complement */
-  --color-yellow: #FFB703; 
-  --color-yellow-shadow: #FFB70399; 
-
-  --color-success-green: #3CB878;
-  --color-failure-red: #E63946;
-
-  --neutral-0:   #FFFFFF;
-  --neutral-50:  #FFFBF7;   /* warm paper */
-  --neutral-100: #F5F6F7;   /* slightly cooler to avoid beige cast */
-  --neutral-200: #E7EAEE;
-  --neutral-300: #D6DAE0;
-  --neutral-400: #B8BEC7;
-  --neutral-500: #8D96A2;
-  --neutral-600: #5A6472;
-  --neutral-800: #1F242C;
-
-  --color-text: #3e3e3e;
-
-  --border: var(--neutral-200);
-  --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-
-  --header-h: 64px;
-  --sidebar-w: 240px;
-  --rightpanel-w: 320px;
-}
-
-
 .auth-root {
   min-height: 100vh; /* use vh so it fills full screen */
   width: 100%;
@@ -83,7 +45,7 @@
   letter-spacing: 0.5px;
 }
 
-.login-card {
+.auth-card {
   background: var(--neutral-0);
   padding: 20px 30px;
   border-radius: 16px;
@@ -96,7 +58,7 @@
 }
 
 @media (max-width: 480px) {
-  .login-card {
+  .auth-card {
     width: calc(100% - 2rem);
     padding: 20px;
     border-radius: 12px;
@@ -172,12 +134,12 @@
 }
 
 .success {
-    color: var(--color-success-green);
+    color: var(--color-green);
     font-weight: bold;
 }
 
 .fail {
-    color: var(--color-failure-red);
+    color: var(--color-red);
 }
 
 .name-row {
@@ -189,4 +151,12 @@
 
 .name-row label {
     flex: 1 1 140px;
+}
+
+.invalid-container {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

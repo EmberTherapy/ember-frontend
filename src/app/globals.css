@@ -1,4 +1,161 @@
+@import './tokens.css';
+
 html, body {
   height: 100%;
-  margin: 0;            /* remove default body margin */
+  margin: 0;      
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--neutral-0);  
+  color: var(--color-text);   
+}
+
+.icon-button {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--neutral-200);
+  background: transparent;
+  font-size: 1.2rem;
+  color: var(--neutral-600);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-button:hover {
+  transform: translateY(-1px);
+}
+
+.icon-button:active {
+  transform: translateY(0);
+}
+
+/* primary / orange */
+.icon-button--primary:hover {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.icon-button--primary:active {
+  background-color: var(--color-primary-fade);
+  border-color: var(--color-primary);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* neutral */
+.icon-button--neutral:hover {
+  background-color: var(--neutral-300);
+  border-color: var(--neutral-600);
+  color: var(--neutral-600);
+}
+
+.icon-button--neutral:active {
+  background-color: var(--neutral-200);
+  border-color: var(--neutral-600);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* danger / red */
+.icon-button--danger {
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+
+.icon-button--danger:hover {
+  background-color: var(--color-red-fade);
+  border-color: var(--color-red);
+  box-shadow: var(--color-red-border);
+}
+
+.icon-button--danger:active {
+  background-color: var(--color-red-fade);
+  border-color: var(--color-red);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hollow-button  {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  padding: .8rem 1rem;
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-primary-light);
+  background-color: var(--neutral-0);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.hollow-button:hover {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 3px 6px rgba(242, 88, 27, 0.15);
+  transform: translateY(-1px);
+}
+
+.hollow-button:active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(0);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.status-pill {  
+  padding: 3px 8px;                
+  border-radius: 5px;       
+  margin-right: 6px;
+  font-size: .8rem;            
+  font-weight: 600;      
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-pill--blue{
+  background-color: var(--color-blue-fade);  
+  color: var(--color-blue);                  
+  border: var(--color-blue-border);            
+}
+
+.status-pill--green{
+  background-color: var(--color-green-fade);  /* soft green */ 
+  color: var(--color-green); 
+  border: var(--color-green-border);
+}
+
+.status-pill--red {
+  color: var(--color-red);
+  background-color: var(--color-red-fade);
+  border: var(--color-red-border);
+}
+
+.status-pill--orange {
+  color: var(--color-orange);
+  background-color: var(--color-orange-fade);
+  border: var(--color-orange-border);
+}
+
+.status-pill--yellow {
+  color: var(--color-yellow);
+  background-color: var(--color-yellow-fade);
+  border: var(--color-yellow-border);
+}
+
+.status-pill--grey {
+  color: var(--color-grey);
+  background-color: var(--color-grey-fade);
+  border: var(--color-grey-border);
 }

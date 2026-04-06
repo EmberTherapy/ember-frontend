@@ -144,8 +144,8 @@ export default function EventFormModal({attemptCloseModal, closeModal, mode, eve
             <div className="top-bar">
                 <h1>{mode === "edit" ? "Edit Event" : mode === "new" ? "New Event" : ""}</h1>
                 <div className="button-group">
-                    {mode == "edit" ? <button className="red-button" onClick={() => setDeleteState({ visible: true, type: 'event', id: eventId })}><FontAwesomeIcon icon={faTrashCan} /></button> : null}
-                    <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                    {mode == "edit" ? <button className="icon-button icon-button--danger" onClick={() => setDeleteState({ visible: true, type: 'event', id: eventId })}><FontAwesomeIcon icon={faTrashCan} /></button> : null}
+                    <button className="icon-button icon-button--neutral" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
             </div>
             <form className="form event-form">
@@ -240,7 +240,7 @@ export default function EventFormModal({attemptCloseModal, closeModal, mode, eve
                     </div>
                 <div className="footer">
                     <button
-                    className="submit-button"
+                    className="hollow-button"
                     type="submit"
                     onClick={(e) => {
                         e.preventDefault();

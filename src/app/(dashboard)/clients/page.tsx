@@ -34,12 +34,10 @@ export default function DashboardPage() {
   return (
     <div className="page">
         <ClientList onChangeDisplay={changeClientDisplay} selected={selectedId} />
-
         <main className="main">
           <div className="main-content">
             <ClientDisplay selected_id={selectedId} onOpenPanel={openPanel} />
           </div>
-
           {panelSource && (
             <aside className="right-panel">
               <RightPanel source={panelSource} onClosePanel={closePanel} clientId={selectedId} />

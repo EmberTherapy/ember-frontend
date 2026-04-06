@@ -17,20 +17,24 @@ export default function AdminPage() {
   useEffect(() => {
       const checkHealth = async () => {
         console.log("Performing health check...");
-        const healthRes = await healthCheck();
-        
-        if (healthRes.status === "success") {
-          setHealthStatus("Healthy");
-          if (healthRes.environment == "production") {
-            setEnv("Prod");
-          }
-          else if (healthRes.environment == "development") {
-            setEnv("Dev");
+        try {
+          const healthRes = await healthCheck();
+          
+          if (healthRes.status === "success") {
+            setHealthStatus("Healthy");
+
+            if (healthRes.environment == "production") {
+              setEnv("Prod");
+            }
+
+            else if (healthRes.environment == "development") {
+              setEnv("Dev");
+            }
           }
         }
-        else {
+        catch (error) {
           setHealthStatus("Down");
-          setEnv("N/A");
+          setEnv("Unknown");
         }
       };
 
@@ -99,8 +103,19 @@ export default function AdminPage() {
         </AdminModule>
 
         <AdminModule title="System Status">
-          <p>Health Status: <span className={ "health-span" + (healthStatus === "Healthy" ? " healthy" : healthStatus === "Down" ? " down" : "") }>{healthStatus}</span></p>
-          <p>Environment: <span className={ "health-span" + (env === "Prod" ? " prod" : env === "Dev" ? " dev" : "") }>{env}</span></p>
+          <div className="status-row">
+            <span className="status-label">Health Status:</span>
+            <span className={"stacked-status-pill status-pill" + (healthStatus === "Healthy" ? " status-pill--green" : healthStatus === "Down" ? " status-pill--red" : "")}>
+              {healthStatus}
+            </span>
+          </div>
+
+          <div className="status-row">
+            <span className="status-label">Environment:</span>
+            <span className={"stacked-status-pill status-pill" + (env === "Prod" ? " status-pill--blue" : env === "Dev" ? " status-pill--yellow" : " status-pill--grey")}>
+              {env}
+            </span>
+          </div>
         </AdminModule>
       </div>
     </main>

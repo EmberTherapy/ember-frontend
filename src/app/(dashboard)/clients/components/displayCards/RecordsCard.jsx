@@ -28,7 +28,7 @@ export default function RecordsCard({ client_id }) {
             <div className="top-bar">
                 <h2>Client Records</h2>
                 <div className="button-group">
-                    <button className="edit-button" onClick={handleCreateRecord}>
+                    <button className="icon-button icon-button--primary" onClick={handleCreateRecord}>
                         <FontAwesomeIcon icon={faPlus}/>
                     </button>
                 </div>

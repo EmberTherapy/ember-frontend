@@ -1,0 +1,62 @@
+:root {
+    /* Brand */
+    --color-primary: #F2581B;      
+    --color-primary-light: #FF6A2A;
+    --color-primary-fade: #fffaf3;  
+    --color-primary-bg: #FFF4E5;
+
+    /* Utility colors */
+
+    --color-grey: var(--neutral-600);
+    --color-grey-fade: var(--neutral-200);
+    --color-grey-border: 1px solid var(--neutral-400);
+
+    --color-orange: #FB8500;       
+    --color-orange-fade: #fff4e5;
+    --color-orange-border: 1px solid #FB850099;
+
+    --color-yellow: #FFB703; 
+    --color-yellow-fade: #fff4e5;
+    --color-yellow-border: 1px solid #FFB70399;
+    --color-yellow-shadow: #FFB70399; 
+
+    --color-red: #E63946;
+    --color-red-fade: #E6394633;
+    --color-red-border: 1px solid #E6394699;
+    --color-red-shadow: #E6394699;
+
+    --color-green: #059669;
+    --color-green-fade: #ECFDF5;
+    --color-green-border: 1px solid #A7F3D0; 
+
+    --color-blue: #2563EB;        
+    --color-blue-fade: #E0F2FF;       
+    --color-blue-border: 1px solid #91c0f9;     
+    
+    /* Neutral Colors */
+    --neutral-0:   #FFFFFF;
+    --neutral-50:  #FFFBF7;   /* warm paper */
+    --neutral-100: #F5F6F7;   /* slightly cooler to avoid beige cast */
+    --neutral-200: #E7EAEE;
+    --neutral-300: #D6DAE0;
+    --neutral-400: #B8BEC7;
+    --neutral-500: #8D96A2;
+    --neutral-600: #5A6472;
+    --neutral-800: #1F242C;
+
+    --color-text: #3e3e3e;
+
+    --border: var(--neutral-200);
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+    --header-h: 64px;
+    --sidebar-w: 240px;
+    --rightpanel-w: 320px;
+
+    /*  Chat */
+    --color-user-bg: #FCEBDD;
+    --color-user-text: #7A3412;
+
+    --color-assistant-bg: #F8F6F3;
+    --color-assistant-text: #2F2F2F;
+}

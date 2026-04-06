@@ -66,19 +66,19 @@ export default function ClientCard({ client_id, onOpenPanel}) {
             <div className="top-bar">
                 <div className = "left-group">
                     <h2>{client.first_name} {client.last_name}</h2>
-                    {inviteStatus == "pending" && <span className="invite-status pending">Invitation Pending</span>}
-                    {inviteStatus == "accepted" && <span className="invite-status accepted">Invitation Accepted</span>}
+                    {inviteStatus == "pending" && <span className="status-pill status-pill--blue">Invitation Pending</span>}
+                    {inviteStatus == "accepted" && <span className="status-pill status-pill--green">Invitation Accepted</span>}
                 </div>
                 <div className="button-group">
                     {inviteStatus == "pending" && 
-                    <button className="edit-button" onClick={()=> handleResendInvitation(client.client_id)} title="Resend Invitation">
+                    <button className="icon-button icon-button--primary" onClick={()=> handleResendInvitation(client.client_id)} title="Resend Invitation">
                         <FontAwesomeIcon icon={faPaperPlane} />
                     </button>}
                     {client.flagged && 
-                    <button className="red-button" onClick={() => onOpenPanel("flag")}>
+                    <button className="icon-button icon-button--danger" onClick={() => onOpenPanel("flag")}>
                         <FontAwesomeIcon icon={faFlag} />
                     </button>}
-                    <button className="edit-button" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'client', client_id: client.client_id })}>
+                    <button className="icon-button icon-button--primary" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'client', client_id: client.client_id })}>
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                 </div>

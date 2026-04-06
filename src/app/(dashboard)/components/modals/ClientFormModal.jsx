@@ -195,7 +195,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
             <div id="modal-content">
                 <div className="top-bar">
                     <h1>{mode === "edit" ? "Edit Client" : mode === "new" ? "New Client" : ""}</h1>
-                    <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                    <button className="icon-button icon-button--neutral" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
                 <p style={{ padding: "20px" }}>Loading...</p>
             </div>
@@ -206,7 +206,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
         <div id="modal-content">
             <div className="top-bar">
                 <h1>{mode === "edit" ? "Edit Client" : mode === "new" ? "New Client" : ""}</h1>
-                <button className="exit-button" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="icon-button icon-button--neutral" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             <form className="form">
                 <div className = "form-section">   
@@ -308,7 +308,7 @@ export default function ClientFormModal({ mode, attemptCloseModal, closeModal, c
                     ))}
                 </div>
                 <div className="footer">
-                    <button className="submit-button" type="submit" onClick={(e) => { e.preventDefault(); mode === "edit" ? handleUpdateClient() : handleCreateNewClient(); }}> {mode === "edit" ? "Save Changes" : "Add & Invite Client"}</button>
+                    <button className="hollow-button" type="submit" onClick={(e) => { e.preventDefault(); mode === "edit" ? handleUpdateClient() : handleCreateNewClient(); }}> {mode === "edit" ? "Save Changes" : "Add & Invite Client"}</button>
                 </div>
             </form>
         </div>
