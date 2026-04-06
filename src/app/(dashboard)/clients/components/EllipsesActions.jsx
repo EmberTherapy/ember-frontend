@@ -3,14 +3,14 @@ import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
-import { useContextProvider } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/(dashboard)/contextProvider";
 
 
-export default function EllipsesActions({ onEdit, recordId }) {
+export default function EllipsesActions({ recordId }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const { setDeleteState } = useContextProvider();
+  const { openDeleteRecord, openEditRecordModal} = useContextProvider();
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -25,10 +25,14 @@ export default function EllipsesActions({ onEdit, recordId }) {
   }, []);
 
   function handleEdit() {
-    onEdit();
+    openEditRecordModal(recordId);
     setIsOpen(false);
   }
 
+  function handleDelete() {
+    openDeleteRecord(recordId);
+    setIsOpen(false);
+  }
 
   return (
     <div className="actions-menu" ref={menuRef}>
@@ -43,7 +47,7 @@ export default function EllipsesActions({ onEdit, recordId }) {
       {isOpen && (
         <div className="actions-menu-dropdown">
           <div className='actions-menu-item' onClick={handleEdit}>Edit</div>
-          <div className='actions-menu-item delete' onClick={() => { setDeleteState({ visible: true, type: "record", id: recordId }); setIsOpen(false); }}>Delete</div>
+          <div className='actions-menu-item delete' onClick={handleDelete}>Delete</div>
         </div>
       )}
     </div>

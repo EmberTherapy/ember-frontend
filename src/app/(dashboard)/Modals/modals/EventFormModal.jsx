@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faChevronDown, faLink, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { useContextProvider } from '@/app/lib/contextProvider';
+import { useContextProvider } from '@/app/(dashboard)/contextProvider';
 import { getClientNames, getClientNameById } from '@/app/lib/api/client';
 import { createEvent, editEvent, getEventById } from '@/app/lib/api/event';
 import { checkEventFormValidity } from '@/app/lib/utils/formHelpers';

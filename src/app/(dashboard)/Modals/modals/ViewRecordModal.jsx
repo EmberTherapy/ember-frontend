@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faPencil } from '@fortawesome/free-solid-svg-icons';
-import { useContextProvider } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/(dashboard)/contextProvider";
 import { getRecordById } from '@/app/lib/api/record';
 
-export default function ViewRecordModal({ closeModal, recordId }) {
+export default function ViewRecordModal({ recordId }) {
+    const { openEditRecordModal, closeModal } = useContextProvider();
+    
     const RECORD_TYPES = {
         1: "Unknown",
         2: "Chat Summary",
@@ -12,7 +14,6 @@ export default function ViewRecordModal({ closeModal, recordId }) {
     };
 
     const [record, setRecord] = useState(null);
-    const { modalState, setModalState } = useContextProvider();
 
     function formatType(type) {
         return RECORD_TYPES[type] || "Unknown";
@@ -42,11 +43,11 @@ export default function ViewRecordModal({ closeModal, recordId }) {
                 <div className='button-group'>
                     {record ?
                         record.record_type_id == 3 ? (
-                            <button className="icon-button icon-button--primary" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'record', record_id: recordId, client_id: record.client_id })}><FontAwesomeIcon icon={faPencil} /></button>
+                            <button className="icon-button icon-button--primary" onClick={() => openEditRecordModal(record.id)}><FontAwesomeIcon icon={faPencil} /></button>
                         ) : null
                      : null
                     }
-                    <button className="icon-button icon-button--neutral" onClick={() => setModalState({ mode: null, type: null, id: null })}><FontAwesomeIcon icon={faXmark} /></button>
+                    <button className="icon-button icon-button--neutral" onClick={() => closeModal()}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
             </div>
             {record ? (

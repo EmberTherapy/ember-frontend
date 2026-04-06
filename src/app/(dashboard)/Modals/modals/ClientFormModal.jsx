@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { checkFormValidity } from '@/app/lib/utils/formHelpers';
 import { createClient, editClient, getClientFormData } from '@/app/lib/api/client';
-import { useContextProvider } from '@/app/lib/contextProvider';
+import { useContextProvider } from '@/app/(dashboard)/contextProvider';
 
 export default function ClientFormModal({ mode, attemptCloseModal, closeModal, clientId}) {
     const { setRefreshKey } = useContextProvider();

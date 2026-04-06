@@ -7,24 +7,24 @@ import ClientList from "./components/ClientList";
 import ClientDisplay from "./components/ClientDisplay";
 import RightPanel from "./components/RightPanel";
 import { isFlagged } from "@/app/lib/api/flag";
+import { useContextProvider } from "@/app/(dashboard)/contextProvider";
 
 
 export default function DashboardPage() {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [selectedRecordId, setSelectedRecordId] = useState<number | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedRecordId, setSelectedRecordId] = useState<string | null>(null);
   const [panelSource, setPanelSource] = useState<PanelSource>(null);
+  const { selectedClientId, setSelectedClientId, rightPanelState } = useContextProvider();
 
 
   function openPanel(source: PanelSource) {
     setPanelSource(source);
   }
 
-  function closePanel() {
-    setPanelSource(null);
-  }
-  
-  async function changeClientDisplay(id: number) {
+  async function changeClientDisplay(id: string) {
     setSelectedId(id);
+    setSelectedClientId(id);
+
 
     if (!await isFlagged(id)) {
       setPanelSource(null);
@@ -33,14 +33,14 @@ export default function DashboardPage() {
   
   return (
     <div className="page">
-        <ClientList onChangeDisplay={changeClientDisplay} selected={selectedId} />
+        <ClientList onChangeDisplay={changeClientDisplay} />
         <main className="main">
           <div className="main-content">
-            <ClientDisplay selected_id={selectedId} onOpenPanel={openPanel} />
+            <ClientDisplay onOpenPanel={openPanel} />
           </div>
-          {panelSource && (
+          {rightPanelState && (
             <aside className="right-panel">
-              <RightPanel source={panelSource} onClosePanel={closePanel} clientId={selectedId} />
+              <RightPanel />
             </aside>
           )}
         </main>

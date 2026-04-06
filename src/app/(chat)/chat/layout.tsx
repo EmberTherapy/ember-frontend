@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
-import { ContextProvider } from '@/app/lib/contextProvider';
 import Header from '@/app/globalComponents/Header';
 import { validateSession} from '@/app/lib/api/auth';
 import '@/app/globalComponents/header.css';
@@ -32,9 +31,9 @@ export default function ChatLayout({
   }, []);
 
   return (
-    <ContextProvider>
+    <div>
       <Header/>
       {children}
-    </ContextProvider>
+    </div>
   );
 }

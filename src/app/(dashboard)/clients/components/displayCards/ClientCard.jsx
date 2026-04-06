@@ -5,18 +5,18 @@ import { getClientData } from "@/app/lib/api/client";
 import { formatTime } from "@/app/lib/utils/dateHelpers";
 import { inviteClient } from "@/app/lib/api/invite";
 import { toast } from 'sonner';
-import { useContextProvider } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/(dashboard)/contextProvider";
 
-export default function ClientCard({ client_id, onOpenPanel}) {
+export default function ClientCard({ onOpenPanel}) {
     const [client, setClient] = useState(null);
     const [inviteStatus, setInviteStatus] = useState(null);
-    const { modalState, setModalState, refreshKey} = useContextProvider();
-
+    const {refreshKey, openEditClientModal, selectedClientId, setRightPanelState } = useContextProvider();
+    
     useEffect(() => {
-        getClientData(client_id).then(client => {
+        getClientData(selectedClientId).then(client => {
             setClient(client);
         }).catch(err => console.error("Error fetching client data:", err));
-    }, [client_id, refreshKey]);
+    }, [selectedClientId, refreshKey]);
 
     useEffect(() => {
         if (!client) return;
@@ -71,14 +71,14 @@ export default function ClientCard({ client_id, onOpenPanel}) {
                 </div>
                 <div className="button-group">
                     {inviteStatus == "pending" && 
-                    <button className="icon-button icon-button--primary" onClick={()=> handleResendInvitation(client.client_id)} title="Resend Invitation">
+                    <button className="icon-button icon-button--primary" onClick={()=> handleResendInvitation(selectedClientId)} title="Resend Invitation">
                         <FontAwesomeIcon icon={faPaperPlane} />
                     </button>}
                     {client.flagged && 
-                    <button className="icon-button icon-button--danger" onClick={() => onOpenPanel("flag")}>
+                    <button className="icon-button icon-button--danger" onClick={() => setRightPanelState({ type: "flag" })} title="View Flags">
                         <FontAwesomeIcon icon={faFlag} />
                     </button>}
-                    <button className="icon-button icon-button--primary" onClick={() => setModalState({ visible: true, mode: 'edit', type: 'client', client_id: client.client_id })}>
+                    <button className="icon-button icon-button--primary" onClick={() => openEditClientModal()} title="Edit Client">
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                 </div>

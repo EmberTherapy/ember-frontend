@@ -6,7 +6,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { Calendar, Views } from "react-big-calendar";
 import Toolbar from "./Toolbar";
-import { useContextProvider } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/(dashboard)/contextProvider";
 import { getEvents } from "@/app/lib/api/event";
 import { localizer } from "@/app/lib/utils/calendarLocalizer";
 
@@ -14,7 +14,7 @@ const DnDCalendar = withDragAndDrop(Calendar);
 
 export default function CalendarContainer() {
   const [events, setEvents] = useState([]);
-  const { setModalState } = useContextProvider();
+  const { openEditEventModal } = useContextProvider();
 
   useEffect(() => {
     getEvents()
@@ -63,12 +63,7 @@ export default function CalendarContainer() {
         onView={setView}
         onEventDrop={moveEvent}
         onSelectEvent={(event) =>
-          setModalState({
-            visible: true,
-            mode: "edit",
-            type: "event",
-            event_id: event.id,
-          })
+          openEditEventModal(event.id)
         }
       />
     </div>

@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import { Toaster } from 'sonner';
-import { ContextProvider } from '@/app/lib/contextProvider';
+import { ContextProvider } from '@/app/(dashboard)/contextProvider';
 import Header from '@/app/globalComponents/Header';
-import ModalHost from "@/app/(dashboard)/components/ModalHost";
-import DeleteHost from "@/app/(dashboard)/components/DeleteHost";
+import ModalHost from "@/app/(dashboard)/Modals/ModalHost";
+import DeleteHost from "@/app/(dashboard)/Modals/DeleteHost";
 import { validateSession} from '@/app/lib/api/auth';
 import '@/app/globalComponents/header.css';
 

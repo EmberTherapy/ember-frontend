@@ -5,11 +5,13 @@ import ClientCard from './displayCards/ClientCard';
 import { getClientRecords } from '@/app/lib/api/record';
 import { getClientData } from '@/app/lib/api/client';
 import { getUserFirstName } from '@/app/lib/api/user';
+import { useContextProvider } from "@/app/(dashboard)/contextProvider";
 
-export default function ClientDisplay({ selected_id, onOpenPanel }) {
+export default function ClientDisplay({ onOpenPanel }) {
 
     const [userFirstName, setUserFirstName] = useState("");
     const [isLoaded, setIsLoaded] = useState(false);
+    const { selectedClientId } = useContextProvider();
     
     useEffect(() => {
         async function fetchUserFirstName() {
@@ -31,7 +33,7 @@ export default function ClientDisplay({ selected_id, onOpenPanel }) {
             </div>
         );
     }
-    if (!selected_id) {
+    if (!selectedClientId) {
         return (
             <div id="client-display">
                 <div>
@@ -46,8 +48,8 @@ export default function ClientDisplay({ selected_id, onOpenPanel }) {
     return (
         <div id="client-display">
             <div>
-                <ClientCard client_id={selected_id} onOpenPanel={onOpenPanel} />
-                <RecordsCard client_id={selected_id}  />
+                <ClientCard onOpenPanel={onOpenPanel} />
+                <RecordsCard client_id={selectedClientId} />
             </div>
         </div>
     );

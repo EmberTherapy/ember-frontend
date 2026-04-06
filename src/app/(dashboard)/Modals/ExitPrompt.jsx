@@ -5,7 +5,7 @@ import ClientFormModal from './modals/ClientFormModal';
 import RecordModal from './modals/ViewRecordModal';
 import { on } from 'events';
 
-import { useModalContext } from "@/app/lib/contextProvider";
+import { useModalContext } from "@/app/(dashboard)/contextProvider";;
 
 export default function ExitPrompt( {closeModal, continueEditing} ) {
 
@@ -13,11 +13,6 @@ export default function ExitPrompt( {closeModal, continueEditing} ) {
 
     useEffect(() => {
         function handleKeyUp(e) {
-        // if (e.key === 'Enter') {
-        //     e.preventDefault();
-        //     onExit();
-        //     return;
-        // }
         if (e.key === 'Escape') {
             e.preventDefault();
             if (ignoreFirstEscapeUp.current) {

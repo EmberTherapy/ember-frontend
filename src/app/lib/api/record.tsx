@@ -6,6 +6,7 @@ export async function createRecord(client_id: number, record_type_id: number, co
         "record_type_id": record_type_id,
         "content": content,
     };
+    console.log("Creating record with body:", body);
 
     const response = await createResponse("create_record", "POST", body);
     return response.status == "success";

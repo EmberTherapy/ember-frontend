@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useContextProvider } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/(dashboard)/contextProvider";
 import { formatDate } from "@/app/lib/utils/dateHelpers";
 import { getFlagsPanelData, resolveFlags } from '@/app/lib/api/flag';
+import { set } from 'date-fns';
     
-export default function RightPanel({ source, onClosePanel, clientId}) {
-    const { setModalState, setRefreshKey } = useContextProvider();
+export default function RightPanel() {
+    const { openViewRecordModal, setRefreshKey, rightPanelState, selectedClientId, closeRightPanel } = useContextProvider();
     const FLAG_TYPES = {
         1: "Other",
         2: "Self-Harm",
@@ -23,18 +24,18 @@ export default function RightPanel({ source, onClosePanel, clientId}) {
     });
 
     useEffect(() => {
-        getFlagsPanelData(clientId).then(panel_data => {
+        getFlagsPanelData(selectedClientId).then(panel_data => {
             setFlagPanelData({
                 emergency_contacts: panel_data?.emergency_contacts ?? [],
                 flags: panel_data?.flags ?? [],
             });
         }).catch(err => console.error("Error fetching flag panel data:", err));
-    }, [clientId]);
+    }, [selectedClientId]);
 
 
     async function handleResolveFlags() {
-        if (await resolveFlags(clientId)) {
-            onClosePanel();
+        if (await resolveFlags(selectedClientId)) {
+            closeRightPanel();
             setRefreshKey(prev => prev + 1);
             toast.success("Flags resolved successfully!");
         }
@@ -47,7 +48,7 @@ export default function RightPanel({ source, onClosePanel, clientId}) {
         <div className="right-panel-content">
             <div className="top-bar">
                 <h1>Flag Information</h1>
-                <button className="icon-button icon-button--neutral" onClick={onClosePanel}><FontAwesomeIcon icon={faXmark} /></button>
+                <button className="icon-button icon-button--neutral" onClick={() => closeRightPanel()}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
             {flagPanelData ? (
                 <div className="panel-main-content">
@@ -60,7 +61,7 @@ export default function RightPanel({ source, onClosePanel, clientId}) {
                                     <p><strong>{formatDate(flag.date)}</strong></p>
                                 </div>
                                 <p><strong>Type:</strong> {FLAG_TYPES[flag.flag_type_id] || flag.flag_type_id}</p>
-                                <p><strong>Chat Snippet:</strong> "{flag.snippet}"&nbsp;&nbsp;<span className='read-more-flag' onClick={() => setModalState({visible: true, mode: 'view', type: 'record', record_id: flag.record_id })}>read more</span></p>
+                                <p><strong>Chat Snippet:</strong> "{flag.snippet}"&nbsp;&nbsp;<span className='read-more-flag' onClick={() => openViewRecordModal(flag.record_id)}>read more</span></p>
                             </div>
                         ))}
                     </div>
@@ -69,7 +70,7 @@ export default function RightPanel({ source, onClosePanel, clientId}) {
                         {flagPanelData.emergency_contacts.map((contact) => (
                             <div key={contact.id} className="contact-item">
                                 <p><strong>{contact.first_name} {contact.last_name}</strong>  - <em>{contact.relationship}</em></p>
-                                <p>{contact.phone}</p>
+                                <p><strong>Phone:</strong> {contact.phone}</p>
                             </div>
                             ) 
                             ) ||    
@@ -86,7 +87,7 @@ export default function RightPanel({ source, onClosePanel, clientId}) {
         </div>
     );
 
-    if (source === "flag") {
+    if (rightPanelState?.type === "flag") {
         return flagPanel;
     }
     else {

@@ -2,7 +2,7 @@ import { use, useEffect, useState } from "react";
 import { toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCalendar, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { useContextProvider } from "@/app/lib/contextProvider";
+import { useContextProvider } from "@/app/(dashboard)/contextProvider";
 import { formatDate, formatTime, getCurrentDate } from "@/app/lib/utils/dateHelpers";
 import { getClientRecords } from "@/app/lib/api/record";
 import { createRecord, editRecord, getRecordById} from "@/app/lib/api/record";
@@ -12,8 +12,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
     const [record, setRecord] = useState(null);
     const [content, setContent] = useState("");
     const [date, setDate] = useState("");
-    const { deleteState, setDeleteState } = useContextProvider();
-    const { setRefreshKey } = useContextProvider();
+    const { setRefreshKey, openDeleteRecord } = useContextProvider();
 
     useEffect(() => {
         if (mode != "edit") {
@@ -74,7 +73,7 @@ export default function WriteRecordModal({ mode, clientId, recordId, closeModal,
                     </h1>
                 )}
                 <div className="button-group">
-                    {mode == "edit" ? <button className="icon-button icon-button--danger" onClick={() => setDeleteState({ visible: true, type: 'record', id: recordId })}><FontAwesomeIcon icon={faTrashCan} /></button> : null}
+                    {mode == "edit" ? <button className="icon-button icon-button--danger" onClick={() => openDeleteRecord(recordId)}><FontAwesomeIcon icon={faTrashCan} /></button> : null}
                     <button className="icon-button icon-button--neutral" onClick={attemptCloseModal}><FontAwesomeIcon icon={faXmark} /></button>
                 </div>
             </div>
