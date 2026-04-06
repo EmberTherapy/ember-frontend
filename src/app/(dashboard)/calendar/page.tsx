@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import './calendar.css';    
 import CalendarContainer from '@/app/(dashboard)/calendar/components/CalendarContainer';
-import ModalHost from "@/app/(dashboard)/components/ModalHost";
+import ModalHost from "@/app/(dashboard)/Modals/ModalHost";
 
 
 export default function CalendarPage() {
