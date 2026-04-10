@@ -104,7 +104,7 @@ export default function AdminPage() {
 
         <AdminModule title="System Status">
           <div className="status-row">
-            <span className="status-label">Health Status:</span>
+            <span className="status-label">API Status:</span>
             <span className={"stacked-status-pill status-pill" + (healthStatus === "Healthy" ? " status-pill--green" : healthStatus === "Down" ? " status-pill--red" : "")}>
               {healthStatus}
             </span>
