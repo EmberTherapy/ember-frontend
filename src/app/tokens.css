@@ -59,4 +59,7 @@
 
     --color-assistant-bg: #F8F6F3;
     --color-assistant-text: #2F2F2F;
+
+    --button-radius: 8px;
+    --card-radius: 12px;
 }

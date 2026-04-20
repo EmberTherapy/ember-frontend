@@ -14,7 +14,7 @@ html, body {
   height: 35px;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: var(--button-radius);
   border: 1px solid var(--neutral-200);
   background: transparent;
   font-size: 1.2rem;
@@ -88,7 +88,7 @@ html, body {
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   font-weight: bold;
   font-size: 1rem;
-  border-radius: 12px;
+  border-radius: var(--button-radius);
   border: 1px solid var(--color-primary-light);
   background-color: var(--neutral-0);
   color: var(--color-primary);
@@ -115,7 +115,7 @@ html, body {
 
 .status-pill {  
   padding: 3px 8px;                
-  border-radius: 5px;       
+  border-radius: var(--button-radius);
   margin-right: 6px;
   font-size: .8rem;            
   font-weight: 600;      

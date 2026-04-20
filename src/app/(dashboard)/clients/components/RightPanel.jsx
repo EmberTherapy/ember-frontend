@@ -19,8 +19,8 @@ export default function RightPanel() {
     };
 
     const [flagPanelData, setFlagPanelData] = useState({
-        emergency_contacts: [],
-        flags: []
+        emergency_contacts: null,
+        flags: null
     });
 
     useEffect(() => {
@@ -43,14 +43,14 @@ export default function RightPanel() {
             toast.error("Couldn’t resolve flags. Please try again.");
         }
     }
-
+                
     const flagPanel = (
         <div className="right-panel-content">
             <div className="top-bar">
                 <h1>Flag Information</h1>
                 <button className="icon-button icon-button--neutral" onClick={() => closeRightPanel()}><FontAwesomeIcon icon={faXmark} /></button>
             </div>
-            {flagPanelData ? (
+            {flagPanelData.emergency_contacts !== null && flagPanelData.flags !== null ? (
                 <div className="panel-main-content">
                     <div className="section">
                         <h2>{flagPanelData.flags.length > 1 ? "Flags" : "Flag"}</h2>
@@ -81,7 +81,7 @@ export default function RightPanel() {
                 </div>
             ) : (
                 <div className='loading'>
-                    <p>Loading</p>
+                    <p>Loading...</p>
                 </div>
             )}
         </div>

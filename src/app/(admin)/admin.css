@@ -16,7 +16,7 @@
 .admin-card {
   background: var(--neutral-0);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--card-radius);
   padding: 20px;
   box-shadow: var(--shadow);
 }
@@ -42,7 +42,7 @@
   width: 100%;
   padding: 10px 12px;
   border: 1px solid var(--neutral-300);
-  border-radius: 10px;
+  border-radius: var(--button-radius);
   background: var(--neutral-0);
   color: var(--color-text);
   box-sizing: border-box;
@@ -60,7 +60,7 @@
 .admin-card button {
   padding: 10px 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--button-radius);
   background: var(--color-primary);
   color: var(--neutral-0);
   cursor: pointer;
